@@ -1,0 +1,24 @@
+powerUp
+
+Aihe: "Acquire"-lautapeliin pohjautuva kahden henkilön peli.
+
+Käyttäjät: Kaksi pelaajaa.
+
+Pelin kuvaus: 
+
+- Pelilauta koostuu useista neliöistä ("tonteista"), kukin merkitty kirjaimella ja numerolla, eli A4 tai E6. Laudan koko on 10x10.
+
+- Pelaajat yrittävät tienata mahdollisimman paljon rahaa ennen pelin loppua ostamalla tontteja, perustamalla sähköyrityksia, ja ostamalla ja myymällä osinkoja.
+
+Käyttäjien toiminnot:
+
+- Pelin aloittaminen
+
+- Vuoron pelaaminen
+  - Tontin ostaminen
+  - Tontin hylkääminen
+  - Tontin pelaaminen
+  - Sähköyrityksen perustaminen
+  - Osinkojen ostaminen
+  - Osinkojen myyminen
+  - Vaihtokauppa
