@@ -1,0 +1,38 @@
+powerUp
+
+---
+
+Aihe:
+
+"Acquire"-lautapeliin ja "Power Players"-videopeliin pohjautuva neljän henkilön peli.
+
+Käyttäjät: Neljä pelaajaa.
+
+---
+
+Pelin kuvaus: 
+
+- Pelilauta koostuu useista neliöistä ("tonteista"), kukin merkitty yksilöllisellä kirjain- ja numerokombinaatiolla, eli A4 tai E6. Laudan koko on 10x10.
+
+- Pelaajat yrittävät kerätä mahdollisimman paljon rahaa.
+
+- Pelaajat pelaavat ostamalla ja myymällä tontteja, perustamalla ja yhdistämällä sähköyrityksia, ja ostamalla ja myymällä osinkoja.
+
+- Eniten rahaa tienataan olemalla enemmistöomistaja sähköyrityksessä, jonka toinen yritys ostaa. Ostohetkellä jaetaan omistajille bonuksia.
+
+- Peli loppuu, kun pelattavat tontit loppuvat. Jokaisen pelaajan osingot myydään, ja eniten rahaa kerännyt pelaaja voittaa.
+
+---
+
+Käyttäjien toiminnot:
+
+- Pelin aloittaminen
+
+- Vuoron pelaaminen
+  - Tontin ostaminen
+  - Tontin pelaaminen
+  - Sähköyrityksen perustaminen
+  - Osinkojen ostaminen
+  - Osinkojen myyminen
+  - Vaihtokauppa
+  - Vuoron lopettaminen

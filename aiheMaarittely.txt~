@@ -6,8 +6,19 @@ Käyttäjät: Kaksi pelaajaa.
 
 Pelin kuvaus: 
 
-- Pelilauta koostuu useista neliöistä, kukin merkitty kirjaimella ja numerolla, eli A4 tai E6. Laudan koko on 10x10.
+- Pelilauta koostuu useista neliöistä ("tonteista"), kukin merkitty kirjaimella ja numerolla, eli A4 tai E6. Laudan koko on 10x10.
 
-- Pelin alussa jaetaan kummallekin pelaajalle yksi neliö, joita värjätään heidän värillään. Sen jälkeen arvotaan, kumpi aloittaa.
+- Pelaajat yrittävät tienata mahdollisimman paljon rahaa ennen pelin loppua ostamalla tontteja, perustamalla sähköyrityksia, ja ostamalla ja myymällä osinkoja.
 
 Käyttäjien toiminnot:
+
+- Pelin aloittaminen
+
+- Vuoron pelaaminen
+  - Tontin ostaminen
+  - Tontin hylkääminen
+  - Tontin pelaaminen
+  - Sähköyrityksen perustaminen
+  - Osinkojen ostaminen
+  - Osinkojen myyminen
+  - Vaihtokauppa

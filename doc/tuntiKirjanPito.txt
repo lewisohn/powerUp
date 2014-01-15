@@ -1,0 +1,13 @@
+Päivämäärä
+Aikaa käytetty
+Ajankäytön kohde
+
+---
+
+14/01/14
+2h 30m
+Aiheen valitseminen, gitin ja Githubin asentaminen
+
+15/01/14
+1h
+Aihemäärittelyn kirjoittaminen, tuntikirjapidon aloittaminen
