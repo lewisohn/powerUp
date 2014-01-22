@@ -6,8 +6,12 @@ Ajankäytön kohde
 
 14/01/14
 2h 30m
-Aiheen valitseminen, gitin ja Githubin asentaminen
+Aiheen valitseminen, gitin ja Githubin asentaminen laitoksen koneelle
 
 15/01/14
 1h
 Aihemäärittelyn kirjoittaminen, tuntikirjapidon aloittaminen
+
+22/01/14
+4h
+Gitin ja Mavenin asentaminen kotikoneelle, luokkakaavion piirtäminen, pelilogiikan koodaaminen
