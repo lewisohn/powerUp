@@ -17,17 +17,12 @@ public class Game {
     private Company superslick;
     private Company whoops;
     private Scanner scanner = new Scanner(System.in);
-    private ArrayList<Integer> directions;
 
     public Game() {
         plots = new ArrayList<>();
         createPlots();
         createPlayers();
         createCompanies();
-        directions = new ArrayList<>();
-        directions.add(-1);
-        directions.add(0);
-        directions.add(1);
     }
 
     private void createPlots() {
@@ -40,9 +35,12 @@ public class Game {
     }
 
     private void createPlayers() {
+//        for (int i = 0; i < 4; i++) {
+//            System.out.print("Enter a name for player " + (i + 1) + ": ");
+//            players[i] = new Player(scanner.nextLine());
+//        }
         for (int i = 0; i < 4; i++) {
-            System.out.print("Enter a name for player " + (i + 1) + ": ");
-            players[i] = new Player(scanner.nextLine());
+            players[i] = new Player("Player " + (i + 1));
         }
     }
 
@@ -55,22 +53,38 @@ public class Game {
         whoops = new Company("Whoops Uranium", 400);
     }
 
+    public Plot getPlot(int x, int y) {
+        if ((x < 0) || (x > 9) || (y < 0) || (y > 9)) {
+            throw new IllegalArgumentException();
+        } else {
+            return plots.get(x).get(y);
+        }
+    }
+
+    public Player[] getPlayers() {
+        return players;
+    }
+
     public ArrayList<Plot> getNeighbours(Plot plot) {
         ArrayList<Plot> neighbours = new ArrayList<>();
-        for (int dx : directions) {
-            for (int dy : directions) {
-                if ((dx != 0) && (dy != 0)) {
-                    // "kulmanaapuri" - ei vaikuta
-                    continue;
-                } else if ((dx == 0) && (dy == 0)) {
-                    // oma paikka
-                    continue;
-                } else {
-                    if (plots.get(plot.getX() + dx).get(plot.getY() + dy).played()) {
-                        // should probably still check for outofbounds exception
-                        neighbours.add(plots.get(plot.getX() + dx).get(plot.getY() + dy));
-                    }
-                }
+        if (plot.getX() > 0) {
+            if (plots.get(plot.getX() - 1).get(plot.getY()).played() == true) {
+                neighbours.add(plots.get(plot.getX() - 1).get(plot.getY()));
+            }
+        }
+        if (plot.getX() < 9) {
+            if (plots.get(plot.getX() + 1).get(plot.getY()).played() == true) {
+                neighbours.add(plots.get(plot.getX() + 1).get(plot.getY()));
+            }
+        }
+        if (plot.getY() > 0) {
+            if (plots.get(plot.getX()).get(plot.getY() - 1).played() == true) {
+                neighbours.add(plots.get(plot.getX()).get(plot.getY() - 1));
+            }
+        }
+        if (plot.getY() < 9) {
+            if (plots.get(plot.getY()).get(plot.getY() + 1).played() == true) {
+                neighbours.add(plots.get(plot.getX()).get(plot.getY() + 1));
             }
         }
         return neighbours;
