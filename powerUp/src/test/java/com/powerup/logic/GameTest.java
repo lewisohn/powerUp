@@ -44,36 +44,34 @@ public class GameTest {
         int x = random.nextInt(9);
         int y = random.nextInt(9);
         int numNeighbours = 0;
-        board.playPlot(x, y);
-        assertEquals(0, board.getNeighbours(board.getPlot(x, y)).size());
-        if (board.playPlot(x + 1, y)) {
+        board.playTile(x, y);
+        assertEquals(0, board.getNeighbours(board.getTile(x, y)).size());
+        if (board.playTile(x + 1, y)) {
             numNeighbours++;
         }
-        if (board.playPlot(x - 1, y)) {
+        if (board.playTile(x - 1, y)) {
             numNeighbours++;
         }
-        if (board.playPlot(x, y + 1)) {
+        if (board.playTile(x, y + 1)) {
             numNeighbours++;
         }
-        if (board.playPlot(x, y - 1)) {
+        if (board.playTile(x, y - 1)) {
             numNeighbours++;
         }
-        System.out.println("Tile: " + (char) (x + 65) + (y + 1));
-        System.out.println("Number of neighbours: " + numNeighbours);
-        assertEquals(numNeighbours, board.getNeighbours(board.getPlot(x, y)).size());
+        assertEquals(numNeighbours, board.getNeighbours(board.getTile(x, y)).size());
     }
 
     @Test
     public void companyTest() {
-        assertEquals(0, board.getCompanyPlots(eclipse).size());
-        board.playPlot(0, 0);
-        board.playPlot(0, 1);
-        board.playPlot(0, 2);
-        board.assignPlot(0, 0, eclipse);
-        board.assignPlot(0, 1, eclipse);
-        board.assignPlot(0, 2, eclipse);
-        board.assignPlot(0, 3, eclipse);
-        assertEquals(3, board.getCompanyPlots(eclipse).size());
+        assertEquals(0, board.getCompanyTiles(eclipse).size());
+        board.playTile(0, 0);
+        board.playTile(0, 1);
+        board.playTile(0, 2);
+        board.assignTile(0, 0, eclipse);
+        board.assignTile(0, 1, eclipse);
+        board.assignTile(0, 2, eclipse);
+        board.assignTile(0, 3, eclipse);
+        assertEquals(3, board.getCompanyTiles(eclipse).size());
     }
 
 }

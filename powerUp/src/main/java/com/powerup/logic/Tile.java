@@ -1,6 +1,6 @@
 package com.powerup.logic;
 
-public class Plot {
+public class Tile {
 
     // koordinaatit
     private int x;
@@ -8,13 +8,14 @@ public class Plot {
     private boolean played;
     private Company owner;
 
-    public Plot(int x, int y) {
+    public Tile(int x, int y) {
         this.x = x;
         this.y = y;
         played = false;
         owner = null;
     }
 
+    // kun tiili on pelattu laudalle, sitä ei voi ottaa pois
     public void play() {
         played = true;
     }
@@ -27,16 +28,21 @@ public class Plot {
         return y;
     }
 
-    public boolean played() {
+    public boolean getPlayed() {
         return played;
     }
 
     public Company getOwner() {
         return owner;
     }
-    
+
     public void setOwner(Company company) {
         owner = company;
     }
 
+    public String getRef() {
+        String ref = Character.toString((char) (x + 65));
+        ref = ref + Integer.toString(y + 1);
+        return ref;
+    }
 }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 public class Player {
 
     private String name;
-
     // omaisuus
     private HashMap<Company, Integer> stocks;
     private int cash;
@@ -27,7 +26,11 @@ public class Player {
             return 0;
         }
     }
-    
+
+    public int buyStock(Company company) {
+        return 0;
+    }
+
     public int getCash() {
         return cash;
     }
@@ -35,6 +38,4 @@ public class Player {
     public void setCash(int cash) {
         this.cash = cash;
     }
-    
-    
 }

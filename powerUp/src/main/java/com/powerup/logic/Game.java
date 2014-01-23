@@ -40,6 +40,7 @@ public class Game {
         return board;
     }
 
+    // turhahko metodi, mutta käytetään JUnit-testeissä
     public Company getEclipse() {
         return eclipse;
     }

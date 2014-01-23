@@ -1,19 +1,34 @@
 package com.powerup.logic;
 
+import java.util.ArrayList;
+
 public class Company {
 
     private final String name;
     private final int initialValue;
-    private int stock;
     private Board board;
+    private boolean status;
+    private ArrayList<Stock> stocks;
 
     public Company(String name, int initialValue, Board board) {
         this.name = name;
         this.initialValue = initialValue;
-        this.stock = 25;
         this.board = board;
+        status = false;
+        stocks = new ArrayList<>();
+        createStock();
+    }
+    
+    private void createStock() {
+        for (int i = 0; i < 25; i++) {
+            stocks.add(new Stock(this, i));
+        }
     }
 
+    public void setStatus(boolean status) {
+        this.status = status;
+    }    
+    
     public String getName() {
         return name;
     }
@@ -22,20 +37,18 @@ public class Company {
         System.out.println(this);
     }
 
-    public boolean buyStock() {
-        if (stock == 0) {
-            return false;
+    public Stock buyStock() {
+        if (stocks.isEmpty()) {
+            return null;
         } else {
-            stock--;
-            return true;
+            Stock purchase = stocks.get(0);
+            stocks.remove(0);
+            return purchase;
+
         }
     }
 
-    public void setStock(int amount) {
-        this.stock = Math.max(amount, 25);
-    }
-
-    public int getStock() {
-        return stock;
+    public ArrayList<Stock> getStocks() {
+        return stocks;
     }
 }

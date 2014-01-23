@@ -1,21 +1,20 @@
-Päivämäärä
-Aikaa käytetty
+Päivämäärä: Aikaa käytetty
 Ajankäytön kohde
+// Kommenttejä
 
 ---
 
-14/01/14
-2h 30m
+14/01/14: 2h 30m
 Aiheen valitseminen, gitin ja Githubin asentaminen laitoksen koneelle
 
-15/01/14
-1h
+15/01/14: 1h
 Aihemäärittelyn kirjoittaminen, tuntikirjapidon aloittaminen
 
-22/01/14
-4h
+22/01/14: 4h
 Gitin ja Mavenin asentaminen kotikoneelle, luokkakaavion piirtäminen, pelilogiikan koodaaminen
 
-23/01/14
-2h
-Pelilogiikan koodaaminen, JUnit-testien kirjoittaminen, uuden luokan lisääminen (huom: puuttuu luokkakaaviosta)
+23/01/14: 4h
+Pelilogiikan koodaaminen, JUnit-testien kirjoittaminen, uusien luokan lisääminen, Maven-ongelmien ratkaiseminen
+// Minua harmittaa, kuinka paljon olen unohtanut viime syksyn kursseista
+// Tuntuu siltä, etten osaa keksiä hyvää luokkarakenetta enää
+// Ja olen käyttänyt nyt aivan liian monta tuntia Gitin ja Mavenin näpelöimiseen!

@@ -16,7 +16,7 @@ Pelin kuvaus:
 
 - Pelaajat yrittävät kerätä mahdollisimman paljon rahaa.
 
-- Pelaajat pelaavat ostamalla ja myymällä tontteja, perustamalla ja yhdistämällä sähköyrityksia, ja ostamalla ja myymällä osinkoja.
+- Pelaajat pelaavat pelaamalla tontteja laudalle, perustamalla ja yhdistämällä sähköyrityksia, ja ostamalla ja myymällä osinkoja.
 
 - Eniten rahaa tienataan olemalla enemmistöomistaja sähköyrityksessä, jonka toinen yritys ostaa. Ostohetkellä jaetaan omistajille bonuksia.
 
