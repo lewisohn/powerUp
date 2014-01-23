@@ -30,4 +30,13 @@ public class Plot {
     public boolean played() {
         return played;
     }
+
+    public Company getOwner() {
+        return owner;
+    }
+    
+    public void setOwner(Company company) {
+        owner = company;
+    }
+
 }

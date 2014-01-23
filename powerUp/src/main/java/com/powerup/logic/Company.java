@@ -3,17 +3,23 @@ package com.powerup.logic;
 public class Company {
 
     private final String name;
-    private int value;
+    private final int initialValue;
     private int stock;
+    private Board board;
 
-    public Company(String name, int value) {
+    public Company(String name, int initialValue, Board board) {
         this.name = name;
-        this.value = value;
+        this.initialValue = initialValue;
         this.stock = 25;
+        this.board = board;
     }
 
-    public int getValue() {
-        return value;
+    public String getName() {
+        return name;
+    }
+
+    public void getValue() {
+        System.out.println(this);
     }
 
     public boolean buyStock() {

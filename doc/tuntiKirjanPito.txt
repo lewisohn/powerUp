@@ -17,5 +17,5 @@ Aihemäärittelyn kirjoittaminen, tuntikirjapidon aloittaminen
 Gitin ja Mavenin asentaminen kotikoneelle, luokkakaavion piirtäminen, pelilogiikan koodaaminen
 
 23/01/14
-1h
-Pelilogiikan koodaaminen, JUnit-testien kirjoittaminen
+2h
+Pelilogiikan koodaaminen, JUnit-testien kirjoittaminen, uuden luokan lisääminen (huom: puuttuu luokkakaaviosta)
