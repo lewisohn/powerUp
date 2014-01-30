@@ -1,4 +1,4 @@
-package com.powerup.logic;
+package com.powerup;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -7,12 +7,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class GameTest {
+public class MainTest {
 
-    Game game;
+    Main main;
 
-    public GameTest() {
-        game = new Game();
+    public MainTest() {
+        main = new Main();
     }
 
     @BeforeClass
@@ -32,8 +32,9 @@ public class GameTest {
     }
 
     @Test
-    public void cannotGetFifthPlayer() {
-        assertNull(game.getPlayer(4));
+    public void mainTest() {
+        Main.main(new String[]{"a", "b"});
+        assertNotNull(main);
     }
 
 }

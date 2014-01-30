@@ -21,71 +21,42 @@ public class Board {
         }
     }
 
+    public ArrayList<ArrayList<Tile>> getTiles() {
+        return tiles;
+    }
+
     public Tile getTile(int x, int y) {
         if ((x < 0) || (x > 9) || (y < 0) || (y > 9)) {
-            throw new IllegalArgumentException();
+            return null;
         } else {
             return tiles.get(x).get(y);
         }
     }
 
     public boolean playTile(int x, int y) {
-        if ((x < 0) || (x > 9) || (y < 0) || (y > 9)) {
-            return false;
-        } else {
+        if ((x >= 0) && (x <= 9) && (y >= 0) && (y <= 9)) {
             getTile(x, y).play();
             return true;
         }
-    }
-
-    public boolean assignTile(int x, int y, Company company) {
-        if ((x < 0) || (x > 9) || (y < 0) || (y > 9)) {
-            return false;
-        } else if (!getTile(x, y).getPlayed()) {
-            return false;
-        } else {
-            getTile(x, y).setOwner(company);
-            return true;
-        }
+        return false;
     }
 
     public ArrayList<Tile> getNeighbours(Tile tile) {
         int x = tile.getX();
         int y = tile.getY();
         ArrayList<Tile> neighbours = new ArrayList<>();
-        if (tile.getX() > 0) {
-            if (getTile(x - 1, y).getPlayed() == true) {
-                neighbours.add(getTile(x - 1, y));
-            }
+        if ((getTile(x - 1, y) != null) && (getTile(x - 1, y).getPlayed() == true)) {
+            neighbours.add(getTile(x - 1, y));
         }
-        if (tile.getX() < 9) {
-            if (getTile(x + 1, y).getPlayed() == true) {
-                neighbours.add(getTile(x + 1, y));
-            }
+        if ((getTile(x + 1, y) != null) && (getTile(x + 1, y).getPlayed() == true)) {
+            neighbours.add(getTile(x + 1, y));
         }
-        if (tile.getY() > 0) {
-            if (getTile(x, y - 1).getPlayed() == true) {
-                neighbours.add(getTile(x, y - 1));
-            }
+        if ((getTile(x, y - 1) != null) && (getTile(x, y - 1).getPlayed() == true)) {
+            neighbours.add(getTile(x, y - 1));
         }
-        if (tile.getY() < 9) {
-            if (getTile(x, y + 1).getPlayed() == true) {
-                neighbours.add(getTile(x, y + 1));
-            }
+        if ((getTile(x, y + 1) != null) && (getTile(x, y + 1).getPlayed() == true)) {
+            neighbours.add(getTile(x, y + 1));
         }
         return neighbours;
-    }
-
-    public ArrayList<Tile> getCompanyTiles(Company company) {
-        ArrayList<Tile> companyLand = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                Company x = getTile(i, j).getOwner();
-                if ((x != null) && (x.equals(company))) {
-                    companyLand.add(getTile(i, j));
-                }
-            }
-        }
-        return companyLand;
     }
 }

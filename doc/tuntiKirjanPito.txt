@@ -15,6 +15,11 @@ Gitin ja Mavenin asentaminen kotikoneelle, luokkakaavion piirtäminen, pelilogii
 
 23/01/14: 4h
 Pelilogiikan koodaaminen, JUnit-testien kirjoittaminen, uusien luokan lisääminen, Maven-ongelmien ratkaiseminen
-// Minua harmittaa, kuinka paljon olen unohtanut viime syksyn kursseista
+// Olen unohtanut aivan liian paljon viime syksyn kursseista
 // Tuntuu siltä, etten osaa keksiä hyvää luokkarakenetta enää
 // Ja olen käyttänyt nyt aivan liian monta tuntia Gitin ja Mavenin näpelöimiseen!
+
+30/01/14: 4h 30m
+Pelilogiikan koodaaminen ja refaktorointi, testien kirjoittaminen
+// Cobertura 100%, PIT 100%
+// Enää pari metodia logiikalle, ja olen valmis siirtymään käyttöliittymän ja GUI:n koodamiseen

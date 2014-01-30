@@ -1,43 +1,62 @@
 package com.powerup.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Company {
 
     private final String name;
     private final int initialValue;
-    private Board board;
-    private boolean status;
+    private boolean active;
     private ArrayList<Stock> stocks;
+    private ArrayList<Tile> tiles;
 
-    public Company(String name, int initialValue, Board board) {
+    public Company(String name, int initialValue) {
         this.name = name;
         this.initialValue = initialValue;
-        this.board = board;
-        status = false;
+        active = false;
         stocks = new ArrayList<>();
+        tiles = new ArrayList<>();
         createStock();
     }
-    
+
     private void createStock() {
         for (int i = 0; i < 25; i++) {
             stocks.add(new Stock(this, i));
         }
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }    
-    
+    public void addTile(Tile tile) {
+        if (tile.getPlayed()) {
+            tile.setOwner(this);
+            tiles.add(tile);
+        }
+    }
+
+    public ArrayList<Tile> getTiles() {
+        return tiles;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
     public String getName() {
         return name;
     }
 
-    public void getValue() {
-        System.out.println(this);
+    public int sellPrice() {
+        // jokaisesta omistetusta tontista tulee 10% arvoa lisää
+        // ja jokaisesta myydystä osingosta tulee 1%
+        return initialValue + ((initialValue / 100) * ((25 - stocks.size()) + (tiles.size() * 10)));
+
     }
 
-    public Stock buyStock() {
+    public Stock sellStock() {
         if (stocks.isEmpty()) {
             return null;
         } else {
@@ -51,4 +70,19 @@ public class Company {
     public ArrayList<Stock> getStocks() {
         return stocks;
     }
+
+    public void takeOver(Company company) {
+        for (Tile tile : company.getTiles()) {
+            this.addTile(tile);
+        }
+        company.liquidate();
+    }
+
+    public void liquidate() {
+        tiles.clear();
+        stocks.clear();
+        createStock();
+        active = false;
+    }
+
 }

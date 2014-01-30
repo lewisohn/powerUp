@@ -28,21 +28,33 @@ public class Game {
     }
 
     private void createCompanies() {
-        eclipse = new Company("Eclipse Solar", 200, board);
-        maniac = new Company("Maniac Timber", 200, board);
-        king = new Company("King Coal", 300, board);
-        guzzler = new Company("Guzzler Gas", 300, board);
-        superslick = new Company("Superslick Oil", 400, board);
-        whoops = new Company("Whoops Uranium", 400, board);
+        eclipse = new Company("Eclipse Solar", 200);
+        maniac = new Company("Maniac Timber", 200);
+        king = new Company("King Coal", 300);
+        guzzler = new Company("Guzzler Gas", 300);
+        superslick = new Company("Superslick Oil", 400);
+        whoops = new Company("Whoops Uranium", 400);
+    }
+
+    public Player getPlayer(int i) {
+        if (i < 4) {
+            return players[i];
+        } else {
+            return null;
+        }
     }
 
     public Board getBoard() {
         return board;
     }
 
-    // turhahko metodi, mutta käytetään JUnit-testeissä
+    // seuraavia metodeja käytetään vain JUnit-testeissä
     public Company getEclipse() {
         return eclipse;
+    }
+
+    public Company getManiac() {
+        return maniac;
     }
 
 }
