@@ -41,8 +41,9 @@ public class Tile {
     }
 
     public String getRef() {
-        String ref = Character.toString((char) (x + 65));
-        ref = ref + Integer.toString(y + 1);
+        String ref = new String();
+        ref = ref + (char) (x + 65);
+        ref = ref + y;
         return ref;
     }
 }

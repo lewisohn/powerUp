@@ -1,5 +1,7 @@
 package com.powerup.logic;
 
+import com.powerup.gui.*;
+
 public class Game {
 
     // pelilauta
@@ -13,6 +15,9 @@ public class Game {
     private Company guzzler;
     private Company superslick;
     private Company whoops;
+    
+    // peli-ikkuna
+    private InfoPanel playingWindow;
 
     public Game() {
         board = new Board();

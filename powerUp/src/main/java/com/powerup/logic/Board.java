@@ -1,15 +1,26 @@
 package com.powerup.logic;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Board {
 
     // kaksiulotteinen taulukko, johon laitetaan pelin tontit
     private final ArrayList<ArrayList<Tile>> tiles;
 
+    // tällä hetkellä pelattavat tontit
+    private ArrayList<Tile> playableTiles;
+
+    private final Random random;
+
     public Board() {
         tiles = new ArrayList<>();
+        random = new Random();
+        playableTiles = new ArrayList<>();
         createTiles();
+        playStartingTiles();
+        chooseFirstPlayableTiles();
+
     }
 
     private void createTiles() {
@@ -21,8 +32,40 @@ public class Board {
         }
     }
 
+    private void playStartingTiles() {
+        int x;
+        int y;
+        int j = 0;
+        while (j < 5) {
+            x = random.nextInt(10);
+            y = random.nextInt(10);
+            if (!getTile(x, y).getPlayed()) {
+                playTile(x, y);
+                j++;
+            }
+        }
+    }
+
+    private void chooseFirstPlayableTiles() {
+        int x;
+        int y;
+        int j = 0;
+        while (j < 10) {
+            x = random.nextInt(10);
+            y = random.nextInt(10);
+            if (!getTile(x, y).getPlayed()) {
+                playableTiles.add(getTile(x, y));
+                j++;
+            }
+        }
+    }
+
     public ArrayList<ArrayList<Tile>> getTiles() {
         return tiles;
+    }
+
+    public ArrayList<Tile> getPlayableTiles() {
+        return playableTiles;
     }
 
     public Tile getTile(int x, int y) {

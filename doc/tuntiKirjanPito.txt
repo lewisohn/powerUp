@@ -23,3 +23,8 @@ Pelilogiikan koodaaminen, JUnit-testien kirjoittaminen, uusien luokan lisäämin
 Pelilogiikan koodaaminen ja refaktorointi, testien kirjoittaminen
 // Cobertura 100%, PIT 100%
 // Enää pari metodia logiikalle, ja olen valmis siirtymään käyttöliittymän ja GUI:n koodamiseen
+
+06/02/14: 4h 30m
+GUI:n koodaaminen
+// Vei paljon aikaa. En ole ehtinyt vielä kirjoittaa JavaDoceja, mutta teen sen huomenna.
+// Ensimmäinen screenshotti lisätty doc-kansioon!

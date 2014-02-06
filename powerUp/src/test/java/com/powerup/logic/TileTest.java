@@ -36,9 +36,9 @@ public class TileTest {
 
     @Test
     public void tileReferencesAreCorrect() {
-        assertEquals("A1", game.getBoard().getTile(0, 0).getRef());
-        assertEquals("E5", game.getBoard().getTile(4, 4).getRef());
-        assertEquals("J10", game.getBoard().getTile(9, 9).getRef());
+        assertEquals("A0", game.getBoard().getTile(0, 0).getRef());
+        assertEquals("E4", game.getBoard().getTile(4, 4).getRef());
+        assertEquals("J9", game.getBoard().getTile(9, 9).getRef());
     }
 
     @Test
