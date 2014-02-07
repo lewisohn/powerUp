@@ -14,7 +14,7 @@ public class TileTest {
 
     public TileTest() {
         game = new Game();
-        eclipse = game.getEclipse();
+        eclipse = game.getCompany(0);
         eclipse.setActive(true);
     }
 
@@ -36,9 +36,9 @@ public class TileTest {
 
     @Test
     public void tileReferencesAreCorrect() {
-        assertEquals("A0", game.getBoard().getTile(0, 0).getRef());
-        assertEquals("E4", game.getBoard().getTile(4, 4).getRef());
-        assertEquals("J9", game.getBoard().getTile(9, 9).getRef());
+        assertEquals("A0", game.getBoard().getTile(0, 0).toString());
+        assertEquals("E4", game.getBoard().getTile(4, 4).toString());
+        assertEquals("J9", game.getBoard().getTile(9, 9).toString());
     }
 
     @Test

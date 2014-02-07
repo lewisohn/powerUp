@@ -1,13 +1,22 @@
 package com.powerup.logic;
 
+/**
+ * A tile on the game board.
+ * @author Oliver Lewisohn
+ * @since 2014-01-22
+ */
 public class Tile {
 
-    // koordinaatit
-    private int x;
-    private int y;
     private boolean played;
     private Company owner;
+    private int x;
+    private int y;
 
+    /**
+     * Creates a new tile with the given coordinates.
+     * @param x The x-coordinate of the tile.
+     * @param y THe y-coordinate of the tile.
+     */
     public Tile(int x, int y) {
         this.x = x;
         this.y = y;
@@ -15,7 +24,9 @@ public class Tile {
         owner = null;
     }
 
-    // kun tiili on pelattu laudalle, sitä ei voi ottaa pois
+    /**
+     * Plays a tile to the board. This cannot be undone.
+     */
     public void play() {
         played = true;
     }
@@ -40,7 +51,7 @@ public class Tile {
         owner = company;
     }
 
-    public String getRef() {
+    public String toString() {
         String ref = new String();
         ref = ref + (char) (x + 65);
         ref = ref + y;

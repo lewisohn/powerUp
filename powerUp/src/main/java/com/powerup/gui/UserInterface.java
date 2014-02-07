@@ -7,20 +7,20 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-public class Interface implements Runnable {
+public class UserInterface implements Runnable {
 
     private JFrame frame;
     private final Game game;
     private InfoPanel infoPanel;
     private ActionPanel actionPanel;
 
-    public Interface(Game game) {
+    public UserInterface(Game game) {
         this.game = game;
     }
 
     @Override
     public void run() {
-        frame = new JFrame("powerUp");
+        frame = new JFrame("powerUp v0.1");
         frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
         frame.setPreferredSize(new Dimension(790, 460));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

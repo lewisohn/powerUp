@@ -3,10 +3,10 @@ package com.powerup.logic;
 import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class PlayerTest {
 
@@ -21,9 +21,9 @@ public class PlayerTest {
     public PlayerTest() {
         game = new Game();
         board = game.getBoard();
-        eclipse = game.getEclipse();
+        eclipse = game.getCompany(0);
         eclipse.setActive(true);
-        maniac = game.getManiac();
+        maniac = game.getCompany(1);
         maniac.setActive(true);
         player1 = game.getPlayer(0);
         player2 = game.getPlayer(1);
@@ -47,37 +47,37 @@ public class PlayerTest {
     }
 
     @Test
-    public void playerHasNoStockInitially() {
-        assertEquals(0, player1.getStockAmount(eclipse));
+    public void playerHasNoSharesInitially() {
+        assertEquals(0, player1.getNumberOfShares(eclipse));
     }
 
     @Test
-    public void playerCanBuyStock() {
+    public void playerCanBuyShares() {
         player1.setCash(602);
-        player1.buyStock(eclipse);
-        player1.buyStock(eclipse);
-        player1.buyStock(maniac);
-        assertEquals(2, player1.getStockAmount(eclipse));
+        player1.buyShare(eclipse);
+        player1.buyShare(eclipse);
+        player1.buyShare(maniac);
+        assertEquals(2, player1.getNumberOfShares(eclipse));
         assertEquals(0, player1.getCash());
 
     }
 
     @Test
-    public void playerHasTooLittleMoneyToBuyStock() {
+    public void playerHasTooLittleMoneyToBuyShares() {
         player1.setCash(100);
-        player1.buyStock(eclipse);
-        assertEquals(0, player1.getStockAmount(eclipse));
+        player1.buyShare(eclipse);
+        assertEquals(0, player1.getNumberOfShares(eclipse));
     }
 
     @Test
-    public void playerCannotBuyStockBecauseCompanyHasNoneLeft() {
+    public void playerCannotBuySharesBecauseCompanyHasNoneLeft() {
         player1.setCash(5600);
         for (int i = 0; i < 25; i++) {
-            player1.buyStock(eclipse);
+            player1.buyShare(eclipse);
         }
-        player2.buyStock(eclipse);
-        assertEquals(0, eclipse.getStocks().size());
-        assertEquals(0, player2.getStockAmount(eclipse));
+        player2.buyShare(eclipse);
+        assertEquals(0, eclipse.getShares().size());
+        assertEquals(0, player2.getNumberOfShares(eclipse));
     }
     
     @Test

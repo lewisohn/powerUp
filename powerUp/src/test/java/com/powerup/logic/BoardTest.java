@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class BoardTest {
 
@@ -21,7 +21,7 @@ public class BoardTest {
     public BoardTest() {
         game = new Game();
         board = game.getBoard();
-        eclipse = game.getEclipse();
+        eclipse = game.getCompany(0);
         eclipse.setActive(true);
         player1 = game.getPlayer(0);
         player2 = game.getPlayer(1);
@@ -30,7 +30,6 @@ public class BoardTest {
 
     @BeforeClass
     public static void setUpClass() {
-
     }
 
     @AfterClass
@@ -131,6 +130,9 @@ public class BoardTest {
         int x = random.nextInt(9);
         int y = random.nextInt(9);
         assertTrue(board.playTile(x, y));
+        for (Tile t : board.getNeighbours(board.getTile(x, y))) {
+            System.out.println(t);
+        }
         assertEquals(0, board.getNeighbours(board.getTile(x, y)).size());
     }
 
@@ -153,5 +155,4 @@ public class BoardTest {
         assertFalse(board.playTile(-1, 5));
         assertFalse(board.playTile(5, 11));
     }
-
 }

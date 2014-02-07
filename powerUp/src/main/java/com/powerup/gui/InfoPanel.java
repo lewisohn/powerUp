@@ -44,7 +44,7 @@ public class InfoPanel extends JPanel {
     private void paintBoardTiles(Graphics g) {
         for (ArrayList<Tile> list : board.getTiles()) {
             for (Tile tile : list) {
-                paintTile(g, 34 * (tile.getX() + 1), 34 * (tile.getY() + 1), tile.getRef(), foreground, false);
+                paintTile(g, 34 * (tile.getX() + 1), 34 * (tile.getY() + 1), tile.toString(), background, false);
             }
         }
     }
@@ -53,7 +53,7 @@ public class InfoPanel extends JPanel {
         int playablePosition = 0;
         for (Tile tile : board.getPlayableTiles()) {
             playablePosition++;
-            paintTile(g, 34 * playablePosition + 374, 340, tile.getRef(), foreground, true);
+            paintTile(g, 34 * playablePosition + 374, 340, tile.toString(), foreground, true);
         }
     }
 

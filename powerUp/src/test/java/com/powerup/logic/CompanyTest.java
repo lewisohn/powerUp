@@ -2,10 +2,10 @@ package com.powerup.logic;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class CompanyTest {
 
@@ -19,9 +19,9 @@ public class CompanyTest {
     public CompanyTest() {
         game = new Game();
         board = game.getBoard();
-        eclipse = game.getEclipse();
+        eclipse = game.getCompany(0);
         eclipse.setActive(true);
-        maniac = game.getManiac();
+        maniac = game.getCompany(1);
         maniac.setActive(true);
         player1 = game.getPlayer(0);
     }
@@ -58,7 +58,7 @@ public class CompanyTest {
 
     @Test
     public void companySellingPriceIsCalculatedCorrectly() {
-        player1.buyStock(eclipse);
+        player1.buyShare(eclipse);
         companyHasCorrectNumberOfTiles();
         assertEquals(262, eclipse.sellPrice());
     }
@@ -77,7 +77,7 @@ public class CompanyTest {
         maniac.takeOver(eclipse);
         assertEquals(3, maniac.getTiles().size());
         assertEquals(0, eclipse.getTiles().size());
-        assertEquals(25, eclipse.getStocks().size());
+        assertEquals(25, eclipse.getShares().size());
         assertFalse(eclipse.getActive());
     }
 

@@ -28,3 +28,6 @@ Pelilogiikan koodaaminen ja refaktorointi, testien kirjoittaminen
 GUI:n koodaaminen
 // Vei paljon aikaa. En ole ehtinyt vielä kirjoittaa JavaDoceja, mutta teen sen huomenna.
 // Ensimmäinen screenshotti lisätty doc-kansioon!
+
+07/02/14: 3h 30m
+Refaktorointi, JavaDocin asentaminen, kirjoittaminen ja generointi, Mavenin ongelmien ratkaiseminen (en onnistunut!)

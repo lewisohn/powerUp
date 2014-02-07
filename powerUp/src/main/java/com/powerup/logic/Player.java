@@ -1,18 +1,21 @@
 package com.powerup.logic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
+/**
+ * A player of the game. Has cash and can use it to buy shares.
+ * @author Oliver Lewisohn
+ * @since 2014-01-22
+ */
 public class Player {
 
     private String name;
-    // omaisuus
-    private ArrayList<Stock> stocks;
+    private ArrayList<Share> shares;
     private int cash;
 
     public Player(String name) {
         this.name = name;
-        stocks = new ArrayList<>();
+        shares = new ArrayList<>();
         cash = 5000;
     }
 
@@ -20,23 +23,23 @@ public class Player {
         return name;
     }
 
-    public int getStockAmount(Company company) {
+    public int getNumberOfShares(Company company) {
         int i = 0;
-        for (Stock stock : stocks) {
-            if (stock.getCompany() == company) {
+        for (Share share : shares) {
+            if (share.getCompany() == company) {
                 i++;
             }
         }
         return i;
     }
 
-    public void buyStock(Company company) {
+    public void buyShare(Company company) {
         int price = company.sellPrice();
         if (this.cash >= price) {
-            Stock purchase = company.sellStock();
+            Share purchase = company.sellShare();
             if (purchase != null) {
                 cash -= price;
-                stocks.add(purchase);
+                shares.add(purchase);
             }
         }
     }

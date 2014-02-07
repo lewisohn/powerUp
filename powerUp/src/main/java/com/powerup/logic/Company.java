@@ -1,31 +1,47 @@
 package com.powerup.logic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class Company {
+/**
+ * An electricity company.
+ * <p />
+ * Initially inactive, but is activated during the course of the game.
+ * Once activated, owns tiles and sells shares.
+ * @author Oliver Lewisohn
+ * @since 2014-01-22
+ */
+public final class Company {
 
     private final String name;
     private final int initialValue;
     private boolean active;
-    private ArrayList<Stock> stocks;
+    private ArrayList<Share> shares;
     private ArrayList<Tile> tiles;
 
+    /**
+     * Creates a new inactive company with the given name, price, and 25 shares.
+     * @param name The name of the company.
+     * @param initialValue The initial share price of the company.
+     */
     public Company(String name, int initialValue) {
         this.name = name;
         this.initialValue = initialValue;
         active = false;
-        stocks = new ArrayList<>();
+        shares = new ArrayList<>();
         tiles = new ArrayList<>();
-        createStock();
+        createShares();
     }
 
-    private void createStock() {
+    private void createShares() {
         for (int i = 0; i < 25; i++) {
-            stocks.add(new Stock(this, i));
+            shares.add(new Share(this));
         }
     }
 
+    /**
+     * Assigns a tile to the company if it has already been played.
+     * @param tile The tile to be added.
+     */
     public void addTile(Tile tile) {
         if (tile.getPlayed()) {
             tile.setOwner(this);
@@ -49,40 +65,49 @@ public class Company {
         return name;
     }
 
+    /**
+     * Calculates the price of buying one share from the company.
+     * <p />
+     * A company's value grows by 10 percentage points for each tile it owns
+     * and an additional percentage point for each share it has sold.
+     * @return The price of buying one share from the company.
+     */
     public int sellPrice() {
-        // jokaisesta omistetusta tontista tulee 10% arvoa lisää
-        // ja jokaisesta myydystä osingosta tulee 1%
-        return initialValue + ((initialValue / 100) * ((25 - stocks.size()) + (tiles.size() * 10)));
+        return initialValue + ((initialValue / 100) * ((25 - shares.size()) + (tiles.size() * 10)));
 
     }
 
-    public Stock sellStock() {
-        if (stocks.isEmpty()) {
+    public Share sellShare() {
+        if (shares.isEmpty()) {
             return null;
         } else {
-            Stock purchase = stocks.get(0);
-            stocks.remove(0);
+            Share purchase = shares.get(0);
+            shares.remove(0);
             return purchase;
 
         }
     }
 
-    public ArrayList<Stock> getStocks() {
-        return stocks;
+    public ArrayList<Share> getShares() {
+        return shares;
     }
-
+    
+    /**
+     * Makes one company take over another one, gaining all its tiles.
+     * @param company The company to be taken over.
+     */
     public void takeOver(Company company) {
         for (Tile tile : company.getTiles()) {
             this.addTile(tile);
         }
         company.liquidate();
+        
     }
 
-    public void liquidate() {
+    private void liquidate() {
         tiles.clear();
-        stocks.clear();
-        createStock();
+        shares.clear();
+        createShares();
         active = false;
     }
-
 }
