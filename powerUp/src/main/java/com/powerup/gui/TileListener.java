@@ -18,7 +18,6 @@ public class TileListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("Tile " + turn.actions);
         int intersection = intersects(e);
         if (intersection >= 0) {
             turn.playTile(intersection);

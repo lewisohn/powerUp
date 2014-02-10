@@ -1,6 +1,7 @@
 package com.powerup.gui;
 
 import com.powerup.logic.*;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -35,6 +36,7 @@ public class StartGameListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println(EventQueue.isDispatchThread());
         if ((p1Name.getText().equals("")) || (p2Name.getText().equals("")) || (p3Name.getText().equals("")) || (p4Name.getText().equals(""))) {
             JOptionPane.showMessageDialog(frame, "Please enter a name for all four players", "Error", JOptionPane.ERROR_MESSAGE);
         } else {

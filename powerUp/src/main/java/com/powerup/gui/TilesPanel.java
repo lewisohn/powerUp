@@ -31,13 +31,15 @@ public class TilesPanel extends JPanel {
 
     private void paintAvailableTiles(Graphics g) {
         int i = 0;
-        while (i < 5) {
-            if (tiles[i] != null) {
-                paintTile(g, 34 * i + 13, 19, tiles[i].toString(), foreground, true);
-            } else {
-                paintTile(g, 34 * i + 13, 19, "", background, false);
+        if (tiles != null) {
+            while (i < 5) {
+                if (tiles[i] != null) {
+                    paintTile(g, 34 * i + 13, 19, tiles[i].toString(), foreground, true);
+                } else {
+                    paintTile(g, 34 * i + 13, 19, "", background, false);
+                }
+                i++;
             }
-            i++;
         }
     }
 

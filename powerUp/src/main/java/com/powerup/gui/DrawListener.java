@@ -14,7 +14,6 @@ public class DrawListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Draw " + turn.actions);
         turn.drawTiles();
     }
 }

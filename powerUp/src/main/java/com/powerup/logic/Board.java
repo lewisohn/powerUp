@@ -37,35 +37,20 @@ public final class Board {
         }
     }
 
-    /**
-     * Plays five tiles to start the game off. <p /> This method may be
-     * deprecated in future, as each player will draw one initial tile, with the
-     * player drawing closest to A0 going first.
-     */
-//    public void playStartingTiles() {
-//        selectTiles(5, true);
-//    }
-    /**
-     * Allocates a number of new playable tiles.
-     *
-     * @param n The number of new tiles to be allocated.
-     */
-//    public void chooseNewPlayableTiles(int n) {
-//        selectTiles(n, false);
-//    }
-    public boolean unassignedTilesRemain() {
+    public int unassignedTilesRemaining() {
+        int sum = 0;
         for (ArrayList<Tile> arrayList : tiles) {
             for (Tile tile : arrayList) {
                 if (tile.getLocation() == Tile.Location.NONE) {
-                    return true;
+                    sum++;
                 }
             }
         }
-        return false;
+        return sum;
     }
 
     public Tile getRandomUnassignedTile() {
-        if (!unassignedTilesRemain()) {
+        if (unassignedTilesRemaining() < 5) {
             return null;
         } else {
             int x;
@@ -81,7 +66,7 @@ public final class Board {
     }
 
     public boolean giveTileToPlayer(Player player) {
-        if (unassignedTilesRemain()) {
+        if (unassignedTilesRemaining() >= 5) {
             if (player.giveTile(getRandomUnassignedTile())) {
                 return true;
             }
@@ -90,7 +75,7 @@ public final class Board {
     }
 
     public boolean giveTileToPlayer(Player player, Tile tile) {
-        if (unassignedTilesRemain()) {
+        if (unassignedTilesRemaining() >= 5) {
             if (player.giveTile(tile)) {
                 return true;
             }

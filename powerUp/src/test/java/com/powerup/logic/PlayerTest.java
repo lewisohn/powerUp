@@ -51,34 +51,34 @@ public class PlayerTest {
         assertEquals(0, player1.getNumberOfShares(eclipse));
     }
 
-    @Test
-    public void playerCanBuyShares() {
-        player1.setCash(602);
-        player1.buyShare(eclipse);
-        player1.buyShare(eclipse);
-        player1.buyShare(maniac);
-        assertEquals(2, player1.getNumberOfShares(eclipse));
-        assertEquals(0, player1.getCash());
+//    @Test
+//    public void playerCanBuyShares() {
+//        player1.setCash(602);
+//        player1.buyShare(eclipse);
+//        player1.buyShare(eclipse);
+//        player1.buyShare(maniac);
+//        assertEquals(2, player1.getNumberOfShares(eclipse));
+//        assertEquals(0, player1.getCash());
+//
+//    }
 
-    }
+//    @Test
+//    public void playerHasTooLittleMoneyToBuyShares() {
+//        player1.setCash(100);
+//        player1.buyShare(eclipse);
+//        assertEquals(0, player1.getNumberOfShares(eclipse));
+//    }
 
-    @Test
-    public void playerHasTooLittleMoneyToBuyShares() {
-        player1.setCash(100);
-        player1.buyShare(eclipse);
-        assertEquals(0, player1.getNumberOfShares(eclipse));
-    }
-
-    @Test
-    public void playerCannotBuySharesBecauseCompanyHasNoneLeft() {
-        player1.setCash(5600);
-        for (int i = 0; i < 25; i++) {
-            player1.buyShare(eclipse);
-        }
-        player2.buyShare(eclipse);
-        assertEquals(0, eclipse.getShares().size());
-        assertEquals(0, player2.getNumberOfShares(eclipse));
-    }
+//    @Test
+//    public void playerCannotBuySharesBecauseCompanyHasNoneLeft() {
+//        player1.setCash(5600);
+//        for (int i = 0; i < 25; i++) {
+//            player1.buyShare(eclipse);
+//        }
+//        player2.buyShare(eclipse);
+//        assertEquals(0, eclipse.getShares().size());
+//        assertEquals(0, player2.getNumberOfShares(eclipse));
+//    }
     
     @Test
     public void playerNameTest() {

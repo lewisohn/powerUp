@@ -54,87 +54,87 @@ public class BoardTest {
         assertEquals(100, sum);
     }
 
-    private void playTileAndNeighbours(int x, int y) {
-        board.playTile(x, y);
-        board.playTile(x + 1, y);
-        board.playTile(x - 1, y);
-        board.playTile(x, y + 1);
-        board.playTile(x, y - 1);
-    }
+//    private void playTileAndNeighbours(int x, int y) {
+//        board.playTile(x, y);
+//        board.playTile(x + 1, y);
+//        board.playTile(x - 1, y);
+//        board.playTile(x, y + 1);
+//        board.playTile(x, y - 1);
+//    }
 
-    @Test
-    public void plotHasCorrectNeighbours() {
-        int x = 0;
-        int y = 0;
-        playTileAndNeighbours(x, y);
-        ArrayList<Tile> neighbours = board.getNeighbours(board.getTile(x, y));
-        assertNull(board.getTile(x - 1, y));
-        assertNull(board.getTile(x, y - 1));
-        assertTrue(neighbours.contains(board.getTile(x + 1, y)));
-        assertTrue(neighbours.contains(board.getTile(x, y + 1)));
-    }
+//    @Test
+//    public void plotHasCorrectNeighbours() {
+//        int x = 0;
+//        int y = 0;
+//        playTileAndNeighbours(x, y);
+//        ArrayList<Tile> neighbours = board.getNeighbours(board.getTile(x, y));
+//        assertNull(board.getTile(x - 1, y));
+//        assertNull(board.getTile(x, y - 1));
+//        assertTrue(neighbours.contains(board.getTile(x + 1, y)));
+//        assertTrue(neighbours.contains(board.getTile(x, y + 1)));
+//    }
 
-    @Test
-    public void plotHasCorrectNeighbours2() {
-        int x = 9;
-        int y = 9;
-        playTileAndNeighbours(x, y);
-        ArrayList<Tile> neighbours = board.getNeighbours(board.getTile(x, y));
-        assertNull(board.getTile(x + 1, y));
-        assertNull(board.getTile(x, y + 1));
-        assertTrue(neighbours.contains(board.getTile(x - 1, y)));
-        assertTrue(neighbours.contains(board.getTile(x, y - 1)));
-    }
+//    @Test
+//    public void plotHasCorrectNeighbours2() {
+//        int x = 9;
+//        int y = 9;
+//        playTileAndNeighbours(x, y);
+//        ArrayList<Tile> neighbours = board.getNeighbours(board.getTile(x, y));
+//        assertNull(board.getTile(x + 1, y));
+//        assertNull(board.getTile(x, y + 1));
+//        assertTrue(neighbours.contains(board.getTile(x - 1, y)));
+//        assertTrue(neighbours.contains(board.getTile(x, y - 1)));
+//    }
 
-    @Test
-    public void centralPlotHasFourNeighbours() {
-        int x = 1 + random.nextInt(8);
-        int y = 1 + random.nextInt(8);
-        playTileAndNeighbours(x, y);
-        assertEquals(4, board.getNeighbours(board.getTile(x, y)).size());
-    }
+//    @Test
+//    public void centralPlotHasFourNeighbours() {
+//        int x = 1 + random.nextInt(8);
+//        int y = 1 + random.nextInt(8);
+//        playTileAndNeighbours(x, y);
+//        assertEquals(4, board.getNeighbours(board.getTile(x, y)).size());
+//    }
 
-    @Test
-    public void edgePlotHasThreeNeighbours() {
-        int x = 0;
-        int y = 1 + random.nextInt(8);
-        playTileAndNeighbours(x, y);
-        assertEquals(3, board.getNeighbours(board.getTile(x, y)).size());
-    }
+//    @Test
+//    public void edgePlotHasThreeNeighbours() {
+//        int x = 0;
+//        int y = 1 + random.nextInt(8);
+//        playTileAndNeighbours(x, y);
+//        assertEquals(3, board.getNeighbours(board.getTile(x, y)).size());
+//    }
 
-    @Test
-    public void cornerPlotHasTwoNeighbours() {
-        int x = 0;
-        int y = 0;
-        playTileAndNeighbours(x, y);
-        assertEquals(2, board.getNeighbours(board.getTile(x, y)).size());
-    }
+//    @Test
+//    public void cornerPlotHasTwoNeighbours() {
+//        int x = 0;
+//        int y = 0;
+//        playTileAndNeighbours(x, y);
+//        assertEquals(2, board.getNeighbours(board.getTile(x, y)).size());
+//    }
 
-    @Test
-    public void cornerPlotHasTwoNeighbours2() {
-        int x = 9;
-        int y = 9;
-        playTileAndNeighbours(x, y);
-        assertEquals(2, board.getNeighbours(board.getTile(x, y)).size());
-    }
+//    @Test
+//    public void cornerPlotHasTwoNeighbours2() {
+//        int x = 9;
+//        int y = 9;
+//        playTileAndNeighbours(x, y);
+//        assertEquals(2, board.getNeighbours(board.getTile(x, y)).size());
+//    }
 
-    public void outOfBoundsPlotHasNoNeighbours() {
-        int x = -1;
-        int y = -1;
-        playTileAndNeighbours(x, y);
-        assertEquals(0, board.getNeighbours(board.getTile(x, y)).size());
-    }
+//    public void outOfBoundsPlotHasNoNeighbours() {
+//        int x = -1;
+//        int y = -1;
+//        playTileAndNeighbours(x, y);
+//        assertEquals(0, board.getNeighbours(board.getTile(x, y)).size());
+//    }
 
-    @Test
-    public void anyPlotHasNoNeighboursIfTheyHaventBeenPlayed() {
-        int x = random.nextInt(9);
-        int y = random.nextInt(9);
-        assertTrue(board.playTile(x, y));
-        for (Tile t : board.getNeighbours(board.getTile(x, y))) {
-            System.out.println(t);
-        }
-        assertEquals(0, board.getNeighbours(board.getTile(x, y)).size());
-    }
+//    @Test
+//    public void anyPlotHasNoNeighboursIfTheyHaventBeenPlayed() {
+//        int x = random.nextInt(9);
+//        int y = random.nextInt(9);
+//        assertTrue(board.playTile(x, y));
+//        for (Tile t : board.getNeighbours(board.getTile(x, y))) {
+//            System.out.println(t);
+//        }
+//        assertEquals(0, board.getNeighbours(board.getTile(x, y)).size());
+//    }
 
     @Test
     public void cannotGetOutOfBoundsTile() {
@@ -146,13 +146,13 @@ public class BoardTest {
         assertNull(board.getTile(5, 11));
     }
 
-    @Test
-    public void cannotPlayOutOfBoundsTile() {
-        assertFalse(board.playTile(-1, -1));
-        assertFalse(board.playTile(-1, 11));
-        assertFalse(board.playTile(11, -1));
-        assertFalse(board.playTile(11, 11));
-        assertFalse(board.playTile(-1, 5));
-        assertFalse(board.playTile(5, 11));
-    }
+//    @Test
+//    public void cannotPlayOutOfBoundsTile() {
+//        assertFalse(board.playTile(-1, -1));
+//        assertFalse(board.playTile(-1, 11));
+//        assertFalse(board.playTile(11, -1));
+//        assertFalse(board.playTile(11, 11));
+//        assertFalse(board.playTile(-1, 5));
+//        assertFalse(board.playTile(5, 11));
+//    }
 }

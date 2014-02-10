@@ -7,13 +7,13 @@ import java.util.Arrays;
 public class Turn {
 
     private Game game;
-    public GameFrame gFrame;
+    private GameFrame gFrame;
     private Player player;
-    public int actions;
+    private int actions;
     private int pid;
+    private DrawListener drawListener;
     private TileListener tileListener;
     private TurnListener turnListener;
-    private DrawListener drawListener;
 
     public Turn(Game game, int pid) {
         this.game = game;
@@ -22,32 +22,45 @@ public class Turn {
         turnListener = new TurnListener(this);
         drawListener = new DrawListener(this);
         tileListener = new TileListener(this);
-        gFrame.getCommandsPanel().getDefaultButton().setEnabled(true);
-        if (gFrame.getCommandsPanel().getDefaultButton().getActionListeners().length == 0) {
-            gFrame.getCommandsPanel().getDefaultButton().addActionListener(turnListener);
-        }
+        gFrame.getCommandsPanel().getEndTurnButton().setEnabled(true);
+        gFrame.getCommandsPanel().getEndTurnButton().addActionListener(turnListener);
+        gFrame.getCommandsPanel().getDrawTilesButton().setEnabled(false);
+        gFrame.getCommandsPanel().getDrawTilesButton().addActionListener(drawListener);
         beginTurn();
+    }
+
+    private void updateCashAndActions() {
+        gFrame.getPlayerPanel().setCash(this.player.getCash());
+        gFrame.getPlayerPanel().repaint();
+        gFrame.getActionsPanel().setActions(this.actions);
+        gFrame.getActionsPanel().repaint();
+//        gFrame.getInfoPanel().write(player + " has $" + this.player.getCash() + " and "
+//                + actions + (actions == 1 ? " action " : " actions ") + "remaining");
+//        gFrame.getInfoPanel().repaint();
+    }
+
+    private void updateTiles() {
+//        gFrame.getTilesPanel().setTiles(player.getTiles());
+//        gFrame.getTilesPanel().update();
+    }
+
+    private void updateBoard() {
+//        gFrame.getBoardPanel().update();
+
     }
 
     private void beginTurn() {
         this.player = game.getPlayer(pid);
         this.actions = 3;
-//        gFrame.getPlayerPanel().setPlayer(this.player);
-        gFrame.getPlayerPanel().setCash(this.player.getCash());
-        gFrame.getActionsPanel().setActions(this.actions);
         gFrame.getInfoPanel().writeln("Starting new turn");
         gFrame.getInfoPanel().write("It's " + player + "'s turn");
-        gFrame.getInfoPanel().writeln(player + " has $" + player.getCash() + " and " + actions + " actions remaining");
-        gFrame.getTilesPanel().setTiles(player.getTiles());
-        gFrame.getTilesPanel().update();
+        updateCashAndActions();
+        updateTiles();
         if (gFrame.getTilesPanel().getMouseListeners().length == 0) {
             gFrame.getTilesPanel().addMouseListener(tileListener);
         }
-        if ((player.getHandSize() < 5) && (game.getBoard().unassignedTilesRemain())) {
+        if ((player.getHandSize() < 5) && (game.getBoard().unassignedTilesRemaining()) >= 5) {
             gFrame.getCommandsPanel().getDrawTilesButton().setEnabled(true);
-            if (gFrame.getCommandsPanel().getDrawTilesButton().getActionListeners().length == 0) {
-                gFrame.getCommandsPanel().getDrawTilesButton().addActionListener(drawListener);
-            }
         }
     }
 
@@ -57,29 +70,28 @@ public class Turn {
         beginTurn();
     }
 
+    private void outOfActions() {
+        gFrame.getInfoPanel().write(player + " is out of actions");
+        gFrame.getInfoPanel().writeln("Click \"End turn\" to proceed with the game");
+        gFrame.getCommandsPanel().getDrawTilesButton().setEnabled(false);
+        gFrame.getTilesPanel().removeMouseListener(tileListener);
+    }
+
     public void playTile(int n) {
         if (player.getTile(n) != null) {
             Tile t = player.getTile(n);
             game.getBoard().playTileToBoard(player.playTile(n));
-            gFrame.getBoardPanel().update();
-            gFrame.getTilesPanel().setTiles(player.getTiles());
-            gFrame.getTilesPanel().update();
             gFrame.getInfoPanel().write(player + " played tile " + t);
+            updateBoard();
+            updateTiles();
             checkCompanies(t);
             actions--;
             if (actions <= 0) {
-                gFrame.getInfoPanel().write(player + " is out of actions");
-                gFrame.getInfoPanel().writeln("Click \"End turn\" to proceed with the game");
-                gFrame.getCommandsPanel().getDrawTilesButton().setEnabled(false);
-                gFrame.getTilesPanel().removeMouseListener(tileListener);
-
+                outOfActions();
             } else {
-                gFrame.getInfoPanel().write(player + " has " + actions + (actions == 1 ? " action " : " actions ") + "remaining");
-                if (game.getBoard().unassignedTilesRemain()) {
+                updateCashAndActions();
+                if (game.getBoard().unassignedTilesRemaining() >= 5) {
                     gFrame.getCommandsPanel().getDrawTilesButton().setEnabled(true);
-                    if (gFrame.getCommandsPanel().getDrawTilesButton().getActionListeners().length == 0) {
-                        gFrame.getCommandsPanel().getDrawTilesButton().addActionListener(drawListener);
-                    }
                 }
             }
         }
@@ -154,37 +166,38 @@ public class Turn {
             }
         } else {
             if (neutral > 0) {
-                if (game.allCompaniesActive()) {
-                    gFrame.getInfoPanel().write("No new companies can be established right now");
-                } else {
-                    Company company = gFrame.createCompany(tile);
-                    player.buyShare(company, true);
-                    gFrame.getInfoPanel().write(company + " has been founded at " + tile + " with size " + company.size());
-                    gFrame.getInfoPanel().write(player + " has received a free " + company + " share");
-                }
+                setUpNewCompany(tile);
             }
-
         }
         gFrame.getBoardPanel().update();
+    }
+
+    private void setUpNewCompany(Tile tile) {
+        if (game.allCompaniesActive()) {
+            gFrame.getInfoPanel().write("No new companies can be established right now");
+        } else {
+            Company company = gFrame.createCompany(tile);
+            player.buyShare(company, true);
+            gFrame.getInfoPanel().write(company + " has been founded at " + tile + " with size " + company.size());
+            gFrame.getInfoPanel().write(player + " has received a free " + company + " share");
+        }
     }
 
     public void drawTiles() {
         for (int i = 0; i < 5; i++) {
             if (player.getTile(i) == null) {
-                player.giveTile(game.getBoard().getRandomUnassignedTile());
+                if (!game.getBoard().giveTileToPlayer(player)) {
+                    break;
+                }
             }
         }
+        updateTiles();
         gFrame.getCommandsPanel().getDrawTilesButton().setEnabled(false);
-        gFrame.getCommandsPanel().getDrawTilesButton().removeActionListener(drawListener);
-        gFrame.getTilesPanel().update();
         gFrame.getInfoPanel().write(player + " drew new tiles");
         actions--;
         if (actions <= 0) {
-            gFrame.getInfoPanel().write(player + " is out of actions");
-            gFrame.getInfoPanel().writeln("Click \"End turn\" to proceed with the game");
-            gFrame.getTilesPanel().removeMouseListener(tileListener);
+            outOfActions();
         } else {
-            gFrame.getInfoPanel().write(player + " has " + actions + (actions == 1 ? " action " : " actions ") + "remaining");
         }
     }
 }

@@ -43,7 +43,7 @@ public class CommandsPanel extends JPanel {
         this.add(Box.createRigidArea(dbl));
     }
 
-    public JButton getDefaultButton() {
+    public JButton getEndTurnButton() {
         return endTurn;
     }
 
