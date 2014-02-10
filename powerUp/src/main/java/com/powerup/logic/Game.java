@@ -1,7 +1,11 @@
 package com.powerup.logic;
 
+import com.powerup.gui.StartFrame;
+import javax.swing.SwingUtilities;
+
 /**
  * Primary logic class. Everything else is set up and accessed from here.
+ *
  * @author Oliver Lewisohn
  * @since 2014-01-22
  */
@@ -19,10 +23,9 @@ public final class Game {
     private Company[] companies;
 
     /**
-     * Sets up the board, players and companies.
-     * <p />
-     * In a future version, the players will not be created automatically at
-     * this stage; the user will be able to name the players themselves.
+     * Sets up the board, players and companies. <p /> In a future version, the
+     * players will not be created automatically at this stage; the user will be
+     * able to name the players themselves.
      */
     public Game() {
         board = new Board();
@@ -80,5 +83,13 @@ public final class Game {
             return companies[id];
         }
         return null;
+    }
+
+    /**
+     * Launches the graphical user interface.
+     */
+    public void launchGUI() {
+        StartFrame start = new StartFrame(this);
+        SwingUtilities.invokeLater(start);
     }
 }

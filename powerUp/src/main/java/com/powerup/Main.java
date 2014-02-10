@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * Main class, launches the game.
+ *
  * @author Oliver Lewisohn
  * @version 0.1
  * @since 2014-01-22
@@ -13,7 +14,8 @@ import javax.swing.SwingUtilities;
 public class Main {
 
     private static Game game;
-    private static UserInterface ui;
+    private static StartFrame start;
+    private static GameFrame ui;
 
     /**
      *
@@ -21,8 +23,6 @@ public class Main {
      */
     public static void main(String[] args) {
         game = new Game();
-        ui = new UserInterface(game);
-        SwingUtilities.invokeLater(ui);
-
+        game.launchGUI();
     }
 }

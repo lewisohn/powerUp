@@ -4,8 +4,8 @@ import com.powerup.logic.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import javax.swing.JPanel;
 import java.util.ArrayList;
+import javax.swing.JPanel;
 
 public class InfoPanel extends JPanel {
 

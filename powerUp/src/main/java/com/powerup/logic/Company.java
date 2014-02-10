@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * An electricity company.
  * <p />
  * Initially inactive, but is activated during the course of the game.
- * Once activated, owns tiles and sells shares.
+ * Once activated, owns tiles and sells shares. Can take over other companies.
+ * Becomes inactivate once again if taken over.
  * @author Oliver Lewisohn
  * @since 2014-01-22
  */

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * A player of the game. Has cash and can use it to buy shares.
+ *
  * @author Oliver Lewisohn
  * @since 2014-01-22
  */
@@ -17,6 +18,10 @@ public class Player {
         this.name = name;
         shares = new ArrayList<>();
         cash = 5000;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {
