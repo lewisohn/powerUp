@@ -29,8 +29,6 @@ public class StartFrame implements Runnable {
     }
 
     public void createComponents(Container container) {
-        // Huom! Luo ensin piirtoalusta jonka lisäät container-olioon
-        // Luo vasta tämän jälkeen näppäimistönkuuntelija, jonka lisäät frame-oliolle
         this.startPanel = new StartPanel(frame, game);
         Border padding;
         padding = BorderFactory.createEmptyBorder(20, 20, 20, 20);

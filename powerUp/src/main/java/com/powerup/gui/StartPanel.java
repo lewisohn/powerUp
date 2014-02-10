@@ -64,7 +64,7 @@ public class StartPanel extends JPanel {
         pleaseName.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(pleaseName);
         this.add(Box.createRigidArea(new Dimension(0, 10)));
-        addTextFields();
+        addNameFields();
         this.add(Box.createRigidArea(new Dimension(0, 10)));
         newGame = new JButton("New game");
         newGame.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -72,7 +72,7 @@ public class StartPanel extends JPanel {
         this.add(newGame);
     }
 
-    private void addTextFields() {
+    private void addNameFields() {
         for (int i = 0; i < 4; i++) {
             names[i] = new JTextField("Player " + (i + 1), 10);
             names[i].addFocusListener(selectAll);

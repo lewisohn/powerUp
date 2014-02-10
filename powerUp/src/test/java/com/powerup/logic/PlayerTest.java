@@ -82,6 +82,6 @@ public class PlayerTest {
     
     @Test
     public void playerNameTest() {
-        assertEquals("Player 1",player1.getName());
+        assertEquals("Player 1",player1.toString());
     }
 }

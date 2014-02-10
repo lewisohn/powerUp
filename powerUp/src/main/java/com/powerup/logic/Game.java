@@ -1,6 +1,8 @@
 package com.powerup.logic;
 
+import com.powerup.gui.GameFrame;
 import com.powerup.gui.StartFrame;
+import java.util.Arrays;
 import javax.swing.SwingUtilities;
 
 /**
@@ -13,6 +15,7 @@ public final class Game {
 
     private final Board board;
     private Player[] players;
+    private GameFrame gFrame;
     // the game's six companies and a list to fetch them from
     private Company eclipse;
     private Company maniac;
@@ -37,7 +40,7 @@ public final class Game {
 
     private void createPlayers() {
         for (int i = 0; i < 4; i++) {
-            players[i] = new Player("Player " + (i + 1));
+            players[i] = new Player();
         }
     }
 
@@ -88,8 +91,76 @@ public final class Game {
     /**
      * Launches the graphical user interface.
      */
-    public void launchGUI() {
-        StartFrame start = new StartFrame(this);
-        SwingUtilities.invokeLater(start);
+    public void launch() {
+        StartFrame sFrame = new StartFrame(this);
+        SwingUtilities.invokeLater(sFrame);
+    }
+
+    public void setUp(GameFrame gFrame) {
+        this.gFrame = gFrame;
+        gFrame.getInfoPanel().writeln("Determing starting order");
+        int i = 0;
+        while (i < 4) {
+            Tile t = board.getRandomUnassignedTile();
+            boolean hasNeighbour = false;
+            int j = 1;
+            while (j <= i) {
+                if (t.isNextTo(players[j - 1].getTile(0))) {
+                    hasNeighbour = true;
+                }
+                j++;
+            }
+            if (!hasNeighbour) {
+                board.giveTileToPlayer(players[i], t);
+                i++;
+            }
+        }
+        Arrays.sort(players);
+        for (int k = 0;
+                k < 4; k++) {
+            Tile t = players[k].playTile(0);
+            t.setLocation(Tile.Location.BOARD);
+            gFrame.getInfoPanel().write(players[k] + " drew " + t + " and will go " + ordinal(k + 1));
+            for (int m = 0; m < 5; m++) {
+                players[k].giveTile(board.getRandomUnassignedTile());
+            }
+        }
+        gFrame.getInfoPanel().write("---");
+        gFrame.getBoardPanel().repaint();
+        Turn turn = new Turn(this, 0);
+    }
+
+    public static String ordinal(int i) {
+        String[] ordinals = new String[]{"noneth", "first", "second", "third", "fourth"};
+        if ((i >= 1) && (i < 5)) {
+            return ordinals[i];
+        } else {
+            return bigOrdinal(i);
+        }
+    }
+
+    public static String bigOrdinal(int i) {
+        String[] suffixes = new String[]{"th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"};
+        switch (i % 100) {
+            case 11:
+            case 12:
+            case 13:
+                return i + "th";
+            default:
+                return i + suffixes[i % 10];
+        }
+    }
+
+    public GameFrame getGameFrame() {
+        return gFrame;
+    }
+
+    public boolean allCompaniesActive() {
+        for (Company company : companies) {
+            if (!company.getActive()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

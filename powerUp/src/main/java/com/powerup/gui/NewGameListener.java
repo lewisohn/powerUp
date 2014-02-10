@@ -34,6 +34,6 @@ public class NewGameListener implements ActionListener {
 
     private void startGame() {
         frame.dispose();
-        game.launchGUI();
+        new Game().launch();
     }
 }
