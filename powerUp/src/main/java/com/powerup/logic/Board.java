@@ -14,6 +14,7 @@ public final class Board {
     private final ArrayList<ArrayList<Tile>> tiles;
     private ArrayList<Tile> playableTiles;
     private final Random random;
+    private ArrayList<Tile> allNeighbours = new ArrayList<>();
 
     /**
      * Creates 100 tiles and picks five of them to be played at the start.
@@ -31,7 +32,7 @@ public final class Board {
         for (int i = 0; i < 10; i++) {
             tiles.add(new ArrayList<Tile>());
             for (int j = 0; j < 10; j++) {
-                tiles.get(i).add(new Tile(i, j));
+                tiles.get(i).add(new Tile(i, j, this));
             }
         }
     }
@@ -52,7 +53,7 @@ public final class Board {
 //    public void chooseNewPlayableTiles(int n) {
 //        selectTiles(n, false);
 //    }
-    private boolean unassignedTilesRemain() {
+    public boolean unassignedTilesRemain() {
         for (ArrayList<Tile> arrayList : tiles) {
             for (Tile tile : arrayList) {
                 if (tile.getLocation() == Tile.Location.NONE) {
@@ -180,5 +181,21 @@ public final class Board {
             neighbours.add(getTile(x, y + 1));
         }
         return neighbours;
+    }
+    private ArrayList<Tile> ret;
+
+    public ArrayList<Tile> getAllConnectedTiles(Tile tile) {
+        ret = new ArrayList<>();
+        recursivelyFindNeighbours(tile);
+        return ret;
+    }
+
+    private void recursivelyFindNeighbours(Tile tile) {
+        ret.add(tile);
+        for (Tile t : getNeighbours(tile)) {
+            if (!ret.contains(t)) {
+                recursivelyFindNeighbours(t);
+            }
+        }
     }
 }

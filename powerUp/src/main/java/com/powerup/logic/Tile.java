@@ -1,5 +1,7 @@
 package com.powerup.logic;
 
+import java.util.ArrayList;
+
 /**
  * A tile on the game board.
  *
@@ -12,6 +14,7 @@ public class Tile implements Comparable<Tile> {
     private Company owner;
     private int x;
     private int y;
+    private Board board;
 
     /**
      * Creates a new tile with the given coordinates.
@@ -19,9 +22,10 @@ public class Tile implements Comparable<Tile> {
      * @param x The x-coordinate of the tile.
      * @param y THe y-coordinate of the tile.
      */
-    public Tile(int x, int y) {
+    public Tile(int x, int y, Board board) {
         this.x = x;
         this.y = y;
+        this.board = board;
         location = Location.NONE;
         owner = null;
     }
@@ -90,4 +94,6 @@ public class Tile implements Comparable<Tile> {
             return false;
         }
     }
+
+
 }

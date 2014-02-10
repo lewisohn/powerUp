@@ -33,7 +33,6 @@ public class TilesPanel extends JPanel {
         int i = 0;
         while (i < 5) {
             if (tiles[i] != null) {
-                System.out.println(tiles[i]);
                 paintTile(g, 34 * i + 13, 19, tiles[i].toString(), foreground, true);
             } else {
                 paintTile(g, 34 * i + 13, 19, "", background, false);

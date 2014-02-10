@@ -83,7 +83,7 @@ public class CompanyTest {
 
     @Test
     public void companyNameTest() {
-        assertEquals("Eclipse Solar", eclipse.getName());
+        assertEquals("Eclipse Solar", eclipse.toString());
     }
 
 }

@@ -11,7 +11,9 @@ public class GameFrame implements Runnable {
     private BoardPanel boardPanel;
     private InfoPanel infoPanel;
     private TilesPanel tilesPanel;
-    private ActionsPanel actionPanel;
+    private PlayerPanel playerPanel;
+    private ActionsPanel actionsPanel;
+    private CommandsPanel commandsPanel;
     private GridBagConstraints c;
 
     public GameFrame(Game game) {
@@ -42,17 +44,20 @@ public class GameFrame implements Runnable {
         tilesPanel = new TilesPanel(game.getBoard());
         tilesPanel.setBorder(BorderFactory.createTitledBorder("Available tiles"));
         tilesPanel.setPreferredSize(new Dimension(193, 63));
-        actionPanel = new ActionsPanel(frame, game);
-        actionPanel.setBorder(BorderFactory.createTitledBorder("Actions"));
+        playerPanel = new PlayerPanel(game);
+        playerPanel.setBorder(BorderFactory.createTitledBorder("Cash"));
+        actionsPanel = new ActionsPanel(game);
+        actionsPanel.setBorder(BorderFactory.createTitledBorder("Actions"));
+        commandsPanel = new CommandsPanel(frame, game);
+        commandsPanel.setBorder(BorderFactory.createTitledBorder("Commands"));
 
         c.insets = new Insets(5, 8, 5, 8);
         c.gridx = 0;
         c.gridy = 0;
-        c.gridwidth = 2;
+        c.gridwidth = 3;
         container.add(boardPanel, c);
 
-        c.gridx = 2;
-        c.gridy = 0;
+        c.gridx = 3;
         c.gridwidth = 1;
         c.fill = GridBagConstraints.BOTH;
         container.add(infoPanel, c);
@@ -61,10 +66,14 @@ public class GameFrame implements Runnable {
         c.gridy = 1;
         container.add(tilesPanel, c);
 
-        c.gridy = 1;
         c.gridx = 1;
-        c.gridwidth = 2;
-        container.add(actionPanel, c);
+        container.add(playerPanel, c);
+
+        c.gridx = 2;
+        container.add(actionsPanel, c);
+
+        c.gridx = 3;
+        container.add(commandsPanel, c);
     }
 
     public InfoPanel getInfoPanel() {
@@ -79,7 +88,54 @@ public class GameFrame implements Runnable {
         return tilesPanel;
     }
 
+    public CommandsPanel getCommandsPanel() {
+        return commandsPanel;
+    }
+
+    public PlayerPanel getPlayerPanel() {
+        return playerPanel;
+    }
+
+    public ActionsPanel getActionsPanel() {
+        return actionsPanel;
+    }
+
     public JFrame getFrame() {
         return frame;
+    }
+
+    public Company createCompany(Tile tile) {
+        Object[] options = game.inactiveCompanies().toArray();
+        Object[] strings = new Object[options.length];
+        for (int i = 0; i < options.length; i++) {
+            strings[i] = options[i].toString();
+        }
+
+        Object result = JOptionPane.showInputDialog(frame,
+                "Select a company to establish.",
+                "Select a company",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                strings,
+                strings[0]);
+        if (result == null) {
+            return createCompany(tile);
+        }
+        return game.establishCompany((String) result, tile);
+    }
+
+    public Company takeOver(Company comp1, Company comp2) {
+        Object[] strings = new Object[]{comp1.toString(), comp2.toString()};
+        Object result = JOptionPane.showInputDialog(frame,
+                "Two companies are the same size. Select the one to take over.",
+                "Select a company",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                strings,
+                strings[0]);
+        if (result == null) {
+            return takeOver(comp1, comp2);
+        }
+        return game.getCompany((String) result);
     }
 }

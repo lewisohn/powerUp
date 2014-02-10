@@ -2,7 +2,6 @@ package com.powerup;
 
 import com.powerup.gui.*;
 import com.powerup.logic.*;
-import javax.swing.SwingUtilities;
 
 /**
  * Main class, launches the game.

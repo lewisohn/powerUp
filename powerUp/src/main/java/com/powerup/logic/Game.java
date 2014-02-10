@@ -2,6 +2,8 @@ package com.powerup.logic;
 
 import com.powerup.gui.GameFrame;
 import com.powerup.gui.StartFrame;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.SwingUtilities;
 
@@ -45,12 +47,12 @@ public final class Game {
     }
 
     private void createCompanies() {
-        eclipse = new Company("Eclipse Solar", 200);
-        maniac = new Company("Maniac Timber", 200);
-        king = new Company("King Coal", 300);
-        guzzler = new Company("Guzzler Gas", 300);
-        superslick = new Company("Superslick Oil", 400);
-        whoops = new Company("Whoops Uranium", 400);
+        eclipse = new Company("Eclipse Solar", 200, this, Color.YELLOW);
+        maniac = new Company("Maniac Timber", 200, this, Color.GREEN);
+        king = new Company("King Coal", 300, this, Color.DARK_GRAY);
+        guzzler = new Company("Guzzler Gas", 300, this, Color.CYAN);
+        superslick = new Company("Superslick Oil", 400, this, Color.RED);
+        whoops = new Company("Whoops Uranium", 400, this, Color.MAGENTA);
         companies[0] = eclipse;
         companies[1] = maniac;
         companies[2] = king;
@@ -73,7 +75,7 @@ public final class Game {
 
     public Company getCompany(String name) {
         for (int i = 0; i < 6; i++) {
-            if (companies[i].getName().equalsIgnoreCase(name)) {
+            if (companies[i].toString().equalsIgnoreCase(name)) {
                 return companies[i];
             }
         }
@@ -162,5 +164,21 @@ public final class Game {
             }
         }
         return true;
+    }
+
+    public ArrayList<Company> inactiveCompanies() {
+        ArrayList<Company> inactive = new ArrayList<>();
+        for (Company company : companies) {
+            if (!company.getActive()) {
+                inactive.add(company);
+            }
+        }
+        return inactive;
+    }
+
+    public Company establishCompany(String name, Tile tile) {
+        Company company = getCompany(name);
+        company.activate(tile);
+        return company;
     }
 }

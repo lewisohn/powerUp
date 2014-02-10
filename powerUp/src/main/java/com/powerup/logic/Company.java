@@ -1,5 +1,6 @@
 package com.powerup.logic;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -10,13 +11,16 @@ import java.util.ArrayList;
  * @author Oliver Lewisohn
  * @since 2014-01-22
  */
-public final class Company {
+public final class Company implements Comparable<Company> {
 
     private final String name;
     private final int initialValue;
     private boolean active;
+    private Tile headquarters;
     private ArrayList<Share> shares;
     private ArrayList<Tile> tiles;
+    private Game game;
+    private Color color;
 
     /**
      * Creates a new inactive company with the given name, price, and 25 shares.
@@ -24,9 +28,11 @@ public final class Company {
      * @param name The name of the company.
      * @param initialValue The initial share price of the company.
      */
-    public Company(String name, int initialValue) {
+    public Company(String name, int initialValue, Game game, Color color) {
         this.name = name;
         this.initialValue = initialValue;
+        this.game = game;
+        this.color = color;
         active = false;
         shares = new ArrayList<>();
         tiles = new ArrayList<>();
@@ -51,6 +57,18 @@ public final class Company {
         }
     }
 
+    public int size() {
+        return tiles.size();
+    }
+
+    public Tile getHeadquarters() {
+        return headquarters;
+    }
+
+    public Color getColor() {
+        return this.color;
+    }
+
     public ArrayList<Tile> getTiles() {
         return tiles;
     }
@@ -63,7 +81,8 @@ public final class Company {
         return active;
     }
 
-    public String getName() {
+    @Override
+    public String toString() {
         return name;
     }
 
@@ -112,5 +131,18 @@ public final class Company {
         shares.clear();
         createShares();
         active = false;
+    }
+
+    public void activate(Tile tile) {
+        headquarters = tile;
+        for (Tile t : game.getBoard().getAllConnectedTiles(tile)) {
+            addTile(t);
+        }
+        active = true;
+    }
+
+    @Override
+    public int compareTo(Company o) {
+        return this.size() - o.size();
     }
 }

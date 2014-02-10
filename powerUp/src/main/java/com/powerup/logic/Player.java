@@ -66,8 +66,13 @@ public class Player implements Comparable<Player> {
         return i;
     }
 
-    public void buyShare(Company company) {
-        int price = company.sellPrice();
+    public void buyShare(Company company, boolean freebie) {
+        int price;
+        if (!freebie) {
+            price = company.sellPrice();
+        } else {
+            price = 0;
+        }
         if (this.cash >= price) {
             Share purchase = company.sellShare();
             if (purchase != null) {
@@ -99,5 +104,15 @@ public class Player implements Comparable<Player> {
     @Override
     public int compareTo(Player o) {
         return this.tiles[0].compareTo(o.tiles[0]);
+    }
+
+    public int getHandSize() {
+        int i = 0;
+        for (Tile tile : tiles) {
+            if (tile != null) {
+                i++;
+            }
+        }
+        return i;
     }
 }
