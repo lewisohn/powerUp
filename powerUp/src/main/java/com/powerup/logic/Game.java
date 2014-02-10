@@ -49,9 +49,9 @@ public final class Game {
     private void createCompanies() {
         eclipse = new Company("Eclipse Solar", 200, this, Color.YELLOW);
         maniac = new Company("Maniac Timber", 200, this, Color.GREEN);
-        king = new Company("King Coal", 300, this, Color.DARK_GRAY);
-        guzzler = new Company("Guzzler Gas", 300, this, Color.CYAN);
-        superslick = new Company("Superslick Oil", 400, this, Color.RED);
+        king = new Company("Cortex Power", 300, this, Color.BLUE);
+        guzzler = new Company("RaShin Geothermal", 300, this, Color.RED);
+        superslick = new Company("Superslick Oil", 400, this, Color.CYAN);
         whoops = new Company("Whoops Uranium", 400, this, Color.MAGENTA);
         companies[0] = eclipse;
         companies[1] = maniac;
@@ -100,7 +100,7 @@ public final class Game {
 
     public void setUp(GameFrame gFrame) {
         this.gFrame = gFrame;
-        gFrame.getInfoPanel().writeln("Determing starting order");
+        gFrame.getInfoPanel().writeln("Determining starting order");
         int i = 0;
         while (i < 4) {
             Tile t = board.getRandomUnassignedTile();

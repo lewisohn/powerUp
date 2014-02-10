@@ -3,6 +3,7 @@ package com.powerup.logic;
 import com.powerup.gui.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.SwingUtilities;
 
 public class Turn {
 
@@ -14,6 +15,7 @@ public class Turn {
     private DrawListener drawListener;
     private TileListener tileListener;
     private TurnListener turnListener;
+    private ShareListener shareListener;
 
     public Turn(Game game, int pid) {
         this.game = game;
@@ -22,30 +24,42 @@ public class Turn {
         turnListener = new TurnListener(this);
         drawListener = new DrawListener(this);
         tileListener = new TileListener(this);
+        shareListener = new ShareListener(this);
         gFrame.getCommandsPanel().getEndTurnButton().setEnabled(true);
         gFrame.getCommandsPanel().getEndTurnButton().addActionListener(turnListener);
         gFrame.getCommandsPanel().getDrawTilesButton().setEnabled(false);
         gFrame.getCommandsPanel().getDrawTilesButton().addActionListener(drawListener);
+        gFrame.getCommandsPanel().getBuySharesButton().addActionListener(shareListener);
         beginTurn();
+    }
+
+    public void launchShareFrame() {
+        ShareFrame shareFrame = new ShareFrame(game);
+        SwingUtilities.invokeLater(shareFrame);
     }
 
     private void updateCashAndActions() {
         gFrame.getPlayerPanel().setCash(this.player.getCash());
-        gFrame.getPlayerPanel().repaint();
         gFrame.getActionsPanel().setActions(this.actions);
-        gFrame.getActionsPanel().repaint();
-//        gFrame.getInfoPanel().write(player + " has $" + this.player.getCash() + " and "
-//                + actions + (actions == 1 ? " action " : " actions ") + "remaining");
-//        gFrame.getInfoPanel().repaint();
+        gFrame.getFrame().validate();
+        if (actions > 0) {
+            gFrame.getInfoPanel().write(player + " has $" + this.player.getCash() + " and "
+                    + actions + (actions == 1 ? " action " : " actions ") + "remaining");
+            if ((player.getHandSize() < 5) && (game.getBoard().unassignedTilesRemaining() >= 5)) {
+                gFrame.getCommandsPanel().getDrawTilesButton().setEnabled(true);
+            }
+        } else {
+            outOfActions();
+        }
     }
 
     private void updateTiles() {
-//        gFrame.getTilesPanel().setTiles(player.getTiles());
-//        gFrame.getTilesPanel().update();
+        gFrame.getTilesPanel().setTiles(player.getTiles());
+        gFrame.getTilesPanel().update();
     }
 
     private void updateBoard() {
-//        gFrame.getBoardPanel().update();
+        gFrame.getBoardPanel().update();
 
     }
 
@@ -56,6 +70,7 @@ public class Turn {
         gFrame.getInfoPanel().write("It's " + player + "'s turn");
         updateCashAndActions();
         updateTiles();
+        gFrame.getCommandsPanel().getBuySharesButton().setEnabled(true);
         if (gFrame.getTilesPanel().getMouseListeners().length == 0) {
             gFrame.getTilesPanel().addMouseListener(tileListener);
         }
@@ -74,6 +89,7 @@ public class Turn {
         gFrame.getInfoPanel().write(player + " is out of actions");
         gFrame.getInfoPanel().writeln("Click \"End turn\" to proceed with the game");
         gFrame.getCommandsPanel().getDrawTilesButton().setEnabled(false);
+        gFrame.getCommandsPanel().getBuySharesButton().setEnabled(false);
         gFrame.getTilesPanel().removeMouseListener(tileListener);
     }
 
@@ -86,14 +102,7 @@ public class Turn {
             updateTiles();
             checkCompanies(t);
             actions--;
-            if (actions <= 0) {
-                outOfActions();
-            } else {
-                updateCashAndActions();
-                if (game.getBoard().unassignedTilesRemaining() >= 5) {
-                    gFrame.getCommandsPanel().getDrawTilesButton().setEnabled(true);
-                }
-            }
+            updateCashAndActions();
         }
     }
 
@@ -195,9 +204,10 @@ public class Turn {
         gFrame.getCommandsPanel().getDrawTilesButton().setEnabled(false);
         gFrame.getInfoPanel().write(player + " drew new tiles");
         actions--;
-        if (actions <= 0) {
-            outOfActions();
-        } else {
-        }
+        updateCashAndActions();
+    }
+
+    public GameFrame getGameFrame() {
+        return gFrame;
     }
 }

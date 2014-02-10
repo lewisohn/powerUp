@@ -88,13 +88,13 @@ public final class Company implements Comparable<Company> {
 
     /**
      * Calculates the price of buying one share from the company. <p /> A
-     * company's value grows by 10 percentage points for each tile it owns and
-     * an additional percentage point for each share it has sold.
+     * company's value grows by 10 percentage points for each tile it owns in
+     * addition to the minimum of two tiles.
      *
      * @return The price of buying one share from the company.
      */
     public int sellPrice() {
-        return initialValue + ((initialValue / 100) * ((25 - shares.size()) + (tiles.size() * 10)));
+        return initialValue + ((initialValue / 100) * (Math.max(0, tiles.size() - 2) * 10));
 
     }
 

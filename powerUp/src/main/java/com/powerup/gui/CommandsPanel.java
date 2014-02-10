@@ -50,4 +50,8 @@ public class CommandsPanel extends JPanel {
     public JButton getDrawTilesButton() {
         return drawTiles;
     }
+
+    public JButton getBuySharesButton() {
+        return buyShares;
+    }
 }

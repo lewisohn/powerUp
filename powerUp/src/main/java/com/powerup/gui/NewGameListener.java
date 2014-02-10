@@ -1,7 +1,6 @@
 package com.powerup.gui;
 
 import com.powerup.logic.*;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -18,7 +17,6 @@ public class NewGameListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(EventQueue.isDispatchThread());
         Object[] options = {"Yes", "No"};
         int result = JOptionPane.showOptionDialog(frame,
                 "Are you sure you want to start a new game?"

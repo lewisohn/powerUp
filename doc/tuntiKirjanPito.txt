@@ -31,3 +31,9 @@ GUI:n koodaaminen
 
 07/02/14: 3h 30m
 Refaktorointi, JavaDocin asentaminen, kirjoittaminen ja generointi, Mavenin ongelmien ratkaiseminen (en onnistunut!)
+
+09/02/14: 2h
+GUI
+
+10/12/14: 12h
+GUI
