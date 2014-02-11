@@ -22,7 +22,7 @@ public class BoardTest {
         game = new Game();
         board = game.getBoard();
         eclipse = game.getCompany(0);
-        eclipse.setActive(true);
+        eclipse.deactivate(true);
         player1 = game.getPlayer(0);
         player2 = game.getPlayer(1);
         random = new Random();

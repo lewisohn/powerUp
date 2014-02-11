@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * An electricity company. <p /> Initially inactive, but is activated during the
  * course of the game. Once activated, owns tiles and sells shares. Can take
- * over other companies. Becomes inactivate once again if taken over.
+ * over other companies. Becomes inactivate again if taken over.
  *
  * @author Oliver Lewisohn
  * @since 2014-01-22
@@ -19,19 +19,21 @@ public final class Company implements Comparable<Company> {
     private Tile headquarters;
     private ArrayList<Share> shares;
     private ArrayList<Tile> tiles;
-    private Game game;
-    private Color color;
+    private Market market;
+    private final Color color;
 
     /**
      * Creates a new inactive company with the given name, price, and 25 shares.
      *
      * @param name The name of the company.
      * @param initialValue The initial share price of the company.
+     * @param game The game.
+     * @param color The color of the company's tiles.
      */
-    public Company(String name, int initialValue, Game game, Color color) {
+    public Company(String name, int initialValue, Market market, Color color) {
         this.name = name;
         this.initialValue = initialValue;
-        this.game = game;
+        this.market = market;
         this.color = color;
         active = false;
         shares = new ArrayList<>();
@@ -65,6 +67,11 @@ public final class Company implements Comparable<Company> {
         return headquarters;
     }
 
+    public void activate(Tile tile) {
+        headquarters = tile;
+        active = true;
+    }
+
     public Color getColor() {
         return this.color;
     }
@@ -73,8 +80,8 @@ public final class Company implements Comparable<Company> {
         return tiles;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void deactivate() {
+        active = false;
     }
 
     public boolean getActive() {
@@ -123,7 +130,6 @@ public final class Company implements Comparable<Company> {
             this.addTile(tile);
         }
         company.liquidate();
-
     }
 
     private void liquidate() {
@@ -131,14 +137,6 @@ public final class Company implements Comparable<Company> {
         shares.clear();
         createShares();
         active = false;
-    }
-
-    public void activate(Tile tile) {
-        headquarters = tile;
-        for (Tile t : game.getBoard().getAllConnectedTiles(tile)) {
-            addTile(t);
-        }
-        active = true;
     }
 
     @Override

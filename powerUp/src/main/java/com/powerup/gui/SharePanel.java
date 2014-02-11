@@ -17,7 +17,7 @@ public class SharePanel extends JPanel {
         Font oldLabelFont = UIManager.getFont("Label.font");
         UIManager.put("Label.font", oldLabelFont.deriveFont(Font.PLAIN));
         this.game = game;
-        this.buyListener = new BuyListener();
+        this.buyListener = new BuyListener(game);
         this.setLayout(new GridBagLayout());
         c = new GridBagConstraints();
         createComponents();
@@ -44,15 +44,15 @@ public class SharePanel extends JPanel {
         for (int i = 0; i < 6; i++) {
             c.gridx = 0;
             c.gridy = i + 1;
-            this.add(new JLabel(game.getCompany(i).toString()), c);
+            this.add(new JLabel(game.getMarket().getCompany(i).toString()), c);
             c.gridx++;
-            this.add(new JLabel(String.valueOf(game.getCompany(i).getShares().size())), c);
+            this.add(new JLabel(String.valueOf(game.getMarket().getCompany(i).getShares().size())), c);
             c.gridx++;
-            this.add(new JLabel("$" + String.valueOf(game.getCompany(i).sellPrice())), c);
+            this.add(new JLabel("$" + String.valueOf(game.getMarket().getCompany(i).sellPrice())), c);
             c.gridx++;
             JButton buy = new JButton("Buy");
             buy.addActionListener(buyListener);
-            if (!game.getCompany(i).getActive()) {
+            if (!game.getMarket().getCompany(i).getActive() || game.getMarket().getCompany(i).getShares().isEmpty()) {
                 buy.setEnabled(false);
             }
             this.add(buy, c);

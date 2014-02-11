@@ -1,5 +1,6 @@
 package com.powerup.gui;
 
+import com.powerup.listeners.NewGameListener;
 import com.powerup.logic.*;
 import java.awt.Dimension;
 import javax.swing.*;

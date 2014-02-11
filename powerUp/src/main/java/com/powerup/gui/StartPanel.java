@@ -1,5 +1,6 @@
 package com.powerup.gui;
 
+import com.powerup.listeners.StartGameListener;
 import com.powerup.logic.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -10,24 +11,12 @@ public class StartPanel extends JPanel {
 
     JFrame frame;
     JTextField[] names;
-    JTextField p1Name;
-    JTextField p2Name;
-    JTextField p3Name;
-    JTextField p4Name;
     JButton newGame;
     Game game;
     FocusListener selectAll = new FocusListener() {
         @Override
         public void focusGained(FocusEvent e) {
-            if (e.getSource().equals(names[0])) {
-                names[0].selectAll();
-            } else if (e.getSource().equals(names[1])) {
-                names[1].selectAll();
-            } else if (e.getSource().equals(names[2])) {
-                names[2].selectAll();
-            } else if (e.getSource().equals(names[3])) {
-                names[3].selectAll();
-            }
+            ((JTextField) e.getSource()).selectAll();
         }
 
         @Override
@@ -68,7 +57,7 @@ public class StartPanel extends JPanel {
         this.add(Box.createRigidArea(new Dimension(0, 10)));
         newGame = new JButton("New game");
         newGame.setAlignmentX(Component.CENTER_ALIGNMENT);
-        newGame.addActionListener(new StartGameListener(frame, names[0], names[1], names[2], names[3], game));
+        newGame.addActionListener(new StartGameListener(frame, names, game));
         this.add(newGame);
     }
 

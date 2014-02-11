@@ -86,14 +86,11 @@ public class Tile implements Comparable<Tile> {
     }
 
     public boolean isNextTo(Tile tile) {
-        if ((this.x == tile.getX()) && (Math.abs(this.y - tile.getY()) == 1)) {
-            return true;
-        } else if ((this.y == tile.getY()) && (Math.abs(this.x - tile.getX()) == 1)) {
+        if (((this.x == tile.getX()) && (Math.abs(this.y - tile.getY()) == 1))
+                || ((this.y == tile.getY()) && (Math.abs(this.x - tile.getX()) == 1))) {
             return true;
         } else {
             return false;
         }
     }
-
-
 }

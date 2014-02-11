@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultCaret;
 import javax.swing.text.StyledDocument;
 
 public class InfoPanel extends JPanel {
@@ -33,21 +34,17 @@ public class InfoPanel extends JPanel {
         scroll.setBorder(null);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        DefaultCaret caret = (DefaultCaret) info.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         this.add(scroll);
     }
 
     private void initialText() {
         doc.addStyle(TOOL_TIP_TEXT_KEY, null);
-        init = new ArrayList<>();
-        init.add("Starting a new game of powerUp");
-        init.add("---");
-        for (int i = 1; i < 5; i++) {
-            init.add("Player " + i + " is called " + game.getPlayer(i - 1));
-        }
-        init.add("---");
-        for (int i = 0; i < init.size(); i++) {
-            write(init.get(i));
-        }
+        write("Welcome to powerUp");
+//        for (int i = 1; i < 5; i++) {
+//            write("Player " + i + " is called " + game.getPlayer(i - 1));
+//        }
     }
 
     public void write(String line) {
@@ -59,7 +56,9 @@ public class InfoPanel extends JPanel {
     }
 
     public void writeln(String line) {
-        write(line);
-        write("---");
+        if (!line.equals("")) {
+            write(line);
+        }
+        write("");
     }
 }

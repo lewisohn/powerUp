@@ -20,9 +20,9 @@ public class CompanyTest {
         game = new Game();
         board = game.getBoard();
         eclipse = game.getCompany(0);
-        eclipse.setActive(true);
+        eclipse.deactivate(true);
         maniac = game.getCompany(1);
-        maniac.setActive(true);
+        maniac.deactivate(true);
         player1 = game.getPlayer(0);
     }
 
@@ -66,7 +66,7 @@ public class CompanyTest {
     @Test
     public void companyCanBeDeactivated() {
         assertTrue(eclipse.getActive());
-        eclipse.setActive(false);
+        eclipse.deactivate(false);
         assertFalse(eclipse.getActive());
 
     }

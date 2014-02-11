@@ -11,7 +11,7 @@ public class GameFrame implements Runnable {
     private BoardPanel boardPanel;
     private InfoPanel infoPanel;
     private TilesPanel tilesPanel;
-    private PlayerPanel playerPanel;
+    private CashPanel playerPanel;
     private ActionsPanel actionsPanel;
     private CommandsPanel commandsPanel;
     private GridBagConstraints c;
@@ -44,7 +44,7 @@ public class GameFrame implements Runnable {
         tilesPanel = new TilesPanel(game.getBoard());
         tilesPanel.setBorder(BorderFactory.createTitledBorder("Available tiles"));
         tilesPanel.setPreferredSize(new Dimension(193, 63));
-        playerPanel = new PlayerPanel(game);
+        playerPanel = new CashPanel(game);
         playerPanel.setBorder(BorderFactory.createTitledBorder("Cash"));
         actionsPanel = new ActionsPanel(game);
         actionsPanel.setBorder(BorderFactory.createTitledBorder("Actions"));
@@ -92,7 +92,7 @@ public class GameFrame implements Runnable {
         return commandsPanel;
     }
 
-    public PlayerPanel getPlayerPanel() {
+    public CashPanel getPlayerPanel() {
         return playerPanel;
     }
 
@@ -105,7 +105,7 @@ public class GameFrame implements Runnable {
     }
 
     public Company createCompany(Tile tile) {
-        Object[] options = game.inactiveCompanies().toArray();
+        Object[] options = game.getMarket().inactiveCompanies().toArray();
         Object[] strings = new Object[options.length];
         for (int i = 0; i < options.length; i++) {
             strings[i] = options[i].toString();
@@ -121,7 +121,7 @@ public class GameFrame implements Runnable {
         if (result == null) {
             return createCompany(tile);
         }
-        return game.establishCompany((String) result, tile);
+        return game.getMarket().activateCompany((String) result, tile);
     }
 
     public Company takeOver(Company comp1, Company comp2) {
@@ -136,6 +136,6 @@ public class GameFrame implements Runnable {
         if (result == null) {
             return takeOver(comp1, comp2);
         }
-        return game.getCompany((String) result);
+        return game.getMarket().getCompany((String) result);
     }
 }

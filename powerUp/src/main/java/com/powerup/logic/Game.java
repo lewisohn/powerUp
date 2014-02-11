@@ -2,8 +2,6 @@ package com.powerup.logic;
 
 import com.powerup.gui.GameFrame;
 import com.powerup.gui.StartFrame;
-import java.awt.Color;
-import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.SwingUtilities;
 
@@ -16,49 +14,25 @@ import javax.swing.SwingUtilities;
 public final class Game {
 
     private final Board board;
-    private Player[] players;
+    private final Market market;
+    private Player[] players = new Player[4];
     private GameFrame gFrame;
-    // the game's six companies and a list to fetch them from
-    private Company eclipse;
-    private Company maniac;
-    private Company king;
-    private Company guzzler;
-    private Company superslick;
-    private Company whoops;
-    private Company[] companies;
+    private Turn turn;
 
     /**
-     * Sets up the board, players and companies. <p /> In a future version, the
-     * players will not be created automatically at this stage; the user will be
-     * able to name the players themselves.
+     * Sets up the board and market.
      */
     public Game() {
         board = new Board();
-        players = new Player[4];
-        companies = new Company[6];
+        market = new Market(board);
         createPlayers();
-        createCompanies();
+
     }
 
     private void createPlayers() {
         for (int i = 0; i < 4; i++) {
             players[i] = new Player();
         }
-    }
-
-    private void createCompanies() {
-        eclipse = new Company("Eclipse Solar", 200, this, Color.YELLOW);
-        maniac = new Company("Maniac Timber", 200, this, Color.GREEN);
-        king = new Company("Cortex Power", 300, this, Color.BLUE);
-        guzzler = new Company("RaShin Geothermal", 300, this, Color.RED);
-        superslick = new Company("Superslick Oil", 400, this, Color.CYAN);
-        whoops = new Company("Whoops Uranium", 400, this, Color.MAGENTA);
-        companies[0] = eclipse;
-        companies[1] = maniac;
-        companies[2] = king;
-        companies[3] = guzzler;
-        companies[4] = superslick;
-        companies[5] = whoops;
     }
 
     public Player getPlayer(int i) {
@@ -73,21 +47,8 @@ public final class Game {
         return board;
     }
 
-    public Company getCompany(String name) {
-        for (int i = 0; i < 6; i++) {
-            if (companies[i].toString().equalsIgnoreCase(name)) {
-                return companies[i];
-            }
-        }
-        return null;
-    }
-
-    // faster version of the above method for use in JUnit tests
-    public Company getCompany(int id) {
-        if ((id >= 0) && (id < 6)) {
-            return companies[id];
-        }
-        return null;
+    public Market getMarket() {
+        return market;
     }
 
     /**
@@ -100,17 +61,21 @@ public final class Game {
 
     public void setUp(GameFrame gFrame) {
         this.gFrame = gFrame;
-        gFrame.getInfoPanel().writeln("Determining starting order");
+        determineStartOrder();
+        playInitialTiles();
+        gFrame.getBoardPanel().repaint();
+        turn = new Turn(this, 0);
+    }
+
+    private void determineStartOrder() {
+        gFrame.getInfoPanel().writeln("");
+        gFrame.getInfoPanel().write("Determining starting order");
         int i = 0;
         while (i < 4) {
             Tile t = board.getRandomUnassignedTile();
             boolean hasNeighbour = false;
-            int j = 1;
-            while (j <= i) {
-                if (t.isNextTo(players[j - 1].getTile(0))) {
-                    hasNeighbour = true;
-                }
-                j++;
+            for (int j = 1; j <= i; j++) {
+                hasNeighbour = (t.isNextTo(players[j - 1].getTile(0)) ? true : hasNeighbour);
             }
             if (!hasNeighbour) {
                 board.giveTileToPlayer(players[i], t);
@@ -118,67 +83,37 @@ public final class Game {
             }
         }
         Arrays.sort(players);
-        for (int k = 0;
-                k < 4; k++) {
+    }
+
+    private void playInitialTiles() {
+        for (int k = 0; k < 4; k++) {
             Tile t = players[k].playTile(0);
             t.setLocation(Tile.Location.BOARD);
             gFrame.getInfoPanel().write(players[k] + " drew " + t + " and will go " + ordinal(k + 1));
             for (int m = 0; m < 5; m++) {
-                players[k].giveTile(board.getRandomUnassignedTile());
+                board.giveTileToPlayer(players[k]);
             }
         }
-        gFrame.getInfoPanel().write("---");
-        gFrame.getBoardPanel().repaint();
-        Turn turn = new Turn(this, 0);
     }
 
-    public static String ordinal(int i) {
+    public void newTurn() {
+        turn.endTurn();
+    }
+
+    public Turn getTurn() {
+        return turn;
+    }
+
+    private String ordinal(int i) {
         String[] ordinals = new String[]{"noneth", "first", "second", "third", "fourth"};
         if ((i >= 1) && (i < 5)) {
             return ordinals[i];
         } else {
-            return bigOrdinal(i);
-        }
-    }
-
-    public static String bigOrdinal(int i) {
-        String[] suffixes = new String[]{"th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"};
-        switch (i % 100) {
-            case 11:
-            case 12:
-            case 13:
-                return i + "th";
-            default:
-                return i + suffixes[i % 10];
+            return null;
         }
     }
 
     public GameFrame getGameFrame() {
         return gFrame;
-    }
-
-    public boolean allCompaniesActive() {
-        for (Company company : companies) {
-            if (!company.getActive()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public ArrayList<Company> inactiveCompanies() {
-        ArrayList<Company> inactive = new ArrayList<>();
-        for (Company company : companies) {
-            if (!company.getActive()) {
-                inactive.add(company);
-            }
-        }
-        return inactive;
-    }
-
-    public Company establishCompany(String name, Tile tile) {
-        Company company = getCompany(name);
-        company.activate(tile);
-        return company;
     }
 }

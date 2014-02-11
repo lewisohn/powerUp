@@ -15,7 +15,7 @@ public class TileTest {
     public TileTest() {
         game = new Game();
         eclipse = game.getCompany(0);
-        eclipse.setActive(true);
+        eclipse.deactivate(true);
     }
 
     @BeforeClass

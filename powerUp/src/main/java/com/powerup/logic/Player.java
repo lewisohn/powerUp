@@ -66,7 +66,7 @@ public class Player implements Comparable<Player> {
         return i;
     }
 
-    public void buyShare(Company company, boolean freebie) {
+    public boolean buyShare(Company company, boolean freebie) {
         int price;
         if (!freebie) {
             price = company.sellPrice();
@@ -78,8 +78,10 @@ public class Player implements Comparable<Player> {
             if (purchase != null) {
                 cash -= price;
                 shares.add(purchase);
+                return true;
             }
         }
+        return false;
     }
 
     public int getCash() {

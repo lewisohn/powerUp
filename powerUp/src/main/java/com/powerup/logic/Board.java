@@ -12,20 +12,15 @@ import java.util.Random;
 public final class Board {
 
     private final ArrayList<ArrayList<Tile>> tiles;
-    private ArrayList<Tile> playableTiles;
     private final Random random;
-    private ArrayList<Tile> allNeighbours = new ArrayList<>();
 
     /**
-     * Creates 100 tiles and picks five of them to be played at the start.
+     * Creates 100 tiles and sets up a random integer generator.
      */
     public Board() {
         tiles = new ArrayList<>();
         random = new Random();
-        playableTiles = new ArrayList<>();
         createTiles();
-//        chooseNewPlayableTiles(5);
-
     }
 
     private void createTiles() {
@@ -37,6 +32,11 @@ public final class Board {
         }
     }
 
+    /**
+     * Finds out how many tiles are not yet on the board or in a player's hand.
+     *
+     * @return The number of tiles remaining in the "bank".
+     */
     public int unassignedTilesRemaining() {
         int sum = 0;
         for (ArrayList<Tile> arrayList : tiles) {
@@ -49,22 +49,29 @@ public final class Board {
         return sum;
     }
 
+    /**
+     * Gets a random tile which is not yet on the board or in a player's hand.
+     *
+     * @return A new random tile.
+     */
     public Tile getRandomUnassignedTile() {
-        if (unassignedTilesRemaining() < 5) {
-            return null;
-        } else {
-            int x;
-            int y;
-            while (true) {
-                x = random.nextInt(10);
-                y = random.nextInt(10);
-                if (getTile(x, y).getLocation() == Tile.Location.NONE) {
-                    return getTile(x, y);
-                }
+        int x;
+        int y;
+        while (true) {
+            x = random.nextInt(10);
+            y = random.nextInt(10);
+            if (getTile(x, y).getLocation() == Tile.Location.NONE) {
+                return getTile(x, y);
             }
         }
     }
 
+    /**
+     * Puts a random unassigned tile in a player's hand.
+     *
+     * @param player The player to receive the tile.
+     * @return True if a tile could be given to the player, otherwise false.
+     */
     public boolean giveTileToPlayer(Player player) {
         if (unassignedTilesRemaining() >= 5) {
             if (player.giveTile(getRandomUnassignedTile())) {
@@ -74,6 +81,13 @@ public final class Board {
         return false;
     }
 
+    /**
+     * Puts a specific tile in a player's hand.
+     *
+     * @param player The player to receive the tile.
+     * @param tile The tile to be given.
+     * @return True if a tile could be given to the player, otherwise false.
+     */
     public boolean giveTileToPlayer(Player player, Tile tile) {
         if (unassignedTilesRemaining() >= 5) {
             if (player.giveTile(tile)) {
@@ -83,33 +97,8 @@ public final class Board {
         return false;
     }
 
-//    private void selectTiles(int n, boolean play) {
-//        int x;
-//        int y;
-//        int i = 0;
-//        while (i < n) {
-//            x = random.nextInt(10);
-//            y = random.nextInt(10);
-//            if (play) {
-//                if (!getTile(x, y).getState()) {
-//                    playTile(x, y);
-//                    i++;
-//                }
-//            } else {
-//                if (!playableTiles.contains(getTile(x, y))) {
-//                    playableTiles.add(getTile(x, y));
-//                    i++;
-//                }
-//
-//            }
-//        }
-//    }
     public ArrayList<ArrayList<Tile>> getTiles() {
         return tiles;
-    }
-
-    public ArrayList<Tile> getPlayableTiles() {
-        return playableTiles;
     }
 
     public Tile getTile(int x, int y) {
@@ -121,11 +110,11 @@ public final class Board {
     }
 
     /**
-     * Plays a tile to the board.
+     * Plays a tile with given coordinates to the board.
      *
      * @param x The x-coordinate of the tile to be played.
      * @param y The y-coordinate of the tile to be played.
-     * @return True if the tile was able to be played, false otherwise.
+     * @return False if the tile was already on the board, otherwise true.
      */
     public boolean playTileToBoard(int x, int y) {
         if ((x >= 0) && (x <= 9) && (y >= 0) && (y <= 9)) {
@@ -135,6 +124,12 @@ public final class Board {
         return false;
     }
 
+    /**
+     * Plays a given tile to the board.
+     *
+     * @param tile The tile to be played.
+     * @return False if the tile was already on the board, otherwise true.
+     */
     public boolean playTileToBoard(Tile tile) {
         if (tile.getLocation() != Tile.Location.BOARD) {
             tile.setLocation(Tile.Location.BOARD);
@@ -153,33 +148,37 @@ public final class Board {
         int x = tile.getX();
         int y = tile.getY();
         ArrayList<Tile> neighbours = new ArrayList<>();
-        if ((getTile(x - 1, y) != null) && (getTile(x - 1, y).getLocation() == Tile.Location.BOARD)) {
-            neighbours.add(getTile(x - 1, y));
-        }
-        if ((getTile(x + 1, y) != null) && (getTile(x + 1, y).getLocation() == Tile.Location.BOARD)) {
-            neighbours.add(getTile(x + 1, y));
-        }
-        if ((getTile(x, y - 1) != null) && (getTile(x, y - 1).getLocation() == Tile.Location.BOARD)) {
-            neighbours.add(getTile(x, y - 1));
-        }
-        if ((getTile(x, y + 1) != null) && (getTile(x, y + 1).getLocation() == Tile.Location.BOARD)) {
-            neighbours.add(getTile(x, y + 1));
+        Direction[] directions = new Direction[]{
+            new Direction(-1, 0), new Direction(1, 0), new Direction(0, -1), new Direction(0, 1)
+        };
+        for (Direction d : directions) {
+            Tile t = getTile(x + d.getX(), y + d.getY());
+            if ((t != null) && (t.getLocation() == Tile.Location.BOARD)) {
+                neighbours.add(t);
+            }
         }
         return neighbours;
     }
-    private ArrayList<Tile> ret;
 
+    /**
+     * Finds all the connecting tiles of a given tile. <p /> This differs from
+     * getNeighbours in that it also finds the neighbours of all the original
+     * tile's neighbours, all their neighbours, and so on.
+     *
+     * @param tile The tile whose connecting tiles are to be fetched.
+     * @return A list containing every tile connected to the parameter tile.
+     */
     public ArrayList<Tile> getAllConnectedTiles(Tile tile) {
-        ret = new ArrayList<>();
-        recursivelyFindNeighbours(tile);
-        return ret;
+        ArrayList<Tile> list = new ArrayList<>();
+        recursivelyFindNeighbours(tile, list);
+        return list;
     }
 
-    private void recursivelyFindNeighbours(Tile tile) {
-        ret.add(tile);
+    private void recursivelyFindNeighbours(Tile tile, ArrayList<Tile> list) {
+        list.add(tile);
         for (Tile t : getNeighbours(tile)) {
-            if (!ret.contains(t)) {
-                recursivelyFindNeighbours(t);
+            if (!list.contains(t)) {
+                recursivelyFindNeighbours(t, list);
             }
         }
     }
