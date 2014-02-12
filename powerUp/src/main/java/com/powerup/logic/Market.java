@@ -15,12 +15,12 @@ public class Market {
 
     private void createCompanies() {
         companies = new Company[]{
-            new Company("Eclipse Solar", 200, this, Color.YELLOW),
-            new Company("Maniac Timber", 200, this, Color.GREEN),
-            new Company("Cortex Power", 300, this, Color.BLUE),
-            new Company("Rashin Geothermal", 300, this, Color.RED),
-            new Company("Superslick Oil", 400, this, Color.CYAN),
-            new Company("Whoops Uranium", 400, this, Color.MAGENTA),};
+            new Company("Eclipse Solar", 200, this, new Color(230, 230, 23)),
+            new Company("Maniac Timber", 200, this, new Color(23, 230, 23)),
+            new Company("Cortex Power", 300, this, new Color(46, 46, 230)),
+            new Company("Rashin Geothermal", 300, this, new Color(230, 23, 23)),
+            new Company("Superslick Oil", 400, this, new Color(23, 230, 230)),
+            new Company("Whoops Uranium", 400, this, new Color(230, 23, 230)),};
     }
 
     public Company getCompany(String name) {
@@ -58,8 +58,7 @@ public class Market {
         return inactive;
     }
 
-    public Company activateCompany(String name, Tile tile) {
-        Company company = getCompany(name);
+    public Company activateCompany(Company company, Tile tile) {
         company.activate(tile);
         for (Tile t : board.getAllConnectedTiles(tile)) {
             company.addTile(t);

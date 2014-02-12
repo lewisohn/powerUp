@@ -1,7 +1,6 @@
 package com.powerup;
 
-import com.powerup.gui.*;
-import com.powerup.logic.*;
+import com.powerup.logic.Game;
 
 /**
  * Main class, launches the game.
@@ -13,8 +12,6 @@ import com.powerup.logic.*;
 public class Main {
 
     private static Game game;
-    private static StartFrame start;
-    private static GameFrame ui;
 
     /**
      *
@@ -22,6 +19,6 @@ public class Main {
      */
     public static void main(String[] args) {
         game = new Game();
-        game.launch();
+        game.start();
     }
 }

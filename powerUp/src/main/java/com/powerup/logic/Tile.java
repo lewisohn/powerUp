@@ -1,7 +1,5 @@
 package com.powerup.logic;
 
-import java.util.ArrayList;
-
 /**
  * A tile on the game board.
  *
@@ -68,7 +66,7 @@ public class Tile implements Comparable<Tile> {
     public String toString() {
         String ref = new String();
         ref = ref + (char) (x + 65);
-        ref = ref + (9 - y);
+        ref = ref + y;
         return ref;
     }
 

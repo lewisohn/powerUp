@@ -72,13 +72,10 @@ public final class Board {
      * @param player The player to receive the tile.
      * @return True if a tile could be given to the player, otherwise false.
      */
-    public boolean giveTileToPlayer(Player player) {
-        if (unassignedTilesRemaining() >= 5) {
-            if (player.giveTile(getRandomUnassignedTile())) {
-                return true;
-            }
+    public void giveTileToPlayer(Player player) {
+        if (unassignedTilesRemaining() > 0) {
+            giveTileToPlayer(player, getRandomUnassignedTile());
         }
-        return false;
     }
 
     /**
@@ -88,13 +85,16 @@ public final class Board {
      * @param tile The tile to be given.
      * @return True if a tile could be given to the player, otherwise false.
      */
-    public boolean giveTileToPlayer(Player player, Tile tile) {
-        if (unassignedTilesRemaining() >= 5) {
-            if (player.giveTile(tile)) {
-                return true;
-            }
+    public void giveTileToPlayer(Player player, Tile tile) {
+        if (player.giveTile(tile)) {
         }
-        return false;
+
+    }
+
+    public void refillPlayerHand(Player player) {
+        for (int i = player.getHandSize(); i < 5; i++) {
+            giveTileToPlayer(player);
+        }
     }
 
     public ArrayList<ArrayList<Tile>> getTiles() {
@@ -181,5 +181,25 @@ public final class Board {
                 recursivelyFindNeighbours(t, list);
             }
         }
+    }
+
+    public ArrayList<Company> companyNeighbours(Tile tile) {
+        ArrayList<Company> companies = new ArrayList<>();
+        for (Tile t : getNeighbours(tile)) {
+            if ((t.getOwner() != null) && (!companies.contains(t.getOwner()))) {
+                companies.add(t.getOwner());
+            }
+        }
+        return companies;
+    }
+
+    public int neutralNeighbours(Tile tile) {
+        int neutral = 0;
+        for (Tile t : getNeighbours(tile)) {
+            if (t.getOwner() == null) {
+                neutral++;
+            }
+        }
+        return neutral;
     }
 }

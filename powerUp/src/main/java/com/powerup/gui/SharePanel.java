@@ -1,35 +1,46 @@
 package com.powerup.gui;
 
-import com.powerup.logic.*;
+import com.powerup.listeners.BuyListener;
+import com.powerup.logic.Game;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+
 
 public class SharePanel extends JPanel {
-
+    
     private Game game;
+    private JDialog dialog;
     private GridBagConstraints c;
     private BuyListener buyListener;
-
-    public SharePanel(Game game) {
+    private JButton done;
+    
+    public SharePanel(Game game, JDialog frame) {
         Font oldLabelFont = UIManager.getFont("Label.font");
         UIManager.put("Label.font", oldLabelFont.deriveFont(Font.PLAIN));
         this.game = game;
+        this.dialog = frame;
         this.buyListener = new BuyListener(game);
         this.setLayout(new GridBagLayout());
         c = new GridBagConstraints();
         createComponents();
     }
-
+    
     private void addHeader(String text) {
         JLabel header = new JLabel(text);
         Font font = header.getFont();
         header.setFont(new Font(font.getFontName(), Font.BOLD, 12));
         this.add(header, c);
     }
-
+    
     private void createComponents() {
         c.insets = new Insets(8, 10, 8, 10);
         c.gridy = 0;
@@ -57,5 +68,17 @@ public class SharePanel extends JPanel {
             }
             this.add(buy, c);
         }
+        c.gridx = 0;
+        c.gridy++;
+        c.gridwidth = 4;
+        done = new JButton("Done");
+        this.add(done, c);
+        done.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();
+            }
+        });
+        dialog.getRootPane().setDefaultButton(done);
     }
 }

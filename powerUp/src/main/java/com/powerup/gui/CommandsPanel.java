@@ -1,22 +1,19 @@
 package com.powerup.gui;
 
-import com.powerup.listeners.NewGameListener;
-import com.powerup.logic.*;
 import java.awt.Dimension;
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class CommandsPanel extends JPanel {
 
-    private Game game;
-    private JFrame frame;
     protected JButton newGame;
     protected JButton buyShares;
     protected JButton drawTiles;
     protected JButton endTurn;
 
-    public CommandsPanel(JFrame frame, Game game) {
-        this.frame = frame;
-        this.game = game;
+    public CommandsPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         addComponents();
     }
@@ -26,21 +23,20 @@ public class CommandsPanel extends JPanel {
         Dimension dbl = new Dimension(8, 0);
         this.add(Box.createRigidArea(dbl));
         newGame = new JButton("New game");
-        NewGameListener newGameListener = new NewGameListener(frame, game);
-        newGame.addActionListener(newGameListener);
+//        NewGameListener newGameListener = new NewGameListener(frame, game);
+//        newGame.addActionListener(newGameListener);
         this.add(newGame);
         this.add(Box.createRigidArea(new Dimension(sgl)));
         buyShares = new JButton("Buy shares");
         this.add(buyShares);
         this.add(Box.createRigidArea(new Dimension(sgl)));
-        buyShares.setEnabled(false);
+//        buyShares.setEnabled(false);
         drawTiles = new JButton("Draw tiles");
         this.add(drawTiles);
         this.add(Box.createRigidArea(new Dimension(sgl)));
-        drawTiles.setEnabled(false);
+//        drawTiles.setEnabled(false);
         endTurn = new JButton("End turn");
         this.add(endTurn);
-        endTurn.setEnabled(false);
         this.add(Box.createRigidArea(dbl));
     }
 
@@ -54,5 +50,9 @@ public class CommandsPanel extends JPanel {
 
     public JButton getBuySharesButton() {
         return buyShares;
+    }
+
+    public JButton[] getButtons() {
+        return new JButton[]{newGame, buyShares, drawTiles, endTurn};
     }
 }

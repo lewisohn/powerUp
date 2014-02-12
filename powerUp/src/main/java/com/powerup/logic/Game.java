@@ -6,7 +6,7 @@ import java.util.Arrays;
 import javax.swing.SwingUtilities;
 
 /**
- * Primary logic class. Everything else is set up and accessed from here.
+ * Primary logic class; everything else is set up and accessed from here.
  *
  * @author Oliver Lewisohn
  * @since 2014-01-22
@@ -16,11 +16,11 @@ public final class Game {
     private final Board board;
     private final Market market;
     private Player[] players = new Player[4];
-    private GameFrame gFrame;
     private Turn turn;
+    private Window window;
 
     /**
-     * Sets up the board and market.
+     * Sets up the board, market and players.
      */
     public Game() {
         board = new Board();
@@ -51,25 +51,28 @@ public final class Game {
         return market;
     }
 
+    public Window getWindow() {
+        return window;
+    }
+
     /**
      * Launches the graphical user interface.
      */
-    public void launch() {
+    public void start() {
         StartFrame sFrame = new StartFrame(this);
         SwingUtilities.invokeLater(sFrame);
     }
 
     public void setUp(GameFrame gFrame) {
-        this.gFrame = gFrame;
+        window = new Window(this, gFrame);
         determineStartOrder();
-        playInitialTiles();
-        gFrame.getBoardPanel().repaint();
-        turn = new Turn(this, 0);
+        distributeInitialTiles();
+        newTurn(0);
     }
 
     private void determineStartOrder() {
-        gFrame.getInfoPanel().writeln("");
-        gFrame.getInfoPanel().write("Determining starting order");
+        window.writeln("");
+        window.write("Determining starting order");
         int i = 0;
         while (i < 4) {
             Tile t = board.getRandomUnassignedTile();
@@ -85,19 +88,19 @@ public final class Game {
         Arrays.sort(players);
     }
 
-    private void playInitialTiles() {
+    private void distributeInitialTiles() {
         for (int k = 0; k < 4; k++) {
-            Tile t = players[k].playTile(0);
-            t.setLocation(Tile.Location.BOARD);
-            gFrame.getInfoPanel().write(players[k] + " drew " + t + " and will go " + ordinal(k + 1));
+            Tile t = players[k].returnTile(0);
+            board.playTileToBoard(t);
+            window.write(players[k] + " drew " + t + " and will go " + ordinal(k + 1));
             for (int m = 0; m < 5; m++) {
                 board.giveTileToPlayer(players[k]);
             }
         }
     }
 
-    public void newTurn() {
-        turn.endTurn();
+    public void newTurn(int n) {
+        turn = new Turn(this, n);
     }
 
     public Turn getTurn() {
@@ -111,9 +114,5 @@ public final class Game {
         } else {
             return null;
         }
-    }
-
-    public GameFrame getGameFrame() {
-        return gFrame;
     }
 }

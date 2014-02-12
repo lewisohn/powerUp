@@ -1,15 +1,18 @@
-package com.powerup.gui;
+package com.powerup.listeners;
 
+import com.powerup.logic.Game;
+import com.powerup.logic.Tile;
 import com.powerup.logic.Turn;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class TileListener implements MouseListener {
 
+    private Game game;
     private Turn turn;
 
-    public TileListener(Turn turn) {
-        this.turn = turn;
+    public TileListener(Game game) {
+        this.game = game;
     }
 
     @Override
@@ -18,9 +21,18 @@ public class TileListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int intersection = intersects(e);
-        if (intersection >= 0) {
-            turn.playTile(intersection);
+        this.turn = game.getTurn();
+        if (turn.getActions() > 0) {
+            int i = intersects(e);
+            if (i >= 0) {
+                Tile t = turn.getActivePlayer().returnTile(i);
+                if (t != null) {
+                    game.getBoard().playTileToBoard(t);
+                    game.getWindow().write(turn.getActivePlayer() + " played tile " + t);
+                    turn.boardCheck(t);
+                    turn.actionTaken();
+                }
+            }
         }
     }
 

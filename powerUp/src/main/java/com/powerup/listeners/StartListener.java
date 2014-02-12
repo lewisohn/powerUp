@@ -1,19 +1,21 @@
 package com.powerup.listeners;
 
 import com.powerup.gui.GameFrame;
-import com.powerup.logic.*;
-import java.awt.EventQueue;
+import com.powerup.logic.Game;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
-public class StartGameListener implements ActionListener {
+public class StartListener implements ActionListener {
 
     private JFrame frame;
     private JTextField[] names;
     private Game game;
 
-    public StartGameListener(JFrame frame, JTextField[] names, Game game) {
+    public StartListener(JFrame frame, JTextField[] names, Game game) {
         this.frame = frame;
         this.names = names;
         this.game = game;

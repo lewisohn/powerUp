@@ -47,11 +47,15 @@ public class Player implements Comparable<Player> {
 //        }
 //        return null;
 //    }
-    public Tile playTile(int n) {
-        if ((n >= 0) && (n <= 4)) {
-            Tile ret = tiles[n];
-            tiles[n] = null;
-            return ret;
+    public Tile returnTile(int n) {
+        if ((n >= 0) && (n < 5)) {
+            if (tiles[n] == null) {
+                return null;
+            } else {
+                Tile t = tiles[n];
+                tiles[n] = null;
+                return t;
+            }
         }
         return null;
     }

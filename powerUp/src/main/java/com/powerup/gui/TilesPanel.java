@@ -1,22 +1,16 @@
 package com.powerup.gui;
 
-import com.powerup.logic.*;
+import com.powerup.logic.Tile;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import javax.swing.*;
+import javax.swing.JPanel;
 
 public class TilesPanel extends JPanel {
 
-    private Board board;
     private final Color foreground = new Color(140, 180, 140);
     private final Color background = new Color(220, 220, 220);
     private Tile[] tiles;
-
-    public TilesPanel(Board board) {
-        this.board = board;
-    }
 
     @Override
     protected void paintComponent(Graphics g) {

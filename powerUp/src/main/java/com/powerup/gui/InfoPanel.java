@@ -1,36 +1,33 @@
 package com.powerup.gui;
 
-import com.powerup.logic.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.StyledDocument;
 
 public class InfoPanel extends JPanel {
 
-    private final Game game;
     private JTextPane info;
-    private ArrayList<String> init;
     private StyledDocument doc;
 
-    public InfoPanel(Game game) {
-        this.game = game;
+    public InfoPanel() {
         addComponents();
     }
 
     private void addComponents() {
         info = new JTextPane();
         info.setEditable(false);
-        info.setPreferredSize(new Dimension(363, 333));
         info.setOpaque(false);
         info.setFont(Font.decode(Font.MONOSPACED));
         doc = info.getStyledDocument();
-        initialText();
+        doc.addStyle(TOOL_TIP_TEXT_KEY, null);
+        write("Welcome to powerUp");
         JScrollPane scroll = new JScrollPane(info);
+        scroll.setPreferredSize(new Dimension(363, 333));
         scroll.setBorder(null);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -39,19 +36,11 @@ public class InfoPanel extends JPanel {
         this.add(scroll);
     }
 
-    private void initialText() {
-        doc.addStyle(TOOL_TIP_TEXT_KEY, null);
-        write("Welcome to powerUp");
-//        for (int i = 1; i < 5; i++) {
-//            write("Player " + i + " is called " + game.getPlayer(i - 1));
-//        }
-    }
-
     public void write(String line) {
         try {
             doc.insertString(doc.getLength(), line + "\n", doc.getStyle(line));
         } catch (BadLocationException ex) {
-            Logger.getLogger(InfoPanel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
     }
 

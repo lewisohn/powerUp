@@ -1,11 +1,20 @@
 package com.powerup.gui;
 
-import com.powerup.listeners.StartGameListener;
-import com.powerup.logic.*;
-import java.awt.*;
+import com.powerup.listeners.StartListener;
+import com.powerup.logic.Game;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class StartPanel extends JPanel {
 
@@ -57,7 +66,7 @@ public class StartPanel extends JPanel {
         this.add(Box.createRigidArea(new Dimension(0, 10)));
         newGame = new JButton("New game");
         newGame.setAlignmentX(Component.CENTER_ALIGNMENT);
-        newGame.addActionListener(new StartGameListener(frame, names, game));
+        newGame.addActionListener(new StartListener(frame, names, game));
         this.add(newGame);
     }
 

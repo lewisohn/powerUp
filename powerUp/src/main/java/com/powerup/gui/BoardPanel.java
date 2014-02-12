@@ -1,14 +1,16 @@
 package com.powerup.gui;
 
-import com.powerup.logic.*;
-import java.awt.*;
+import com.powerup.logic.Board;
+import com.powerup.logic.Company;
+import com.powerup.logic.Tile;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel {
 
@@ -60,20 +62,15 @@ public class BoardPanel extends JPanel {
             BufferedImage img = ImageIO.read(getClass().getResource(owner.toString().replaceAll(" ", "_").toLowerCase() + ".png"));
             g.drawImage(img, x, y, this);
         } catch (IOException | IllegalArgumentException ex) {
-//            Logger.getLogger(BoardPanel.class.getName()).log(Level.SEVERE, null, ex);
-            g.setColor(Color.BLACK);
-            g.fillOval(x, y, 18, 18);
-            g.setColor(owner.getColor());
-            g.fillOval(x + 4, y + 4, 10, 10);
+            g.setColor(brightness(owner.getColor()) > 0.55 ? Color.BLACK : Color.WHITE);
+            g.setFont(new Font(g.getFont().getName(), Font.BOLD, g.getFont().getSize()));
+            g.drawString(owner.toString().substring(0, 1), x + 7, y + 14);
+            g.setFont(new Font(g.getFont().getName(), Font.PLAIN, g.getFont().getSize()));
         }
     }
 
     private void paintTile(Graphics g, int x, int y, String ref, Color color, boolean raised) {
-        if (color.equals(Color.DARK_GRAY)) {
-            g.setColor(Color.BLACK);
-        } else {
-            g.setColor(Color.DARK_GRAY);
-        }
+        g.setColor(Color.DARK_GRAY);
         g.drawRect(x, y, 30, 30);
         g.setColor(color);
         if (raised) {
@@ -81,13 +78,17 @@ public class BoardPanel extends JPanel {
         } else {
             g.fillRect(x + 1, y + 1, 29, 29);
         }
-        if (color.equals(Color.DARK_GRAY)) {
-            g.setColor(Color.WHITE);
-        } else {
-            g.setColor(Color.BLACK);
-        }
+        g.setColor(brightness(color) > 0.55 ? Color.BLACK : Color.WHITE);
+        g.drawString(ref, x + 9, y + 20);
+    }
 
-        g.drawString(ref, x + 8, y + 21);
+    private double brightness(Color color) {
+        double brightness = 0;
+        double[] weights = new double[]{0.241, 0.691, 0.068};
+        for (int i = 0; i < 3; i++) {
+            brightness += (weights[i] * Math.pow(color.getRGBComponents(null)[i], 2));
+        }
+        return Math.sqrt(brightness);
     }
 
     public void update() {

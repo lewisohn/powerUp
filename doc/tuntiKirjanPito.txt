@@ -37,3 +37,6 @@ GUI
 
 10/12/14: 12h
 GUI
+
+11/12/14: 9h
+GUI, refaktorointi

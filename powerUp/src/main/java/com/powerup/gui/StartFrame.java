@@ -1,8 +1,11 @@
 package com.powerup.gui;
 
-import com.powerup.logic.*;
-import java.awt.*;
-import javax.swing.*;
+import com.powerup.logic.Game;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
 public class StartFrame implements Runnable {
