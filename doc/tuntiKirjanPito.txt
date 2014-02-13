@@ -35,8 +35,21 @@ Refaktorointi, JavaDocin asentaminen, kirjoittaminen ja generointi, Mavenin onge
 09/02/14: 2h
 GUI
 
-10/12/14: 12h
+10/02/14: 12h
 GUI
 
-11/12/14: 9h
+11/02/14: 9h
 GUI, refaktorointi
+
+12/02/14: 6h
+GUI
+
+13/02/14: 3h
+Bugien korjaaminen, Javadocin kirjoittaminen
+// Tiedän, sekvenssikaavioita vielä puuttuu, ja testit ovat melkein kaikki rikkoutuneet päivitysten ansiosta.
+// Taisin innostua vähän liikaa GUI:n rakentamisesta tällä viikolla. Se on ollut erittäin hidasta, mutta ohjelma on
+// nyt lähes käyttökelpoinen :)
+// Tuli muutama hyvä kommentti Gurulassa olevilta käpistelijöiltä, joita kirjoitan tähän muistiinpanoksi:
+// "New game"-nappi voisi siirtää järkevämmälle paikalle
+// Olisi kiva nähdä selkeämmin, kenen vuoro on, ja mihin kädessä olevia tiilejä voi pelata
+// Olen itsekin miettinyt aivan samoja juttuja, mutta saa nähdä, riittääkö aika niiden toimeenpanoon...
