@@ -1,13 +1,11 @@
 package com.powerup.listeners;
 
-import com.powerup.gui.ShareDialog;
 import com.powerup.logic.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 public class CommandListener implements ActionListener {
 
@@ -58,16 +56,15 @@ public class CommandListener implements ActionListener {
     }
 
     private void buySharesClicked() {
-        ShareDialog shareDialog = new ShareDialog(game);
-        SwingUtilities.invokeLater(shareDialog);
+        window.showBuySharesDialog();
     }
 
     private void drawTilesClicked() {
         Player p = game.getTurn().getActivePlayer();
         game.getBoard().refillPlayerHand(p);
-        window.write(p + " drew new tiles");
+        window.writepn(p + " drew new tiles");
         if (game.getBoard().unassignedTilesRemaining() <= 0) {
-            window.write("No more tiles were available to be drawn");
+            window.write("All tiles were now assigned");
         }
         game.getTurn().actionTaken();
     }

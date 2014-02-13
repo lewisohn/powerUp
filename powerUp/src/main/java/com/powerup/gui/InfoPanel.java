@@ -25,7 +25,11 @@ public class InfoPanel extends JPanel {
         info.setFont(Font.decode(Font.MONOSPACED));
         doc = info.getStyledDocument();
         doc.addStyle(TOOL_TIP_TEXT_KEY, null);
-        write("Welcome to powerUp");
+        write("Welcome to powerUp \n");
+        /* This functionality will be added later!
+         * write("Press F1 to read the rules at any time");
+         */
+        write("Good luck!");
         JScrollPane scroll = new JScrollPane(info);
         scroll.setPreferredSize(new Dimension(363, 333));
         scroll.setBorder(null);
@@ -42,12 +46,5 @@ public class InfoPanel extends JPanel {
         } catch (BadLocationException ex) {
             System.out.println(ex);
         }
-    }
-
-    public void writeln(String line) {
-        if (!line.equals("")) {
-            write(line);
-        }
-        write("");
     }
 }

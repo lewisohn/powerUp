@@ -28,7 +28,7 @@ public class TileListener implements MouseListener {
                 Tile t = turn.getActivePlayer().returnTile(i);
                 if (t != null) {
                     game.getBoard().playTileToBoard(t);
-                    game.getWindow().write(turn.getActivePlayer() + " played tile " + t);
+                    game.getWindow().writepn(turn.getActivePlayer() + " played tile " + t);
                     turn.boardCheck(t);
                     turn.actionTaken();
                 }

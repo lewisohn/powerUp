@@ -71,8 +71,7 @@ public final class Game {
     }
 
     private void determineStartOrder() {
-        window.writeln("");
-        window.write("Determining starting order");
+        window.writepn("Determining starting order");
         int i = 0;
         while (i < 4) {
             Tile t = board.getRandomUnassignedTile();
@@ -108,11 +107,16 @@ public final class Game {
     }
 
     private String ordinal(int i) {
-        String[] ordinals = new String[]{"noneth", "first", "second", "third", "fourth"};
+        String[] ordinals = new String[]{"", "first", "second", "third", "fourth"};
         if ((i >= 1) && (i < 5)) {
             return ordinals[i];
         } else {
             return null;
         }
+    }
+
+    public void end() {
+        Arrays.sort(players);
+        window.showResultsDialog();
     }
 }

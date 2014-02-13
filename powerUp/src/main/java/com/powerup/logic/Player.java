@@ -109,7 +109,11 @@ public class Player implements Comparable<Player> {
 
     @Override
     public int compareTo(Player o) {
-        return this.tiles[0].compareTo(o.tiles[0]);
+        if (this.cash == o.getCash()) {
+            return this.tiles[0].compareTo(o.getTiles()[0]);
+        } else {
+            return o.getCash() - this.cash;
+        }
     }
 
     public int getHandSize() {
@@ -120,5 +124,25 @@ public class Player implements Comparable<Player> {
             }
         }
         return i;
+    }
+
+    public void giveCash(int amount) {
+        setCash(getCash() + amount);
+    }
+
+    public int sellShares(Company prey) {
+        int income = 0;
+        ArrayList<Share> remove = new ArrayList<>();
+        for (Share share : shares) {
+            if (share.getCompany() == prey) {
+                income += prey.sellPrice();
+                remove.add(share);
+            }
+        }
+        for (Share share : remove) {
+            shares.remove(share);
+        }
+        giveCash(income);
+        return income;
     }
 }

@@ -22,11 +22,16 @@ public class ShareDialog implements Runnable {
         dialog.setResizable(false);
         dialog.pack();
         dialog.setLocationRelativeTo(null);
+        dialog.setLocation(dialog.getBounds().x, dialog.getBounds().y - 30);
         dialog.setVisible(true);
     }
 
     public void createComponents() {
         sharePanel = new SharePanel(game, dialog);
         dialog.add(sharePanel);
+    }
+
+    public SharePanel getSharePanel() {
+        return sharePanel;
     }
 }

@@ -58,11 +58,29 @@ public class Market {
         return inactive;
     }
 
+    public ArrayList<Company> activeCompanies() {
+        ArrayList<Company> active = new ArrayList<>();
+        for (Company company : companies) {
+            if (company.getActive()) {
+                active.add(company);
+            }
+        }
+        return active;
+    }
+
     public Company activateCompany(Company company, Tile tile) {
         company.activate(tile);
         for (Tile t : board.getAllConnectedTiles(tile)) {
             company.addTile(t);
         }
         return company;
+    }
+
+    public int numberOfCompaniesLargerThan(int size) {
+        int n = 0;
+        for (Company company : companies) {
+            n += (company.size() >= size ? 1 : 0);
+        }
+        return n;
     }
 }

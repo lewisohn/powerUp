@@ -1,10 +1,17 @@
 package com.powerup.logic;
 
 import com.powerup.gui.GameFrame;
-import com.powerup.listeners.*;
+import com.powerup.gui.ResultsDialog;
+import com.powerup.gui.ShareDialog;
+import com.powerup.listeners.CommandListener;
+import com.powerup.listeners.TileListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 public class Window {
 
@@ -12,11 +19,14 @@ public class Window {
     private GameFrame gFrame;
     private TileListener tileListener;
     private CommandListener commandListener;
+    private ShareDialog shareDialog;
+    private ResultsDialog resultsDialog;
 
     public Window(Game game, GameFrame gFrame) {
         this.game = game;
         this.gFrame = gFrame;
         commandListener = new CommandListener(game, this);
+        tileListener = new TileListener(game);
         for (JButton button : gFrame.getCommandsPanel().getButtons()) {
             button.addActionListener(commandListener);
         }
@@ -32,7 +42,13 @@ public class Window {
     }
 
     public void writeln(String string) {
-        gFrame.getInfoPanel().writeln(string);
+        gFrame.getInfoPanel().write(string);
+        gFrame.getInfoPanel().write("");
+    }
+
+    public void writepn(String string) {
+        gFrame.getInfoPanel().write("");
+        gFrame.getInfoPanel().write(string);
     }
 
     public JFrame getFrame() {
@@ -64,7 +80,6 @@ public class Window {
     }
 
     public void activateTileListener(Game game) {
-        tileListener = new TileListener(game);
         gFrame.getTilesPanel().addMouseListener(tileListener);
     }
 
@@ -104,5 +119,34 @@ public class Window {
             return showTakeOverDialog(comp1, comp2);
         }
         return game.getMarket().getCompany((String) result);
+    }
+
+    public void showBuySharesDialog() {
+        shareDialog = new ShareDialog(game);
+        SwingUtilities.invokeLater(shareDialog);
+    }
+
+    public void updateBuySharesDialog() {
+        shareDialog.getSharePanel().update();
+    }
+
+    public void disableAllButtons() {
+        for (int i = 0; i < 3; i++) {
+            disableButton(i + 1);
+        }
+    }
+
+    public void showResultsDialog() {
+        writepn("Here are the results...");
+        resultsDialog = new ResultsDialog(game);
+        Timer t = new Timer(3000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(resultsDialog);
+                writepn("Thanks for playing!");
+            }
+        });
+        t.setRepeats(false);
+        t.start();
     }
 }
