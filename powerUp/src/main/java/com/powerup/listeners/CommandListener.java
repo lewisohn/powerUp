@@ -1,5 +1,6 @@
 package com.powerup.listeners;
 
+import com.powerup.gui.Window;
 import com.powerup.logic.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

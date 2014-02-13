@@ -17,9 +17,8 @@ public final class Company implements Comparable<Company> {
     private final int initialValue;
     private boolean active;
     private Tile headquarters;
-    private ArrayList<Share> shares;
-    private ArrayList<Tile> tiles;
-    private Market market;
+    private final ArrayList<Share> shares;
+    private final ArrayList<Tile> tiles;
     private final Color color;
 
     /**
@@ -27,13 +26,11 @@ public final class Company implements Comparable<Company> {
      *
      * @param name The name of the company.
      * @param initialValue The initial share price of the company.
-     * @param game The game.
      * @param color The color of the company's tiles.
      */
-    public Company(String name, int initialValue, Market market, Color color) {
+    public Company(String name, int initialValue, Color color) {
         this.name = name;
         this.initialValue = initialValue;
-        this.market = market;
         this.color = color;
         active = false;
         shares = new ArrayList<>();
@@ -48,7 +45,9 @@ public final class Company implements Comparable<Company> {
     }
 
     /**
-     * Assigns a tile to the company if it has already been played.
+     * Assigns a tile to the company.
+     * <p />
+     * A tile must be on the board for it to be assigned to a company.
      *
      * @param tile The tile to be added.
      */
@@ -67,6 +66,11 @@ public final class Company implements Comparable<Company> {
         return headquarters;
     }
 
+    /**
+     * Activates the company and sets its headquarters.
+     *
+     * @param tile The company's new headquarters.
+     */
     public void activate(Tile tile) {
         headquarters = tile;
         active = true;
@@ -80,6 +84,9 @@ public final class Company implements Comparable<Company> {
         return tiles;
     }
 
+    /**
+     * Deactivates the company.
+     */
     public void deactivate() {
         active = false;
     }
@@ -94,8 +101,9 @@ public final class Company implements Comparable<Company> {
     }
 
     /**
-     * Calculates the price of buying one share from the company. <p /> A
-     * company's value grows by 10 percentage points for each tile it owns in
+     * Calculates the price of buying one share from the company.
+     * <p />
+     * A company's value grows by 10 percentage points for each tile it owns in
      * addition to the minimum of two tiles.
      *
      * @return The price of buying one share from the company.
@@ -105,6 +113,10 @@ public final class Company implements Comparable<Company> {
 
     }
 
+    /**
+     * Instructs the company to sell one of its shares, if it has any left.
+     * @return The share which is being sold.
+     */
     public Share sellShare() {
         if (shares.isEmpty()) {
             return null;

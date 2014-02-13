@@ -1,10 +1,10 @@
-package com.powerup.logic;
+package com.powerup.gui;
 
-import com.powerup.gui.GameFrame;
-import com.powerup.gui.ResultsDialog;
-import com.powerup.gui.ShareDialog;
 import com.powerup.listeners.CommandListener;
 import com.powerup.listeners.TileListener;
+import com.powerup.logic.Company;
+import com.powerup.logic.Game;
+import com.powerup.logic.Tile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -15,10 +15,10 @@ import javax.swing.Timer;
 
 public class Window {
 
-    private Game game;
-    private GameFrame gFrame;
-    private TileListener tileListener;
-    private CommandListener commandListener;
+    private final Game game;
+    private final GameFrame gFrame;
+    private final TileListener tileListener;
+    private final CommandListener commandListener;
     private ShareDialog shareDialog;
     private ResultsDialog resultsDialog;
 
@@ -149,4 +149,31 @@ public class Window {
         t.setRepeats(false);
         t.start();
     }
+
+    public void buttonCheck(int actions, int startActions, int handSize, int tilesRemaining, boolean tilePlayed) {
+        if (actions <= 0) {
+            disableButton(1);
+            disableButton(2);
+            enableButton(3);
+        } else {
+            if ((handSize < 5) && (tilesRemaining > 0)) {
+                enableButton(2);
+            } else {
+                disableButton(2);
+            }
+            if (actions == startActions) {
+                disableButton(1);
+                disableButton(3);
+            } else {
+                if (tilePlayed) {
+                    enableButton(1);
+                    enableButton(3);
+                } else {
+                    disableButton(1);
+                    disableButton(3);
+                }
+            }
+        }
+    }
+
 }

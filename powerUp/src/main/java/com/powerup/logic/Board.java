@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Responsible for maintaining the game's tiles.
+ * The game's board, responsible for maintaining tiles.
  *
  * @author Oliver Lewisohn
  * @since 2014-01-22
@@ -70,7 +70,6 @@ public final class Board {
      * Puts a random unassigned tile in a player's hand.
      *
      * @param player The player to receive the tile.
-     * @return True if a tile could be given to the player, otherwise false.
      */
     public void giveTileToPlayer(Player player) {
         if (unassignedTilesRemaining() > 0) {
@@ -83,14 +82,17 @@ public final class Board {
      *
      * @param player The player to receive the tile.
      * @param tile The tile to be given.
-     * @return True if a tile could be given to the player, otherwise false.
      */
     public void giveTileToPlayer(Player player, Tile tile) {
-        if (player.giveTile(tile)) {
+        if (player.addTileToHand(tile)) {
         }
 
     }
 
+    /**
+     * Refills a player's hand to size five, providing enough tiles remain.
+     * @param player The player to receive the tiles.
+     */
     public void refillPlayerHand(Player player) {
         for (int i = player.getHandSize(); i < 5; i++) {
             giveTileToPlayer(player);
@@ -101,6 +103,12 @@ public final class Board {
         return tiles;
     }
 
+    /**
+     * Gets a tile by its x and y coordinates.
+     * @param x The x-coordinate of the tile to be fetched.
+     * @param y The y-coordinate of the tile to be fetched.
+     * @return The desired tile, providing the coordinates are within range.
+     */
     public Tile getTile(int x, int y) {
         if ((x < 0) || (x > 9) || (y < 0) || (y > 9)) {
             return null;
@@ -183,6 +191,11 @@ public final class Board {
         }
     }
 
+    /**
+     * Fetches the companies which own tiles neighbouring the parameter tile.
+     * @param tile The tile to be checked.
+     * @return A list of companies which own tiles neighbouring the parameter tile.
+     */
     public ArrayList<Company> companyNeighbours(Tile tile) {
         ArrayList<Company> companies = new ArrayList<>();
         for (Tile t : getNeighbours(tile)) {
@@ -193,6 +206,12 @@ public final class Board {
         return companies;
     }
 
+    /**
+     * Finds out how many neutral tiles neighbour the parameter tile.
+     * A neutral tile is defined as a tile which is not owned by any company.
+     * @param tile The tile to be checked.
+     * @return The number of neutral tiles neighbouring the parameter tile.
+     */
     public int neutralNeighbours(Tile tile) {
         int neutral = 0;
         for (Tile t : getNeighbours(tile)) {

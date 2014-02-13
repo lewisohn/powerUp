@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
@@ -59,7 +60,7 @@ public class BoardPanel extends JPanel {
         g.setColor(owner.getColor());
         g.fillRect(x, y, 20, 20);
         try {
-            BufferedImage img = ImageIO.read(getClass().getResource(owner.toString().replaceAll(" ", "_").toLowerCase() + ".png"));
+            BufferedImage img = ImageIO.read(new File("icons/" + owner.toString().replaceAll(" ", "_").toLowerCase() + ".png"));
             g.drawImage(img, x, y, this);
         } catch (IOException | IllegalArgumentException ex) {
             g.setColor(brightness(owner.getColor()) > 0.55 ? Color.BLACK : Color.WHITE);

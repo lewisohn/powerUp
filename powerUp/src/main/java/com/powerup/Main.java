@@ -6,7 +6,7 @@ import com.powerup.logic.Game;
  * Main class, launches the game.
  *
  * @author Oliver Lewisohn
- * @version 0.1
+ * @version 0.8
  * @since 2014-01-22
  */
 public class Main {

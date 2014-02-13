@@ -2,6 +2,9 @@ package com.powerup.gui;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -13,8 +16,13 @@ public class InfoPanel extends JPanel {
 
     private JTextPane info;
     private StyledDocument doc;
+    private final GridBagConstraints c;
 
     public InfoPanel() {
+        this.setLayout(new GridBagLayout());
+        c = new GridBagConstraints();
+        c.weightx = c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
         addComponents();
     }
 
@@ -31,13 +39,13 @@ public class InfoPanel extends JPanel {
          */
         write("Good luck!");
         JScrollPane scroll = new JScrollPane(info);
-        scroll.setPreferredSize(new Dimension(363, 333));
-        scroll.setBorder(null);
+//        scroll.setPreferredSize(new Dimension(350, 350));
+        scroll.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         DefaultCaret caret = (DefaultCaret) info.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-        this.add(scroll);
+        this.add(scroll, c);
     }
 
     public void write(String line) {

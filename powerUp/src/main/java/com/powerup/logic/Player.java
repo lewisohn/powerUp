@@ -11,10 +11,13 @@ import java.util.ArrayList;
 public class Player implements Comparable<Player> {
 
     private String name;
-    private ArrayList<Share> shares;
-    private Tile[] tiles;
+    private final ArrayList<Share> shares;
+    private final Tile[] tiles;
     private int cash;
 
+    /**
+     * Creates a new player with $5000 and space for five tiles.
+     */
     public Player() {
         shares = new ArrayList<>();
         tiles = new Tile[5];
@@ -30,7 +33,12 @@ public class Player implements Comparable<Player> {
         return name;
     }
 
-    public boolean giveTile(Tile tile) {
+    /**
+     * Adds a specified tile to the player's hand, providing there is room.
+     * @param tile The tile to be added.
+     * @return True if there was room for the tile, otherwise false.
+     */
+    public boolean addTileToHand(Tile tile) {
         for (int i = 0; i < 5; i++) {
             if (tiles[i] == null) {
                 tiles[i] = tile;
@@ -41,13 +49,12 @@ public class Player implements Comparable<Player> {
         return false;
     }
 
-//    public Tile getTile(int n) {
-//        if ((n >= 0) && (n <= 4)) {
-//            return tiles[n];
-//        }
-//        return null;
-//    }
-    public Tile returnTile(int n) {
+    /**
+     * Takes a tile from the player's hand and returns it.
+     * @param n The number of the tile to be taken, from 0 to 4.
+     * @return The tile which has been taken.
+     */
+    public Tile returnTileFromHand(int n) {
         if ((n >= 0) && (n < 5)) {
             if (tiles[n] == null) {
                 return null;
@@ -60,6 +67,11 @@ public class Player implements Comparable<Player> {
         return null;
     }
 
+    /**
+     * Finds out how many shares the player owns in a given company.
+     * @param company The company to be checked.
+     * @return The number of shares the player owns in the given company.
+     */
     public int getNumberOfShares(Company company) {
         int i = 0;
         for (Share share : shares) {
@@ -70,6 +82,13 @@ public class Player implements Comparable<Player> {
         return i;
     }
 
+    /**
+     * Instructs the player to buy a share in the given company.
+     * @param company The company to buy a share from.
+     * @param freebie Whether or not the player has to pay for buying the share.
+     * When creating a company, the first share is free.
+     * @return Whether or not a share could be bought with the player's current cash.
+     */
     public boolean buyShare(Company company, boolean freebie) {
         int price;
         if (!freebie) {
@@ -96,6 +115,11 @@ public class Player implements Comparable<Player> {
         this.cash = cash;
     }
 
+    /**
+     * Fetches a tile from the player's hand without removing it.
+     * @param n The number of the tile to be fetched, from 0 to 4.
+     * @return The desired tile (can be null).
+     */
     public Tile getTile(int n) {
         if ((n >= 0) && (n <= 5)) {
             return tiles[n];
@@ -116,6 +140,10 @@ public class Player implements Comparable<Player> {
         }
     }
 
+    /**
+     * Finds out how many tiles a player currently has in their hand.
+     * @return The size of the player's hand.
+     */
     public int getHandSize() {
         int i = 0;
         for (Tile tile : tiles) {
@@ -126,10 +154,19 @@ public class Player implements Comparable<Player> {
         return i;
     }
 
+    /**
+     * Gives the player a certain amount of cash.
+     * @param amount
+     */
     public void giveCash(int amount) {
         setCash(getCash() + amount);
     }
 
+    /**
+     * Instructs the player to sell all their shares in a given company.
+     * @param prey The company (being taken over) whose shares should be sold.
+     * @return The cash generated through the sale.
+     */
     public int sellShares(Company prey) {
         int income = 0;
         ArrayList<Share> remove = new ArrayList<>();

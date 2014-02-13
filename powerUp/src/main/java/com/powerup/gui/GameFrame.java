@@ -30,12 +30,12 @@ public class GameFrame implements Runnable {
 
     @Override
     public void run() {
-        frame = new JFrame("powerUp 0.1");
+        frame = new JFrame("powerUp 0.8");
         frame.setLayout(new GridBagLayout());
-        c = new GridBagConstraints();
-        frame.setMinimumSize(new Dimension(833, 510));
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         ((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(7, 10, 13, 10));
+        c = new GridBagConstraints();
         createComponents(frame.getContentPane());
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -50,6 +50,7 @@ public class GameFrame implements Runnable {
         boardPanel.setPreferredSize(new Dimension(363, 369));
         infoPanel = new InfoPanel();
         infoPanel.setBorder(BorderFactory.createTitledBorder("Information"));
+        infoPanel.setPreferredSize(new Dimension(363, 369));
         tilesPanel = new TilesPanel();
         tilesPanel.setBorder(BorderFactory.createTitledBorder("Available tiles"));
         tilesPanel.setPreferredSize(new Dimension(193, 63));

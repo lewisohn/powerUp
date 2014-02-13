@@ -1,22 +1,33 @@
 package com.powerup.logic;
 
-import com.powerup.gui.ShareDialog;
+import com.powerup.gui.Window;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import javax.swing.SwingUtilities;
 
+/**
+ * A game turn.
+ *
+ * @author Oliver Lewisohn
+ * @since 2014-02-13
+ */
 public class Turn {
 
-    private Game game;
-    private Window window;
-    private Player player;
+    private final Game game;
+    private final Window window;
+    private Player activePlayer;
     private int actions;
     private int startActions;
     private int pid;
     private boolean tilePlayed;
     private final Random random;
 
+    /**
+     * Starts a new turn.
+     *
+     * @param game The game.
+     * @param pid The ID of the player whose turn is starting.
+     */
     public Turn(Game game, int pid) {
         this.game = game;
         this.window = game.getWindow();
@@ -25,27 +36,32 @@ public class Turn {
         beginTurn();
     }
 
-    public void launchShareFrame() {
-        ShareDialog shareFrame = new ShareDialog(game);
-        SwingUtilities.invokeLater(shareFrame);
-    }
-
+    /**
+     * Redundant?
+     *
+     * public void launchShareFrame() { ShareDialog shareFrame = new
+     * ShareDialog(game); SwingUtilities.invokeLater(shareFrame); }
+     */
     private void beginTurn() {
-        this.player = game.getPlayer(pid);
+        this.activePlayer = game.getPlayer(pid);
         int sa = random.nextInt(4);
         this.startActions = 2 + (sa == 3 ? 1 : sa);
         this.actions = startActions;
         this.tilePlayed = false;
         window.write("---");
-        window.write(player + "'s turn");
-        window.write(player + " rolled " + startActions + " actions for this turn");
+        window.write(activePlayer + "'s turn");
+        window.write(activePlayer + " rolled " + startActions + " actions for this turn");
         window.activateTileListener(game);
-        buttonCheck();
         updateWindow();
+        window.buttonCheck(actions, startActions, activePlayer.getHandSize(),
+                game.getBoard().unassignedTilesRemaining(), tilePlayed);
     }
 
+    /**
+     * Ends the turn and instructs the game to begin a new one.
+     */
     public void endTurn() {
-        window.writepn("End of " + player + "'s turn");
+        window.writepn("End of " + activePlayer + "'s turn");
         pid++;
         pid = (pid % 4);
         game.newTurn(pid);
@@ -136,6 +152,16 @@ public class Turn {
         }
     }
 
+    /**
+     * Checks to see which action needs to be performed after a tile is played.
+     * <p />
+     * The action could be: create a new company; join an existing company;
+     * initiate a merger; or nothing.
+     * <p />
+     * This method may be better located in the Board class.
+     *
+     * @param tile
+     */
     public void boardCheck(Tile tile) {
         tilePlayed = true;
         int neutral = game.getBoard().neutralNeighbours(tile);
@@ -168,9 +194,9 @@ public class Turn {
                     window.write("No new company could be established");
                 } else {
                     Company company = game.getMarket().activateCompany(window.showCreateCompanyDialog(), tile);
-                    player.buyShare(company, true);
+                    activePlayer.buyShare(company, true);
                     window.write(company + " was founded at " + tile + " with size " + company.size());
-                    window.write(player + " received a free " + company + " share");
+                    window.write(activePlayer + " received a free " + company + " share");
                 }
                 updateWindow();
             }
@@ -178,23 +204,28 @@ public class Turn {
     }
 
     public Player getActivePlayer() {
-        return player;
+        return activePlayer;
     }
 
     private void updateWindow() {
         window.setActions(actions);
-        window.setCash(player.getCash());
-        window.updateTiles(player.getTiles());
+        window.setCash(activePlayer.getCash());
+        window.updateTiles(activePlayer.getTiles());
         window.updateBoard();
     }
 
+    /**
+     * Reduces the number of remaining actions by one and then checks for
+     * consequences.
+     */
     public void actionTaken() {
         actions--;
         updateWindow();
-        buttonCheck();
+        window.buttonCheck(actions, startActions, activePlayer.getHandSize(),
+                game.getBoard().unassignedTilesRemaining(), tilePlayed);
         if (actions <= 0) {
             window.deactivateTileListener();
-            window.write(player + " ran out of actions");
+            window.write(activePlayer + " ran out of actions");
         }
         if (endOfGameCheck()) {
             window.deactivateTileListener();
@@ -202,32 +233,6 @@ public class Turn {
             dissolveAll();
         }
 
-    }
-
-    private void buttonCheck() {
-        if (actions <= 0) {
-            window.disableButton(1);
-            window.disableButton(2);
-            window.enableButton(3);
-        } else {
-            if ((player.getHandSize() < 5) && (game.getBoard().unassignedTilesRemaining() > 0)) {
-                window.enableButton(2);
-            } else {
-                window.disableButton(2);
-            }
-            if (actions == startActions) {
-                window.disableButton(1);
-                window.disableButton(3);
-            } else {
-                if (tilePlayed) {
-                    window.enableButton(1);
-                    window.enableButton(3);
-                } else {
-                    window.disableButton(1);
-                    window.disableButton(3);
-                }
-            }
-        }
     }
 
     public int getActions() {

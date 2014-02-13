@@ -6,7 +6,6 @@ import java.awt.Container;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import javax.swing.border.Border;
 
 public class StartFrame implements Runnable {
 
@@ -20,7 +19,7 @@ public class StartFrame implements Runnable {
 
     @Override
     public void run() {
-        frame = new JFrame("powerUp 0.1");
+        frame = new JFrame("powerUp 0.8");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         createComponents(frame.getContentPane());
         frame.getRootPane().setDefaultButton(startPanel.getDefaultButton());

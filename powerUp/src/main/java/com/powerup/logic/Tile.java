@@ -10,15 +10,16 @@ public class Tile implements Comparable<Tile> {
 
     private Location location;
     private Company owner;
-    private int x;
-    private int y;
-    private Board board;
+    private final int x;
+    private final int y;
+    private final Board board;
 
     /**
      * Creates a new tile with the given coordinates.
      *
      * @param x The x-coordinate of the tile.
-     * @param y THe y-coordinate of the tile.
+     * @param y The y-coordinate of the tile.
+     * @param board The game's board.
      */
     public Tile(int x, int y, Board board) {
         this.x = x;
@@ -28,6 +29,10 @@ public class Tile implements Comparable<Tile> {
         owner = null;
     }
 
+    /**
+     * The three possible locations for a tile: BOARD - on the game's board;
+     * HAND - in a player's hand; NONE - unassigned.
+     */
     public enum Location {
 
         BOARD,
@@ -37,6 +42,8 @@ public class Tile implements Comparable<Tile> {
 
     /**
      * Plays a tile to the board. This cannot be undone.
+     *
+     * @param loc
      */
     public void setLocation(Location loc) {
         this.location = loc;
@@ -83,12 +90,14 @@ public class Tile implements Comparable<Tile> {
         return 1;
     }
 
+    /**
+     * Checks if this tile is a neighbour of another tile.
+     *
+     * @param tile The potential neighbour tile to be checked.
+     * @return True if the parameter tile is a neighbour, otherwise false.
+     */
     public boolean isNextTo(Tile tile) {
-        if (((this.x == tile.getX()) && (Math.abs(this.y - tile.getY()) == 1))
-                || ((this.y == tile.getY()) && (Math.abs(this.x - tile.getX()) == 1))) {
-            return true;
-        } else {
-            return false;
-        }
+        return ((this.x == tile.getX()) && (Math.abs(this.y - tile.getY()) == 1))
+                || ((this.y == tile.getY()) && (Math.abs(this.x - tile.getX()) == 1));
     }
 }
