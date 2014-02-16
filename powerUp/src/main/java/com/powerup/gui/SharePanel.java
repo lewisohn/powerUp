@@ -27,7 +27,7 @@ public final class SharePanel extends AbstractPanel {
         UIManager.put("Label.font", oldFont.deriveFont(Font.PLAIN));
         this.game = game;
         this.window = dialog;
-        this.buyListener = new BuyListener(game);
+        this.buyListener = new BuyListener(game, this);
         this.setLayout(new GridBagLayout());
         c = new GridBagConstraints();
         c.insets = new Insets(8, 10, 8, 10);
@@ -84,11 +84,20 @@ public final class SharePanel extends AbstractPanel {
             ((JLabel) components.get(i + 1)[2]).setText(String.valueOf(player.getNumberOfShares(seller)));
             ((JLabel) components.get(i + 1)[3]).setText("$" + String.valueOf(seller.sellPrice()));
             if ((seller.getActive()) && (!seller.getShares().isEmpty())
-                    && (actions > 0) && (player.getCash() > seller.sellPrice())) {
+                    && (actions > 0) && (player.getCash() >= seller.sellPrice())
+                    && (game.getTurn().getTilePlayed())) {
                 components.get(i + 1)[4].setEnabled(true);
             } else {
                 components.get(i + 1)[4].setEnabled(false);
             }
         }
+    }
+
+    public JButton[] getBuyButtons() {
+        JButton[] buttons = new JButton[6];
+        for (int i = 0; i < 6; i++) {
+            buttons[i] = (JButton) components.get(i + 1)[4];
+        }
+        return buttons;
     }
 }

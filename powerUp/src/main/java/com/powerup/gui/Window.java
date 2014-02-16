@@ -81,10 +81,12 @@ public class Window {
 
     public void activateTileListener(Game game) {
         gFrame.getTilesPanel().addMouseListener(tileListener);
+        gFrame.getTilesPanel().addMouseMotionListener(tileListener);
     }
 
     public void deactivateTileListener() {
         gFrame.getTilesPanel().removeMouseListener(tileListener);
+        gFrame.getTilesPanel().removeMouseMotionListener(tileListener);
     }
 
     public Company showCreateCompanyDialog() {
@@ -143,37 +145,44 @@ public class Window {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SwingUtilities.invokeLater(resultsDialog);
-                writepn("Thanks for playing!");
+                Timer t2 = new Timer(7500, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        writepn(game.getPlayer(0) + " won the game with assets of $"
+                                + game.getPlayer(0).getCash() + "!");
+                        deactivateTileListener();
+                    }
+                });
+                t2.setRepeats(false);
+                t2.start();
             }
         });
         t.setRepeats(false);
         t.start();
     }
 
-    public void buttonCheck(int actions, int startActions, int handSize, int tilesRemaining, boolean tilePlayed) {
+    public void buttonCheck(int actions, int startActions, int handSize,
+            int tilesRemaining, boolean tilePlayed) {
         if (actions <= 0) {
             disableButton(1);
             disableButton(2);
             enableButton(3);
         } else {
+            enableButton(1);
             if ((handSize < 5) && (tilesRemaining > 0)) {
                 enableButton(2);
             } else {
                 disableButton(2);
             }
-            if (actions == startActions) {
-                disableButton(1);
+            if (actions == startActions || !tilePlayed) {
                 disableButton(3);
             } else {
-                if (tilePlayed) {
-                    enableButton(1);
-                    enableButton(3);
-                } else {
-                    disableButton(1);
-                    disableButton(3);
-                }
+                enableButton(3);
             }
         }
     }
 
+    public void updateInfoPanel(String string) {
+        gFrame.getInfoPanel().update(string);
+    }
 }

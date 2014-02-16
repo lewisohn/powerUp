@@ -5,8 +5,9 @@ import com.powerup.logic.Tile;
 import com.powerup.logic.Turn;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class TileListener implements MouseListener {
+public class TileListener implements MouseListener, MouseMotionListener {
 
     private Game game;
     private Turn turn;
@@ -21,18 +22,13 @@ public class TileListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        this.turn = game.getTurn();
-        if (turn.getActions() > 0) {
-            int i = intersects(e);
-            if (i >= 0) {
-                Tile t = turn.getActivePlayer().returnTileFromHand(i);
-                if (t != null) {
-                    game.getBoard().playTileToBoard(t);
-                    game.getWindow().writepn(turn.getActivePlayer() + " played tile " + t);
-                    turn.boardCheck(t);
-                    turn.actionTaken();
-                }
-            }
+        Tile t = tileCheck(e, true);
+        if (t != null) {
+            game.getBoard().playTileToBoard(t);
+            game.getBoard().setHighlightedTile(null);
+            game.getWindow().writepn(turn.getActivePlayer() + " played tile " + t);
+            turn.boardCheck(t);
+            turn.actionTaken();
         }
     }
 
@@ -44,8 +40,26 @@ public class TileListener implements MouseListener {
     public void mouseEntered(MouseEvent e) {
     }
 
+    private Tile tileCheck(MouseEvent e, boolean take) {
+        Tile t = null;
+        this.turn = game.getTurn();
+        if (turn.getActions() > 0) {
+            int i = intersects(e);
+            if (i >= 0) {
+                if (take) {
+                    t = turn.getActivePlayer().returnTileFromHand(i);
+                } else {
+                    t = turn.getActivePlayer().getTile(i);
+                }
+            }
+        }
+        return t;
+    }
+
     @Override
     public void mouseExited(MouseEvent e) {
+        game.getBoard().setHighlightedTile(null);
+        game.getWindow().updateBoard();
     }
 
     private int intersects(MouseEvent e) {
@@ -59,5 +73,22 @@ public class TileListener implements MouseListener {
             }
         }
         return -1;
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        Tile t = tileCheck(e, false);
+        if (t != null) {
+            if (game.getBoard().getHighlightedTile() != t) {
+                game.getBoard().setHighlightedTile(t);
+            }
+        } else {
+            game.getBoard().setHighlightedTile(null);
+        }
+        game.getWindow().updateBoard();
     }
 }

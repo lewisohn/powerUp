@@ -13,6 +13,7 @@ public final class Board {
 
     private final ArrayList<ArrayList<Tile>> tiles;
     private final Random random;
+    private Tile highlightedTile;
 
     /**
      * Creates 100 tiles and sets up a random integer generator.
@@ -20,6 +21,7 @@ public final class Board {
     public Board() {
         tiles = new ArrayList<>();
         random = new Random();
+        highlightedTile = null;
         createTiles();
     }
 
@@ -91,6 +93,7 @@ public final class Board {
 
     /**
      * Refills a player's hand to size five, providing enough tiles remain.
+     *
      * @param player The player to receive the tiles.
      */
     public void refillPlayerHand(Player player) {
@@ -105,6 +108,7 @@ public final class Board {
 
     /**
      * Gets a tile by its x and y coordinates.
+     *
      * @param x The x-coordinate of the tile to be fetched.
      * @param y The y-coordinate of the tile to be fetched.
      * @return The desired tile, providing the coordinates are within range.
@@ -193,8 +197,10 @@ public final class Board {
 
     /**
      * Fetches the companies which own tiles neighbouring the parameter tile.
+     *
      * @param tile The tile to be checked.
-     * @return A list of companies which own tiles neighbouring the parameter tile.
+     * @return A list of companies which own tiles neighbouring the parameter
+     * tile.
      */
     public ArrayList<Company> companyNeighbours(Tile tile) {
         ArrayList<Company> companies = new ArrayList<>();
@@ -207,8 +213,9 @@ public final class Board {
     }
 
     /**
-     * Finds out how many neutral tiles neighbour the parameter tile.
-     * A neutral tile is defined as a tile which is not owned by any company.
+     * Finds out how many neutral tiles neighbour the parameter tile. A neutral
+     * tile is defined as a tile which is not owned by any company.
+     *
      * @param tile The tile to be checked.
      * @return The number of neutral tiles neighbouring the parameter tile.
      */
@@ -220,5 +227,13 @@ public final class Board {
             }
         }
         return neutral;
+    }
+
+    public void setHighlightedTile(Tile tile) {
+        highlightedTile = tile;
+    }
+
+    public Tile getHighlightedTile() {
+        return highlightedTile;
     }
 }

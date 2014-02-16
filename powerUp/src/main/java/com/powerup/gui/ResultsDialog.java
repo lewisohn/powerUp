@@ -1,7 +1,6 @@
 package com.powerup.gui;
 
 import com.powerup.logic.Game;
-import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
@@ -21,11 +20,9 @@ public class ResultsDialog implements Runnable {
         this.dialog = new JDialog(game.getWindow().getFrame(), "Results", JDialog.ModalityType.DOCUMENT_MODAL);
         createComponents();
         dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-//        dialog.setPreferredSize(new Dimension(250, 200));
-//        dialog.setResizable(false);
         dialog.pack();
         dialog.setLocationRelativeTo(null);
-        dialog.setLocation(dialog.getBounds().x, dialog.getBounds().y - 30);
+        dialog.setLocation(dialog.getBounds().x, dialog.getBounds().y - 60);
         dialog.setVisible(true);
 
     }

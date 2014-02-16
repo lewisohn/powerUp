@@ -11,7 +11,7 @@ import java.util.Random;
  * @author Oliver Lewisohn
  * @since 2014-02-13
  */
-public class Turn {
+public final class Turn {
 
     private final Game game;
     private final Window window;
@@ -20,6 +20,7 @@ public class Turn {
     private int startActions;
     private int pid;
     private boolean tilePlayed;
+    private boolean companyCreated;
     private final Random random;
 
     /**
@@ -44,10 +45,15 @@ public class Turn {
      */
     private void beginTurn() {
         this.activePlayer = game.getPlayer(pid);
-        int sa = random.nextInt(4);
-        this.startActions = 2 + (sa == 3 ? 1 : sa);
+        int sa = random.nextInt(6);
+        if (sa == 2) {
+            startActions = 2;
+        } else {
+            startActions = (sa < 2 ? 4 : 3);
+        }
         this.actions = startActions;
         this.tilePlayed = false;
+        this.companyCreated = false;
         window.write("---");
         window.write(activePlayer + "'s turn");
         window.write(activePlayer + " rolled " + startActions + " actions for this turn");
@@ -116,8 +122,8 @@ public class Turn {
     }
 
     private void giveBonuses(ArrayList<ArrayList<Player>> list, Company prey, boolean endOfGame) {
-        int majPot = (endOfGame ? 6 : 12) * prey.sellPrice();
-        int minPot = (endOfGame ? 3 : 6) * prey.sellPrice();
+        int majPot = (endOfGame ? 4 : 8) * prey.sellPrice();
+        int minPot = (endOfGame ? 2 : 4) * prey.sellPrice();
         if (list.get(0).size() > 1) {
             window.write("There was a " + list.get(0).size() + "-way split"
                     + " of the combined bonuses");
@@ -154,11 +160,9 @@ public class Turn {
 
     /**
      * Checks to see which action needs to be performed after a tile is played.
-     * <p />
-     * The action could be: create a new company; join an existing company;
-     * initiate a merger; or nothing.
-     * <p />
-     * This method may be better located in the Board class.
+     * <p /> The action could be: create a new company; join an existing
+     * company; initiate a merger; or nothing. <p /> This method may be better
+     * located in the Board class.
      *
      * @param tile
      */
@@ -190,9 +194,10 @@ public class Turn {
             }
         } else {
             if (neutral > 0) {
-                if (game.getMarket().allCompaniesActive()) {
+                if (game.getMarket().allCompaniesActive() || companyCreated) {
                     window.write("No new company could be established");
                 } else {
+                    companyCreated = true;
                     Company company = game.getMarket().activateCompany(window.showCreateCompanyDialog(), tile);
                     activePlayer.buyShare(company, true);
                     window.write(company + " was founded at " + tile + " with size " + company.size());
@@ -212,6 +217,7 @@ public class Turn {
         window.setCash(activePlayer.getCash());
         window.updateTiles(activePlayer.getTiles());
         window.updateBoard();
+        window.updateInfoPanel(activePlayer.toString() + "'s turn");
     }
 
     /**
@@ -230,6 +236,7 @@ public class Turn {
         if (endOfGameCheck()) {
             window.deactivateTileListener();
             window.disableAllButtons();
+            window.updateInfoPanel("game ended");
             dissolveAll();
         }
 
@@ -250,16 +257,20 @@ public class Turn {
 
     private boolean endOfGameCheck() {
         if (game.getBoard().unassignedTilesRemaining() < 50) {
-            for (int i = 0; i < 3; i++) {
-                int threshold = 50 - (i == 2 ? 25 : i * 15);
+            for (int i = 0; i < 2; i++) {
+                int threshold = 50 - (i == 1 ? 20 : 0);
                 int n = game.getMarket().numberOfCompaniesLargerThan(threshold);
                 if (n >= (i + 1)) {
                     window.writepn("The game is over");
                     window.write(cardinal(n) + (n > 1 ? " companies have" : " company has")
                             + " reached size " + threshold);
+                    window.deactivateTileListener();
                     return true;
                 }
             }
+        } else if ((activePlayer.getHandSize() == 0) && (game.getBoard().unassignedTilesRemaining() == 0)) {
+            window.writepn("The game is over");
+            window.write(activePlayer + " has run out of tiles and no more can be drawn");
         }
         return false;
     }
@@ -282,5 +293,9 @@ public class Turn {
             sellAllShares(company);
         }
         game.end();
+    }
+
+    public boolean getTilePlayed() {
+        return tilePlayed;
     }
 }

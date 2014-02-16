@@ -62,7 +62,7 @@ public final class ResultsPanel extends AbstractPanel {
         for (int i = 0; i < 5; i++) {
             for (JLabel label : labels.get(i)) {
                 this.add(label);
-                label.setHorizontalAlignment(JLabel.CENTER);
+                label.setHorizontalAlignment(JLabel.LEFT);
                 label.setVisible((i == 0 || String.valueOf(label.getText().charAt(1)).equals(".") ? true : false));
             }
         }
@@ -87,5 +87,4 @@ public final class ResultsPanel extends AbstractPanel {
             }
         }
     }
-
 }

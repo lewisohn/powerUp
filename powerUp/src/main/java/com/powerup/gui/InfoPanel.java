@@ -1,6 +1,5 @@
 package com.powerup.gui;
 
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,7 +11,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.StyledDocument;
 
-public class InfoPanel extends JPanel {
+public final class InfoPanel extends AbstractPanel {
 
     private JTextPane info;
     private StyledDocument doc;
@@ -23,21 +22,22 @@ public class InfoPanel extends JPanel {
         c = new GridBagConstraints();
         c.weightx = c.weighty = 1;
         c.fill = GridBagConstraints.BOTH;
-        addComponents();
+        createComponents();
     }
 
-    private void addComponents() {
+    @Override
+    protected void createComponents() {
         info = new JTextPane();
         info.setEditable(false);
         info.setOpaque(false);
         info.setFont(Font.decode(Font.MONOSPACED));
         doc = info.getStyledDocument();
         doc.addStyle(TOOL_TIP_TEXT_KEY, null);
-        write("Welcome to powerUp \n");
+        write("Welcome to powerUp");
         /* This functionality will be added later!
          * write("Press F1 to read the rules at any time");
+         * write("Good luck!");
          */
-        write("Good luck!");
         JScrollPane scroll = new JScrollPane(info);
 //        scroll.setPreferredSize(new Dimension(350, 350));
         scroll.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -54,5 +54,14 @@ public class InfoPanel extends JPanel {
         } catch (BadLocationException ex) {
             System.out.println(ex);
         }
+    }
+
+    @Override
+    public void update() {
+        this.setBorder(BorderFactory.createTitledBorder("Information"));
+    }
+
+    public void update(String string) {
+        this.setBorder(BorderFactory.createTitledBorder("Information: " + string));
     }
 }

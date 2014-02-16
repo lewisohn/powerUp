@@ -49,7 +49,10 @@ Bugien korjaaminen, Javadocin kirjoittaminen
 // Tiedän, sekvenssikaavioita vielä puuttuu, ja testit ovat melkein kaikki rikkoutuneet päivitysten ansiosta.
 // Taisin innostua vähän liikaa GUI:n rakentamisesta tällä viikolla. Se on ollut erittäin hidasta, mutta ohjelma on
 // nyt lähes käyttökelpoinen :)
-// Tuli muutama hyvä kommentti Gurulassa olevilta käpistelijöiltä, joita kirjoitan tähän muistiinpanoksi:
-// "New game"-nappi voisi siirtää järkevämmälle paikalle
-// Olisi kiva nähdä selkeämmin, kenen vuoro on, ja mihin kädessä olevia tiilejä voi pelata
-// Olen itsekin miettinyt aivan samoja juttuja, mutta saa nähdä, riittääkö aika niiden toimeenpanoon...
+// Gurulassa olevilta käpistelijöiltä tuli pari hyvää kehitysideaa
+
+14/02/14: 3h
+GUI
+
+15/02/14: 1h
+Bugien korjaaminen, pieniä sääntömuutoksia

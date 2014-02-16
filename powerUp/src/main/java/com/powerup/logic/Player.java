@@ -96,7 +96,7 @@ public class Player implements Comparable<Player> {
         } else {
             price = 0;
         }
-        if (this.cash >= price) {
+        if (cash >= price) {
             Share purchase = company.sellShare();
             if (purchase != null) {
                 cash -= price;

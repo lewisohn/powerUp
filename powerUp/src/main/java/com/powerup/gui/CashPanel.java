@@ -1,6 +1,7 @@
 package com.powerup.gui;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -11,6 +12,7 @@ public class CashPanel extends JPanel {
     private JLabel cash;
 
     public CashPanel() {
+        this.setPreferredSize(new Dimension(75, 39));
         addComponents();
     }
 

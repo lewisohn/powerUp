@@ -38,7 +38,9 @@ public class BoardPanel extends JPanel {
         Color paintColor;
         for (ArrayList<Tile> list : board.getTiles()) {
             for (Tile tile : list) {
-                if (tile.getLocation() == Tile.Location.BOARD) {
+                if (tile == board.getHighlightedTile()) {
+                    paintTile(g, (34 * tile.getX()) + 13, (34 * tile.getY()) + 19, tile.toString(), Color.WHITE, true);
+                } else if (tile.getLocation() == Tile.Location.BOARD) {
                     if (tile.getOwner() == null) {
                         paintTile(g, (34 * tile.getX()) + 13, (34 * tile.getY()) + 19, tile.toString(), foreground, true);
                     } else {

@@ -12,7 +12,6 @@ public class Tile implements Comparable<Tile> {
     private Company owner;
     private final int x;
     private final int y;
-    private final Board board;
 
     /**
      * Creates a new tile with the given coordinates.
@@ -24,7 +23,6 @@ public class Tile implements Comparable<Tile> {
     public Tile(int x, int y, Board board) {
         this.x = x;
         this.y = y;
-        this.board = board;
         location = Location.NONE;
         owner = null;
     }

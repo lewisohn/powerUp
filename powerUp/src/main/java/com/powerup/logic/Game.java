@@ -1,8 +1,8 @@
 package com.powerup.logic;
 
-import com.powerup.gui.Window;
 import com.powerup.gui.GameFrame;
 import com.powerup.gui.StartFrame;
+import com.powerup.gui.Window;
 import java.util.Arrays;
 import javax.swing.SwingUtilities;
 
@@ -37,9 +37,8 @@ public final class Game {
     }
 
     /**
-     * Returns a player based on the given ID.
-     * <p />
-     * The IDs run from 0 to 3, with 0 being the player who had the first turn.
+     * Returns a player based on the given ID. <p /> The IDs run from 0 to 3,
+     * with 0 being the player who had the first turn.
      *
      * @param i The ID of the player to be fetched
      * @return The player in question.
@@ -114,6 +113,7 @@ public final class Game {
 
     /**
      * Starts a new turn of the game.
+     *
      * @param n The ID of the player whose turn it is.
      */
     public void newTurn(int n) {
@@ -134,10 +134,9 @@ public final class Game {
     }
 
     /**
-     * Ends the game.
-     * <p />
-     * Re-sorts the list of players by their total cash and shows the results
-     * dialog, where they are revealed in order from least cash to most.
+     * Ends the game. <p /> Re-sorts the list of players by their total cash and
+     * shows the results dialog, where they are revealed in order from least
+     * cash to most.
      */
     public void end() {
         Arrays.sort(players);
