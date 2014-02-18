@@ -2,8 +2,12 @@ package com.powerup.gui;
 
 import com.powerup.logic.Tile;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class TilesPanel extends JPanel {
@@ -12,9 +16,15 @@ public class TilesPanel extends JPanel {
     private final Color background = new Color(220, 220, 220);
     private Tile[] tiles;
 
+    public TilesPanel() {
+        this.setBorder(BorderFactory.createTitledBorder("Available tiles"));
+        this.setPreferredSize(new Dimension(193, 63));
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
         g.setFont(Font.decode(Font.MONOSPACED));
         paintAvailableTiles(g);
     }
@@ -51,7 +61,7 @@ public class TilesPanel extends JPanel {
             g.fillRect(x + 1, y + 1, 29, 29);
         }
         g.setColor(Color.BLACK);
-        g.drawString(ref, x + 8, y + 21);
+        g.drawString(ref, x + 9, y + 21);
     }
 
     public void update() {

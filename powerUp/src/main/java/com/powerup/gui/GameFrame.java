@@ -3,11 +3,11 @@ package com.powerup.gui;
 //import com.powerup.listeners.FrameListener;
 import com.powerup.logic.Game;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -19,7 +19,7 @@ public class GameFrame implements Runnable {
     private BoardPanel boardPanel;
     private InfoPanel infoPanel;
     private TilesPanel tilesPanel;
-    private CashPanel playerPanel;
+    private CashPanel cashPanel;
     private ActionsPanel actionsPanel;
     private CommandsPanel commandsPanel;
     private GridBagConstraints c;
@@ -36,48 +36,41 @@ public class GameFrame implements Runnable {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         ((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(7, 10, 13, 10));
         c = new GridBagConstraints();
+        c.insets = new Insets(5, 8, 5, 8);
+        c.fill = GridBagConstraints.BOTH;
         createComponents(frame.getContentPane());
+        ImageIcon icon = new ImageIcon("icons/window.png");
+        frame.setIconImage(icon.getImage());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-//        frame.addWindowListener(new FrameListener(frame));
+//        frame.addWindowListener(new FrameListener(frame)); -- see FrameListener class JavaDoc
         game.setUp(this);
     }
 
     public void createComponents(Container container) {
-        boardPanel = new BoardPanel(game.getBoard());
-        boardPanel.setBorder(BorderFactory.createTitledBorder("Playing board"));
-        boardPanel.setPreferredSize(new Dimension(363, 369));
-        infoPanel = new InfoPanel();
-        infoPanel.setBorder(BorderFactory.createTitledBorder("Information"));
-        infoPanel.setPreferredSize(new Dimension(363, 369));
-        tilesPanel = new TilesPanel();
-        tilesPanel.setBorder(BorderFactory.createTitledBorder("Available tiles"));
-        tilesPanel.setPreferredSize(new Dimension(193, 63));
-        playerPanel = new CashPanel();
-        playerPanel.setBorder(BorderFactory.createTitledBorder("Cash"));
-        actionsPanel = new ActionsPanel();
-        actionsPanel.setBorder(BorderFactory.createTitledBorder("Actions"));
-        commandsPanel = new CommandsPanel();
-        commandsPanel.setBorder(BorderFactory.createTitledBorder("Commands"));
-        c.insets = new Insets(5, 8, 5, 8);
-        c.gridx = 0;
-        c.gridy = 0;
+        JComponent[] topRow = new JComponent[]{
+            boardPanel = new BoardPanel(game.getBoard()),
+            infoPanel = new InfoPanel()
+        };
+        JComponent[] bottomRow = new JComponent[]{
+            tilesPanel = new TilesPanel(),
+            cashPanel = new CashPanel(),
+            actionsPanel = new ActionsPanel(),
+            commandsPanel = new CommandsPanel()
+        };
         c.gridwidth = 3;
-        container.add(boardPanel, c);
-        c.gridx = 3;
-        c.gridwidth = 1;
-        c.fill = GridBagConstraints.BOTH;
-        container.add(infoPanel, c);
+        for (JComponent panel : topRow) {
+            container.add(panel, c);
+            c.gridwidth = 1;
+            c.gridx = 3;
+        }
         c.gridx = 0;
         c.gridy = 1;
-        container.add(tilesPanel, c);
-        c.gridx = 1;
-        container.add(playerPanel, c);
-        c.gridx = 2;
-        container.add(actionsPanel, c);
-        c.gridx = 3;
-        container.add(commandsPanel, c);
+        for (JComponent panel : bottomRow) {
+            container.add(panel, c);
+            c.gridx++;
+        }
     }
 
     public InfoPanel getInfoPanel() {
@@ -97,7 +90,7 @@ public class GameFrame implements Runnable {
     }
 
     public CashPanel getCashPanel() {
-        return playerPanel;
+        return cashPanel;
     }
 
     public ActionsPanel getActionsPanel() {

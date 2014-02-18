@@ -10,9 +10,9 @@ import javax.swing.JOptionPane;
 
 public class CommandListener implements ActionListener {
 
-    private Game game;
-    private Window window;
-    private JFrame frame;
+    private final Game game;
+    private final Window window;
+    private final JFrame frame;
 
     public CommandListener(Game game, Window window) {
         this.game = game;
@@ -52,7 +52,7 @@ public class CommandListener implements ActionListener {
                 options[1]);
         if (result == JOptionPane.YES_OPTION) {
             frame.dispose();
-            new Game().start();
+            new Game().start(game.getPlayers());
         }
     }
 

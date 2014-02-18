@@ -2,6 +2,7 @@ package com.powerup.gui;
 
 import java.awt.Component;
 import java.awt.Font;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -10,6 +11,9 @@ public class ActionsPanel extends JPanel {
     private JLabel actions;
 
     public ActionsPanel() {
+        this.setBorder(BorderFactory.createTitledBorder("Action" + 
+                (!System.getProperty("os.name").equals("Linux") ? "s" : "")
+        ));
         addComponents();
     }
 

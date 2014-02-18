@@ -2,6 +2,7 @@ package com.powerup.gui;
 
 import com.powerup.listeners.StartListener;
 import com.powerup.logic.Game;
+import com.powerup.logic.Player;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -18,11 +19,11 @@ import javax.swing.JTextField;
 
 public class StartPanel extends JPanel {
 
-    JFrame frame;
-    JTextField[] names;
-    JButton newGame;
-    Game game;
-    FocusListener selectAll = new FocusListener() {
+    private final JFrame frame;
+    private final Game game;
+    private final Player[] players;
+    private final JTextField[] names;
+    private final FocusListener selectAll = new FocusListener() {
         @Override
         public void focusGained(FocusEvent e) {
             ((JTextField) e.getSource()).selectAll();
@@ -32,10 +33,12 @@ public class StartPanel extends JPanel {
         public void focusLost(FocusEvent e) {
         }
     };
+    private JButton newGame;
 
-    public StartPanel(JFrame frame, Game game) {
+    public StartPanel(JFrame frame, Game game, Player[] players) {
         this.frame = frame;
         this.game = game;
+        this.players = players;
         this.names = new JTextField[4];
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         addComponents();
@@ -72,7 +75,11 @@ public class StartPanel extends JPanel {
 
     private void addNameFields() {
         for (int i = 0; i < 4; i++) {
-            names[i] = new JTextField("Player " + (i + 1), 10);
+            if (players[i].toString() == null) {
+                names[i] = new JTextField("Player " + (i + 1), 10);
+            } else {
+                names[i] = new JTextField(players[i].toString());
+            }
             names[i].addFocusListener(selectAll);
             this.add(names[i]);
         }

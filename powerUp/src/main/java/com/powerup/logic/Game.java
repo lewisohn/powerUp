@@ -51,6 +51,10 @@ public final class Game {
         }
     }
 
+    public Player[] getPlayers() {
+        return players;
+    }
+
     public Board getBoard() {
         return board;
     }
@@ -67,7 +71,18 @@ public final class Game {
      * Launches the graphical user interface with the "start" frame.
      */
     public void start() {
-        StartFrame sFrame = new StartFrame(this);
+        StartFrame sFrame = new StartFrame(this, this.players);
+        SwingUtilities.invokeLater(sFrame);
+    }
+
+    /**
+     * Launches the graphical user interface with the "start" frame.
+     * <p /> Also fills in the four player names to match the previous game.
+     *
+     * @param players
+     */
+    public void start(Player[] players) {
+        StartFrame sFrame = new StartFrame(this, players);
         SwingUtilities.invokeLater(sFrame);
     }
 

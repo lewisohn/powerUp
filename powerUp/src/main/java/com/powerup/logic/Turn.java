@@ -37,12 +37,6 @@ public final class Turn {
         beginTurn();
     }
 
-    /**
-     * Redundant?
-     *
-     * public void launchShareFrame() { ShareDialog shareFrame = new
-     * ShareDialog(game); SwingUtilities.invokeLater(shareFrame); }
-     */
     private void beginTurn() {
         this.activePlayer = game.getPlayer(pid);
         int sa = random.nextInt(6);
@@ -122,8 +116,10 @@ public final class Turn {
     }
 
     private void giveBonuses(ArrayList<ArrayList<Player>> list, Company prey, boolean endOfGame) {
-        int majPot = (endOfGame ? 4 : 8) * prey.sellPrice();
-        int minPot = (endOfGame ? 2 : 4) * prey.sellPrice();
+        // previously, bonuses would be smaller at the end of the game, but the
+        // endOfGame field is currently not in use
+        int majPot = 10 * prey.sellPrice();
+        int minPot = 5 * prey.sellPrice();
         if (list.get(0).size() > 1) {
             window.write("There was a " + list.get(0).size() + "-way split"
                     + " of the combined bonuses");

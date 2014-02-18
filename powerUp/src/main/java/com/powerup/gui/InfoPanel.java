@@ -1,5 +1,6 @@
 package com.powerup.gui;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,6 +19,8 @@ public final class InfoPanel extends AbstractPanel {
     private final GridBagConstraints c;
 
     public InfoPanel() {
+        this.setBorder(BorderFactory.createTitledBorder("Information"));
+        this.setPreferredSize(new Dimension(363, 369));
         this.setLayout(new GridBagLayout());
         c = new GridBagConstraints();
         c.weightx = c.weighty = 1;

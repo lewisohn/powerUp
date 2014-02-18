@@ -29,7 +29,7 @@ public final class Market {
             new Company("Eclipse Solar", 200, new Color(230, 230, 23)),
             new Company("Maniac Timber", 200, new Color(23, 230, 23)),
             new Company("Cortex Power", 300, new Color(46, 46, 230)),
-            new Company("Rashin Geothermal", 300, new Color(230, 23, 23)),
+            new Company("Rufus Geothermal", 300, new Color(230, 23, 23)),
             new Company("Superslick Oil", 400, new Color(23, 230, 230)),
             new Company("Whoops Uranium", 400, new Color(230, 23, 230)),};
     }

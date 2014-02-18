@@ -1,6 +1,7 @@
 package com.powerup.gui;
 
 import java.awt.Dimension;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,6 +16,7 @@ public class CommandsPanel extends JPanel {
     private JButton[] buttons;
 
     public CommandsPanel() {
+        this.setBorder(BorderFactory.createTitledBorder("Commands"));
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         addComponents();
     }

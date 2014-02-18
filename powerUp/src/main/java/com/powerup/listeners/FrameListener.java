@@ -14,7 +14,7 @@ import javax.swing.JFrame;
  */
 public class FrameListener implements WindowListener {
 
-    private JFrame frame;
+    private final JFrame frame;
 
     public FrameListener(JFrame frame) {
         this.frame = frame;

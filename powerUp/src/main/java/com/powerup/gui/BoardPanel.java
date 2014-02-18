@@ -4,13 +4,17 @@ import com.powerup.logic.Board;
 import com.powerup.logic.Company;
 import com.powerup.logic.Tile;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel {
@@ -21,6 +25,8 @@ public class BoardPanel extends JPanel {
 
     public BoardPanel(Board board) {
         this.board = board;
+        this.setBorder(BorderFactory.createTitledBorder("Playing board"));
+        this.setPreferredSize(new Dimension(363, 369));
         addComponents();
     }
 
@@ -30,29 +36,34 @@ public class BoardPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
         g.setFont(Font.decode(Font.MONOSPACED));
         paintBoardTiles(g);
     }
 
     private void paintBoardTiles(Graphics g) {
+        int x = 0;
+        int y = 0;
         Color paintColor;
         for (ArrayList<Tile> list : board.getTiles()) {
             for (Tile tile : list) {
+                x = (34 * tile.getX()) + 13;
+                y = (34 * tile.getY()) + 19;
                 if (tile == board.getHighlightedTile()) {
-                    paintTile(g, (34 * tile.getX()) + 13, (34 * tile.getY()) + 19, tile.toString(), Color.WHITE, true);
+                    paintTile(g, x, y, tile.toString(), Color.WHITE, true);
                 } else if (tile.getLocation() == Tile.Location.BOARD) {
                     if (tile.getOwner() == null) {
-                        paintTile(g, (34 * tile.getX()) + 13, (34 * tile.getY()) + 19, tile.toString(), foreground, true);
+                        paintTile(g, x, y, tile.toString(), foreground, true);
                     } else {
-                        paintTile(g, (34 * tile.getX()) + 13, (34 * tile.getY()) + 19, tile.toString(), tile.getOwner().getColor(), true);
+                        paintTile(g, x, y, tile.toString(), tile.getOwner().getColor(), true);
                         if (tile.equals(tile.getOwner().getHeadquarters())) {
-                            paintHeadQuarters(g, (34 * tile.getX()) + 19, (34 * tile.getY()) + 25, tile.getOwner());
+                            paintHeadQuarters(g, x, y, tile.getOwner());
                         }
                     }
 
                 } else {
                     paintColor = background;
-                    paintTile(g, 34 * (tile.getX()) + 13, 34 * (tile.getY()) + 19, tile.toString(), paintColor, false);
+                    paintTile(g, x, y, tile.toString(), paintColor, false);
                 }
             }
         }
@@ -60,16 +71,18 @@ public class BoardPanel extends JPanel {
 
     public void paintHeadQuarters(Graphics g, int x, int y, Company owner) {
         g.setColor(owner.getColor());
-        g.fillRect(x, y, 20, 20);
-        try {
-            BufferedImage img = ImageIO.read(new File("icons/" + owner.toString().replaceAll(" ", "_").toLowerCase() + ".png"));
-            g.drawImage(img, x, y, this);
-        } catch (IOException | IllegalArgumentException ex) {
-            g.setColor(brightness(owner.getColor()) > 0.55 ? Color.BLACK : Color.WHITE);
-            g.setFont(new Font(g.getFont().getName(), Font.BOLD, g.getFont().getSize()));
-            g.drawString(owner.toString().substring(0, 1), x + 7, y + 14);
-            g.setFont(new Font(g.getFont().getName(), Font.PLAIN, g.getFont().getSize()));
-        }
+        g.fillRect(x + 5, y + 5, 20, 20);
+//        try {
+//            BufferedImage img = ImageIO.read(new File("icons/" + owner.toString().replaceAll(" ", "_").toLowerCase() + ".png"));
+//            g.drawImage(img, x, y, this);
+//        } catch (IOException | IllegalArgumentException ex) {
+        g.setColor(brightness(owner.getColor()) > 0.55 ? Color.BLACK : Color.WHITE);
+        g.setFont(new Font(g.getFont().getName(), Font.BOLD, g.getFont().getSize() + 4));
+        ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g.drawString(owner.toString().substring(0, 1), x + 10, y + 22);
+        g.setFont(new Font(g.getFont().getName(), Font.PLAIN, g.getFont().getSize() - 4));
+        ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
+//        }
     }
 
     private void paintTile(Graphics g, int x, int y, String ref, Color color, boolean raised) {

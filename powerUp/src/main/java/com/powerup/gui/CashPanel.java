@@ -12,6 +12,7 @@ public class CashPanel extends JPanel {
     private JLabel cash;
 
     public CashPanel() {
+        this.setBorder(BorderFactory.createTitledBorder("Cash"));
         this.setPreferredSize(new Dimension(75, 39));
         addComponents();
     }
