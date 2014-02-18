@@ -1,3 +1,7 @@
+http://macintoshgarden.org/games/power-players
+
+http://upload.wikimedia.org/wikipedia/commons/8/81/Acquire_game.JPG
+
 Existing ideas:
 
 - Build in-game help system
@@ -10,3 +14,4 @@ Existing ideas:
 - Put information panel updates on timer, particularly at the end of the game
 
 Suggestions:
+- AI
