@@ -56,3 +56,6 @@ GUI
 
 15/02/14: 1h
 Bugien korjaaminen, pieniä sääntömuutoksia
+
+18/02/14: 2h
+Ohjelman valmistelua demotilaisuutta varten
