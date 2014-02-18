@@ -34,74 +34,6 @@ public final class Board {
         }
     }
 
-    /**
-     * Finds out how many tiles are not yet on the board or in a player's hand.
-     *
-     * @return The number of tiles remaining in the "bank".
-     */
-    public int unassignedTilesRemaining() {
-        int sum = 0;
-        for (ArrayList<Tile> arrayList : tiles) {
-            for (Tile tile : arrayList) {
-                if (tile.getLocation() == Tile.Location.NONE) {
-                    sum++;
-                }
-            }
-        }
-        return sum;
-    }
-
-    /**
-     * Gets a random tile which is not yet on the board or in a player's hand.
-     *
-     * @return A new random tile.
-     */
-    public Tile getRandomUnassignedTile() {
-        int x;
-        int y;
-        while (true) {
-            x = random.nextInt(10);
-            y = random.nextInt(10);
-            if (getTile(x, y).getLocation() == Tile.Location.NONE) {
-                return getTile(x, y);
-            }
-        }
-    }
-
-    /**
-     * Puts a random unassigned tile in a player's hand.
-     *
-     * @param player The player to receive the tile.
-     */
-    public void giveTileToPlayer(Player player) {
-        if (unassignedTilesRemaining() > 0) {
-            giveTileToPlayer(player, getRandomUnassignedTile());
-        }
-    }
-
-    /**
-     * Puts a specific tile in a player's hand.
-     *
-     * @param player The player to receive the tile.
-     * @param tile The tile to be given.
-     */
-    public void giveTileToPlayer(Player player, Tile tile) {
-        if (player.addTileToHand(tile)) {
-        }
-
-    }
-
-    /**
-     * Refills a player's hand to size five, providing enough tiles remain.
-     *
-     * @param player The player to receive the tiles.
-     */
-    public void refillPlayerHand(Player player) {
-        for (int i = player.getHandSize(); i < 5; i++) {
-            giveTileToPlayer(player);
-        }
-    }
-
     public ArrayList<ArrayList<Tile>> getTiles() {
         return tiles;
     }
@@ -122,32 +54,20 @@ public final class Board {
     }
 
     /**
-     * Plays a tile with given coordinates to the board.
+     * Gets a random tile which is not yet on the board or in a player's hand.
      *
-     * @param x The x-coordinate of the tile to be played.
-     * @param y The y-coordinate of the tile to be played.
-     * @return False if the tile was already on the board, otherwise true.
+     * @return A new random tile.
      */
-    public boolean playTileToBoard(int x, int y) {
-        if ((x >= 0) && (x <= 9) && (y >= 0) && (y <= 9)) {
-            getTile(x, y).setLocation(Tile.Location.BOARD);
-            return true;
+    public Tile getRandomUnassignedTile() {
+        int x;
+        int y;
+        while (true) {
+            x = random.nextInt(10);
+            y = random.nextInt(10);
+            if (getTile(x, y).getLocation() == Tile.Location.NONE) {
+                return getTile(x, y);
+            }
         }
-        return false;
-    }
-
-    /**
-     * Plays a given tile to the board.
-     *
-     * @param tile The tile to be played.
-     * @return False if the tile was already on the board, otherwise true.
-     */
-    public boolean playTileToBoard(Tile tile) {
-        if (tile.getLocation() != Tile.Location.BOARD) {
-            tile.setLocation(Tile.Location.BOARD);
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -184,6 +104,86 @@ public final class Board {
         ArrayList<Tile> list = new ArrayList<>();
         recursivelyFindNeighbours(tile, list);
         return list;
+    }
+    
+    /**
+     * Finds out how many tiles are not yet on the board or in a player's hand.
+     *
+     * @return The number of tiles remaining in the "bank".
+     */
+    public int unassignedTilesRemaining() {
+        int sum = 0;
+        for (ArrayList<Tile> arrayList : tiles) {
+            for (Tile tile : arrayList) {
+                if (tile.getLocation() == Tile.Location.NONE) {
+                    sum++;
+                }
+            }
+        }
+        return sum;
+    }
+
+    /**
+     * Puts a random unassigned tile in a player's hand.
+     *
+     * @param player The player to receive the tile.
+     */
+    public void giveTileToPlayer(Player player) {
+        if (unassignedTilesRemaining() > 0) {
+            giveTileToPlayer(player, getRandomUnassignedTile());
+        }
+    }
+
+    /**
+     * Puts a specific tile in a player's hand.
+     *
+     * @param player The player to receive the tile.
+     * @param tile The tile to be given.
+     */
+    public void giveTileToPlayer(Player player, Tile tile) {
+        if (player.addTileToHand(tile)) {
+        }
+
+    }
+
+    /**
+     * Refills a player's hand to size five, providing enough tiles remain.
+     *
+     * @param player The player to receive the tiles.
+     */
+    public void refillPlayerHand(Player player) {
+        for (int i = player.getHandSize(); i < 5; i++) {
+            giveTileToPlayer(player);
+        }
+    }
+
+    /**
+     * Plays a tile with given coordinates to the board.
+     *
+     * @param x The x-coordinate of the tile to be played.
+     * @param y The y-coordinate of the tile to be played.
+     * @return False if the tile was already on the board, otherwise true.
+     */
+    public boolean playTileToBoard(int x, int y) {
+        if ((x >= 0) && (x <= 9) && (y >= 0) && (y <= 9)) {
+            getTile(x, y).setLocation(Tile.Location.BOARD);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Plays a given tile to the board.
+     *
+     * @param tile The tile to be played.
+     * @return False if the tile was already on the board, otherwise true.
+     */
+    public boolean playTileToBoard(Tile tile) {
+        if (tile.getLocation() != Tile.Location.BOARD) {
+            tile.setLocation(Tile.Location.BOARD);
+            return true;
+        }
+        return false;
     }
 
     private void recursivelyFindNeighbours(Tile tile, ArrayList<Tile> list) {

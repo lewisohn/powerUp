@@ -1,0 +1,12 @@
+Existing ideas:
+
+- Build in-game help system
+- Implement menu bar with "New game" and "Help" options; move "New game" away
+  from "Commands" panel
+- Add possibility of playing two- or three-player game
+- Add option to include Department of Energy as passive player - necessary for
+  two-player game to be interesting
+- Create dice roll graphics for rolling actions
+- Put information panel updates on timer, particularly at the end of the game
+
+Suggestions:

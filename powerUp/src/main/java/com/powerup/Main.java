@@ -3,7 +3,7 @@ package com.powerup;
 import com.powerup.logic.Game;
 
 /**
- * Main class, launches the game.
+ * Main class.
  *
  * @author Oliver Lewisohn
  * @version 0.8
@@ -14,11 +14,10 @@ public class Main {
     private static Game game;
 
     /**
-     *
-     * @param args
+     * Main method.
+     * @param args Arguments.
      */
     public static void main(String[] args) {
-        System.out.println(System.getProperty("os.name"));
         game = new Game();
         game.start();
     }

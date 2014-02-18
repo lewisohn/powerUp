@@ -164,15 +164,15 @@ public class Player implements Comparable<Player> {
 
     /**
      * Instructs the player to sell all their shares in a given company.
-     * @param prey The company (being taken over) whose shares should be sold.
+     * @param company The company (being taken over) whose shares should be sold.
      * @return The cash generated through the sale.
      */
-    public int sellShares(Company prey) {
+    public int sellShares(Company company) {
         int income = 0;
         ArrayList<Share> remove = new ArrayList<>();
         for (Share share : shares) {
-            if (share.getCompany() == prey) {
-                income += prey.sellPrice();
+            if (share.getCompany() == company) {
+                income += company.sellPrice();
                 remove.add(share);
             }
         }

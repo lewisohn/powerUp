@@ -21,8 +21,8 @@ public class BoardTest {
     public BoardTest() {
         game = new Game();
         board = game.getBoard();
-        eclipse = game.getCompany(0);
-        eclipse.deactivate(true);
+        eclipse = game.getMarket().getCompany(0);
+
         player1 = game.getPlayer(0);
         player2 = game.getPlayer(1);
         random = new Random();
@@ -61,7 +61,6 @@ public class BoardTest {
 //        board.playTile(x, y + 1);
 //        board.playTile(x, y - 1);
 //    }
-
 //    @Test
 //    public void plotHasCorrectNeighbours() {
 //        int x = 0;
@@ -73,7 +72,6 @@ public class BoardTest {
 //        assertTrue(neighbours.contains(board.getTile(x + 1, y)));
 //        assertTrue(neighbours.contains(board.getTile(x, y + 1)));
 //    }
-
 //    @Test
 //    public void plotHasCorrectNeighbours2() {
 //        int x = 9;
@@ -85,7 +83,6 @@ public class BoardTest {
 //        assertTrue(neighbours.contains(board.getTile(x - 1, y)));
 //        assertTrue(neighbours.contains(board.getTile(x, y - 1)));
 //    }
-
 //    @Test
 //    public void centralPlotHasFourNeighbours() {
 //        int x = 1 + random.nextInt(8);
@@ -93,7 +90,6 @@ public class BoardTest {
 //        playTileAndNeighbours(x, y);
 //        assertEquals(4, board.getNeighbours(board.getTile(x, y)).size());
 //    }
-
 //    @Test
 //    public void edgePlotHasThreeNeighbours() {
 //        int x = 0;
@@ -101,7 +97,6 @@ public class BoardTest {
 //        playTileAndNeighbours(x, y);
 //        assertEquals(3, board.getNeighbours(board.getTile(x, y)).size());
 //    }
-
 //    @Test
 //    public void cornerPlotHasTwoNeighbours() {
 //        int x = 0;
@@ -109,7 +104,6 @@ public class BoardTest {
 //        playTileAndNeighbours(x, y);
 //        assertEquals(2, board.getNeighbours(board.getTile(x, y)).size());
 //    }
-
 //    @Test
 //    public void cornerPlotHasTwoNeighbours2() {
 //        int x = 9;
@@ -117,14 +111,12 @@ public class BoardTest {
 //        playTileAndNeighbours(x, y);
 //        assertEquals(2, board.getNeighbours(board.getTile(x, y)).size());
 //    }
-
 //    public void outOfBoundsPlotHasNoNeighbours() {
 //        int x = -1;
 //        int y = -1;
 //        playTileAndNeighbours(x, y);
 //        assertEquals(0, board.getNeighbours(board.getTile(x, y)).size());
 //    }
-
 //    @Test
 //    public void anyPlotHasNoNeighboursIfTheyHaventBeenPlayed() {
 //        int x = random.nextInt(9);
@@ -135,7 +127,6 @@ public class BoardTest {
 //        }
 //        assertEquals(0, board.getNeighbours(board.getTile(x, y)).size());
 //    }
-
     @Test
     public void cannotGetOutOfBoundsTile() {
         assertNull(board.getTile(-1, -1));
