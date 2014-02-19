@@ -52,14 +52,14 @@ public final class ResultsPanel extends AbstractPanel {
                     makeHeader("Player"),
                     makeHeader("Cash")
                 });
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < game.getPlayers().length; i++) {
             labels.add(new JLabel[]{
                         makeLabel((i + 1) + "."),
                         makeLabel(game.getPlayer(i).toString()),
                         makeLabel("$" + game.getPlayer(i).getCash())
                     });
         }
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < (game.getPlayers().length + 1); i++) {
             for (JLabel label : labels.get(i)) {
                 this.add(label);
                 label.setHorizontalAlignment(JLabel.LEFT);
@@ -75,14 +75,14 @@ public final class ResultsPanel extends AbstractPanel {
 
     @Override
     public void update() {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < game.getPlayers().length; i++) {
             update(i + 1);
         }
     }
 
     public void update(int revealStage) {
-        if ((revealStage > 0) && (revealStage < 5)) {
-            for (JComponent comp : labels.get(5 - revealStage)) {
+        if ((revealStage > 0) && (revealStage < (game.getPlayers().length + 1))) {
+            for (JComponent comp : labels.get(game.getPlayers().length + 1 - revealStage)) {
                 comp.setVisible(true);
             }
         }

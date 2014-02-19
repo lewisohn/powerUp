@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 /**
- * The game's stock market, responsible for creating, modifying and accessing companies.
+ * The game's stock market, responsible for creating, modifying and accessing
+ * companies.
  *
  * @author Oliver Lewisohn
  * @since 2014-02-13
@@ -35,9 +36,8 @@ public final class Market {
     }
 
     /**
-     * Fetches a company by name.
-     * <p />
-     * Used to respond to dialog events which return strings.
+     * Fetches a company by name. <p /> Used to respond to dialog events which
+     * return strings.
      *
      * @param name The name of the company to be fetched.
      * @return The desired company.
@@ -52,9 +52,8 @@ public final class Market {
     }
 
     /**
-     * Fetches a company by ID.
-     * <p />
-     * IDs run from 0 (Eclipse Solar) to 5 (Whoops Uranium).
+     * Fetches a company by ID. <p /> IDs run from 0 (Eclipse Solar) to 5
+     * (Whoops Uranium).
      *
      * @param id The ID of the company to be fetched.
      * @return The desired company.

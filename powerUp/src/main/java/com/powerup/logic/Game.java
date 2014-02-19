@@ -16,23 +16,23 @@ public final class Game {
 
     private final Board board;
     private final Market market;
-    private final Player[] players = new Player[4];
+    private Player[] players;
+    private DoE doe;
     private Turn turn;
     private Window window;
 
     /**
-     * Sets up the board, market and players.
+     * Sets up the board and market.
      */
     public Game() {
         board = new Board();
         market = new Market(board);
-        createPlayers();
-
     }
 
-    private void createPlayers() {
-        for (int i = 0; i < 4; i++) {
-            players[i] = new Player();
+    private void createPlayers(int n, String[] playerNames) {
+        players = new Player[n];
+        for (int i = 0; i < n; i++) {
+            players[i] = new Player(playerNames[i]);
         }
     }
 
@@ -44,7 +44,7 @@ public final class Game {
      * @return The player in question.
      */
     public Player getPlayer(int i) {
-        if ((i >= 0) && (i < 4)) {
+        if ((i >= 0) && (i < players.length)) {
             return players[i];
         } else {
             return null;
@@ -67,17 +67,21 @@ public final class Game {
         return window;
     }
 
-    /**
-     * Launches the graphical user interface with the "start" frame.
-     */
-    public void start() {
-        StartFrame sFrame = new StartFrame(this, this.players);
-        SwingUtilities.invokeLater(sFrame);
+    public DoE getDoe() {
+        return doe;
     }
 
     /**
      * Launches the graphical user interface with the "start" frame.
-     * <p /> Also fills in the four player names to match the previous game.
+     */
+    public void start() {
+        StartFrame sFrame = new StartFrame(this);
+        SwingUtilities.invokeLater(sFrame);
+    }
+
+    /**
+     * Launches the graphical user interface with the "start" frame. <p /> Also
+     * fills in the four player names to match the previous game.
      *
      * @param players
      */
@@ -87,12 +91,26 @@ public final class Game {
     }
 
     /**
-     * Launches the primary game window and runs some setup methods.
-     *
-     * @param gFrame The frame of the window.
+     * Invokes the primary game frame.
      */
-    public void setUp(GameFrame gFrame) {
-        window = new Window(this, gFrame);
+    public void launch(int numberOfPlayers, String[] playerNames, boolean energyDept) {
+        createPlayers(numberOfPlayers, playerNames);
+        if (energyDept) {
+            doe = new DoE("The DoE");
+        }
+        GameFrame ui = new GameFrame(this);
+        SwingUtilities.invokeLater(ui);
+    }
+
+    /**
+     * Runs some setup methods and begins the first turn. <p /> This cannot be
+     * combined with the launch method because the GameFrame is invoked later by
+     * SwingUtilities, and we must wait for it to load.
+     *
+     * @param window The primary game window.
+     */
+    public void setUp(Window window) {
+        this.window = window;
         determineStartOrder();
         distributeInitialTiles();
         newTurn(0);
@@ -101,7 +119,7 @@ public final class Game {
     private void determineStartOrder() {
         window.writepn("Determining starting order");
         int i = 0;
-        while (i < 4) {
+        while (i < players.length) {
             Tile t = board.getRandomUnassignedTile();
             boolean hasNeighbour = false;
             for (int j = 1; j <= i; j++) {
@@ -116,7 +134,7 @@ public final class Game {
     }
 
     private void distributeInitialTiles() {
-        for (int k = 0; k < 4; k++) {
+        for (int k = 0; k < players.length; k++) {
             Tile t = players[k].returnTileFromHand(0);
             board.playTileToBoard(t);
             window.write(players[k] + " drew " + t + " and will go " + ordinal(k + 1));

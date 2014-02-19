@@ -22,6 +22,8 @@ public final class Turn {
     private boolean tilePlayed;
     private boolean companyCreated;
     private final Random random;
+    private ArrayList<Player> maj;
+    private ArrayList<Player> min;
 
     /**
      * Starts a new turn.
@@ -45,6 +47,7 @@ public final class Turn {
         } else {
             startActions = (sa < 2 ? 4 : 3);
         }
+//        startActions = 9;
         this.actions = startActions;
         this.tilePlayed = false;
         this.companyCreated = false;
@@ -63,7 +66,7 @@ public final class Turn {
     public void endTurn() {
         window.writepn("End of " + activePlayer + "'s turn");
         pid++;
-        pid = (pid % 4);
+        pid = (pid % game.getPlayers().length);
         game.newTurn(pid);
     }
 
@@ -87,32 +90,39 @@ public final class Turn {
         return predator;
     }
 
-    private ArrayList<ArrayList<Player>> determineMajorAndMinor(Company prey) {
-        ArrayList<Player> maj = new ArrayList<>();
-        ArrayList<Player> min = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            int shares = game.getPlayer(i).getNumberOfShares(prey);
-            if (shares > 0) {
-                if ((maj.isEmpty()) || (shares > maj.get(0).getNumberOfShares(prey))) {
-                    min = (ArrayList<Player>) maj.clone();
-                    maj.clear();
-                    maj.add(game.getPlayer(i));
-                } else if (shares == maj.get(0).getNumberOfShares(prey)) {
-                    maj.add(game.getPlayer(i));
-                } else {
-                    if ((min.isEmpty()) || (shares > min.get(0).getNumberOfShares(prey))) {
-                        min.clear();
-                        min.add(game.getPlayer(i));
-                    } else if (shares == min.get(0).getNumberOfShares(prey)) {
-                        min.add(game.getPlayer(i));
-                    }
-                }
-            }
+    private ArrayList<ArrayList<Player>> determineMajorAndMinor(Company company) {
+        maj = new ArrayList<>();
+        min = new ArrayList<>();
+        for (int i = 0; i < game.getPlayers().length; i++) {
+            method(game.getPlayer(i), company);
+        }
+        if (game.getDoe() != null) {
+            method(game.getDoe(), company);
         }
         ArrayList<ArrayList<Player>> list = new ArrayList<>();
         list.add(maj);
         list.add(min);
         return list;
+    }
+
+    private void method(Player player, Company company) {
+        int shares = player.getNumberOfShares(company);
+        if (shares > 0) {
+            if ((maj.isEmpty()) || (shares > maj.get(0).getNumberOfShares(company))) {
+                min = (ArrayList<Player>) maj.clone();
+                maj.clear();
+                maj.add(player);
+            } else if (shares == maj.get(0).getNumberOfShares(company)) {
+                maj.add(player);
+            } else {
+                if ((min.isEmpty()) || (shares > min.get(0).getNumberOfShares(company))) {
+                    min.clear();
+                    min.add(player);
+                } else if (shares == min.get(0).getNumberOfShares(company)) {
+                    min.add(player);
+                }
+            }
+        }
     }
 
     private void giveBonuses(ArrayList<ArrayList<Player>> list, Company prey, boolean endOfGame) {
@@ -194,10 +204,19 @@ public final class Turn {
                     window.write("No new company could be established");
                 } else {
                     companyCreated = true;
-                    Company company = game.getMarket().activateCompany(window.showCreateCompanyDialog(), tile);
+                    Company company = game.getMarket().activateCompany(
+                            window.showCreateCompanyDialog(), tile);
                     activePlayer.buyShare(company, true);
                     window.write(company + " was founded at " + tile + " with size " + company.size());
-                    window.write(activePlayer + " received a free " + company + " share");
+                    if (game.getDoe() != null) {
+                        int threshold = 1 + random.nextInt(10 - game.getPlayers().length);
+                        for (int i = threshold; i > 0; i--) {
+                            game.getDoe().buyShare(company, true);
+                        }
+                        window.write("The Department of Energy bought " + threshold
+                                + (threshold == 1 ? " share" : " shares"));
+                    }
+                    window.write(activePlayer + " received a free share");
                 }
                 updateWindow();
             }
@@ -243,11 +262,15 @@ public final class Turn {
     }
 
     private void sellAllShares(Company prey) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < game.getPlayers().length; i++) {
             if (game.getPlayer(i).getNumberOfShares(prey) > 0) {
                 window.write(game.getPlayer(i) + " received $" + game.getPlayer(i).sellShares(prey)
                         + " in share sales");
             }
+        }
+        if (game.getDoe() != null) {
+            window.write(game.getDoe() + " received $" + game.getDoe().sellShares(prey)
+                    + " in share sales");
         }
     }
 

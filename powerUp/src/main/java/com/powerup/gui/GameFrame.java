@@ -22,6 +22,7 @@ public class GameFrame implements Runnable {
     private CashPanel cashPanel;
     private ActionsPanel actionsPanel;
     private CommandsPanel commandsPanel;
+    private Window window;
     private GridBagConstraints c;
 
     public GameFrame(Game game) {
@@ -45,7 +46,8 @@ public class GameFrame implements Runnable {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 //        frame.addWindowListener(new FrameListener(frame)); -- see FrameListener class JavaDoc
-        game.setUp(this);
+        window = new Window(game, this);
+        game.setUp(window);
     }
 
     public void createComponents(Container container) {

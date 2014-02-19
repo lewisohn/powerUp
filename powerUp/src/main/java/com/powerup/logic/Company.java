@@ -35,7 +35,6 @@ public final class Company implements Comparable<Company> {
         active = false;
         shares = new ArrayList<>();
         tiles = new ArrayList<>();
-        createShares();
     }
 
     private void createShares() {
@@ -45,9 +44,8 @@ public final class Company implements Comparable<Company> {
     }
 
     /**
-     * Assigns a tile to the company.
-     * <p />
-     * A tile must be on the board for it to be assigned to a company.
+     * Assigns a tile to the company. <p /> A tile must be on the board for it
+     * to be assigned to a company.
      *
      * @param tile The tile to be added.
      */
@@ -55,6 +53,7 @@ public final class Company implements Comparable<Company> {
         if (tile.getLocation() == Tile.Location.BOARD) {
             tile.setOwner(this);
             tiles.add(tile);
+            createShares();
         }
     }
 
@@ -74,6 +73,7 @@ public final class Company implements Comparable<Company> {
     public void activate(Tile tile) {
         headquarters = tile;
         active = true;
+        createShares();
     }
 
     public Color getColor() {
@@ -101,20 +101,21 @@ public final class Company implements Comparable<Company> {
     }
 
     /**
-     * Calculates the price of buying one share from the company.
-     * <p />
-     * A company's value grows by 10 percentage points for each tile it owns in
+     * Calculates the price of buying one share from the company. <p /> A
+     * company's value grows by 50 dollars for each tile it owns in
      * addition to the minimum of two tiles.
      *
      * @return The price of buying one share from the company.
      */
     public int sellPrice() {
-        return initialValue + ((initialValue / 100) * (Math.max(0, tiles.size() - 2) * 10));
+//        return initialValue + ((initialValue / 100) * (Math.max(0, tiles.size() - 2) * 10));
+        return initialValue + (Math.max(0, tiles.size() - 2) * 50);
 
     }
 
     /**
      * Instructs the company to sell one of its shares, if it has any left.
+     *
      * @return The share which is being sold.
      */
     public Share sellShare() {
@@ -147,7 +148,6 @@ public final class Company implements Comparable<Company> {
     private void liquidate() {
         tiles.clear();
         shares.clear();
-        createShares();
         active = false;
     }
 

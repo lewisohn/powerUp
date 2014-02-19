@@ -145,7 +145,7 @@ public class Window {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SwingUtilities.invokeLater(resultsDialog);
-                Timer t2 = new Timer(7500, new ActionListener() {
+                Timer t2 = new Timer(1500 * (game.getPlayers().length + 1), new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         writepn(game.getPlayer(0) + " won the game with assets of $"

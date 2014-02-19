@@ -21,6 +21,11 @@ public class StartFrame implements Runnable {
         this.players = players;
     }
 
+    public StartFrame(Game game) {
+        this.game = game;
+        players = new Player[4];
+    }
+
     @Override
     public void run() {
         frame = new JFrame("powerUp 0.8");
@@ -37,7 +42,7 @@ public class StartFrame implements Runnable {
 
     public void createComponents(Container container) {
         this.startPanel = new StartPanel(frame, game, players);
-        startPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        startPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         startPanel.setVisible(true);
         container.add(startPanel, BorderLayout.CENTER);
     }
