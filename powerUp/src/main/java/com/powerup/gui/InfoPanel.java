@@ -1,11 +1,9 @@
 package com.powerup.gui;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
@@ -33,7 +31,7 @@ public final class InfoPanel extends AbstractPanel {
         info = new JTextPane();
         info.setEditable(false);
         info.setOpaque(false);
-        info.setFont(Font.decode(Font.MONOSPACED));
+//        info.setFont(Font.decode(Font.MONOSPACED));
         doc = info.getStyledDocument();
         doc.addStyle(TOOL_TIP_TEXT_KEY, null);
         write("Welcome to powerUp");

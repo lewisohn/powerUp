@@ -53,7 +53,6 @@ public final class Company implements Comparable<Company> {
         if (tile.getLocation() == Tile.Location.BOARD) {
             tile.setOwner(this);
             tiles.add(tile);
-            createShares();
         }
     }
 
@@ -102,8 +101,8 @@ public final class Company implements Comparable<Company> {
 
     /**
      * Calculates the price of buying one share from the company. <p /> A
-     * company's value grows by 50 dollars for each tile it owns in
-     * addition to the minimum of two tiles.
+     * company's value grows by 50 dollars for each tile it owns in addition to
+     * the minimum of two tiles.
      *
      * @return The price of buying one share from the company.
      */
@@ -139,7 +138,9 @@ public final class Company implements Comparable<Company> {
      * @param company The company to be taken over.
      */
     public void takeOver(Company company) {
+        System.out.println("Taking " + company.getTiles().size() + " tiles");
         for (Tile tile : company.getTiles()) {
+            System.out.println("Taking " + tile);
             this.addTile(tile);
         }
         company.liquidate();
@@ -149,10 +150,11 @@ public final class Company implements Comparable<Company> {
         tiles.clear();
         shares.clear();
         active = false;
+        System.out.println(this + " is now active: " + active);
     }
 
     @Override
     public int compareTo(Company o) {
-        return this.size() - o.size();
+        return o.size() - this.size();
     }
 }

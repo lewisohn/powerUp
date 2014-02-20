@@ -25,7 +25,7 @@ public class CommandsPanel extends JPanel {
         Dimension dim = new Dimension(4, 0);
         buttons = new JButton[]{
             new JButton("New game"),
-            new JButton("Buy shares"),
+            new JButton("Stock market"),
             new JButton("Draw tiles"),
             new JButton("End turn")
         };

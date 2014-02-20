@@ -27,8 +27,8 @@ public class CommandListener implements ActionListener {
             case "New game":
                 newGameClicked();
                 break;
-            case "Buy shares":
-                buySharesClicked();
+            case "Stock market":
+                stockMarketClicked();
                 break;
             case "Draw tiles":
                 drawTilesClicked();
@@ -56,8 +56,8 @@ public class CommandListener implements ActionListener {
         }
     }
 
-    private void buySharesClicked() {
-        window.showBuySharesDialog();
+    private void stockMarketClicked() {
+        window.showStockMarketDialog();
     }
 
     private void drawTilesClicked() {

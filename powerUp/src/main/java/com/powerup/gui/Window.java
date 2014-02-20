@@ -7,6 +7,9 @@ import com.powerup.logic.Game;
 import com.powerup.logic.Tile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -85,8 +88,14 @@ public class Window {
     }
 
     public void deactivateTileListener() {
-        gFrame.getTilesPanel().removeMouseListener(tileListener);
-        gFrame.getTilesPanel().removeMouseMotionListener(tileListener);
+        for (MouseListener ml : gFrame.getTilesPanel().getMouseListeners()) {
+            gFrame.getTilesPanel().removeMouseListener(ml);
+        }
+        for (MouseMotionListener mml : gFrame.getTilesPanel().getMouseMotionListeners()) {
+            gFrame.getTilesPanel().removeMouseMotionListener(mml);
+        }
+//        gFrame.getTilesPanel().removeMouseListener(tileListener);
+//        gFrame.getTilesPanel().removeMouseMotionListener(tileListener);
     }
 
     public Company showCreateCompanyDialog() {
@@ -108,22 +117,35 @@ public class Window {
         return game.getMarket().getCompany((String) result);
     }
 
-    public Company showTakeOverDialog(Company comp1, Company comp2) {
-        Object[] strings = new Object[]{comp1.toString(), comp2.toString()};
+    public Company showSurvivorDialog(ArrayList<Company> companies) {
+        return showTakeoverDialog(companies, "Two or more companies are the same"
+                + " size. Select the one to survive.", "Select a company");
+    }
+
+    private Company showTakeoverDialog(ArrayList<Company> companies, String message, String title) {
+        Object[] options = new Object[companies.size()];
+        for (int i = 0; i < companies.size(); i++) {
+            options[i] = companies.get(i).toString();
+        }
         Object result = JOptionPane.showInputDialog(gFrame.getFrame(),
-                "Two companies are the same size. Select the one to survive.",
-                "Select a company",
+                message,
+                title,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                strings,
-                strings[0]);
+                options,
+                options[0]);
         if (result == null) {
-            return showTakeOverDialog(comp1, comp2);
+            return showSurvivorDialog(companies);
         }
         return game.getMarket().getCompany((String) result);
     }
 
-    public void showBuySharesDialog() {
+    public Company showOrderDialog(ArrayList<Company> companies) {
+        return showTakeoverDialog(companies, "Two or more companies are the same"
+                + " size. Select the one to be taken over first.", "Select a company");
+    }
+
+    public void showStockMarketDialog() {
         shareDialog = new ShareDialog(game);
         SwingUtilities.invokeLater(shareDialog);
     }

@@ -16,7 +16,7 @@ public class ShareDialog implements Runnable {
 
     @Override
     public void run() {
-        this.dialog = new JDialog(game.getWindow().getFrame(), "Buy shares", JDialog.ModalityType.DOCUMENT_MODAL);
+        this.dialog = new JDialog(game.getWindow().getFrame(), "Stock market", JDialog.ModalityType.DOCUMENT_MODAL);
         createComponents();
         dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         dialog.setResizable(false);

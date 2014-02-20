@@ -9,11 +9,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
@@ -42,13 +38,11 @@ public class BoardPanel extends JPanel {
     }
 
     private void paintBoardTiles(Graphics g) {
-        int x = 0;
-        int y = 0;
         Color paintColor;
         for (ArrayList<Tile> list : board.getTiles()) {
             for (Tile tile : list) {
-                x = (34 * tile.getX()) + 13;
-                y = (34 * tile.getY()) + 19;
+                int x = (34 * tile.getX()) + 13;
+                int y = (34 * tile.getY()) + 19;
                 if (tile == board.getHighlightedTile()) {
                     paintTile(g, x, y, tile.toString(), Color.WHITE, true);
                 } else if (tile.getLocation() == Tile.Location.BOARD) {
@@ -79,10 +73,11 @@ public class BoardPanel extends JPanel {
         g.setColor(brightness(owner.getColor()) > 0.55 ? Color.BLACK : Color.WHITE);
         g.setFont(new Font(g.getFont().getName(), Font.BOLD, g.getFont().getSize() + 4));
         ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g.drawString(owner.toString().substring(0, 1), x + 10, y + 22);
+        g.drawString(owner.toString().substring(0, 1),
+                x + (!System.getProperty("os.name").equals("Linux") ? 11 : 10),
+                y + (!System.getProperty("os.name").equals("Linux") ? 20 : 22));
         g.setFont(new Font(g.getFont().getName(), Font.PLAIN, g.getFont().getSize() - 4));
         ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
-//        }
     }
 
     private void paintTile(Graphics g, int x, int y, String ref, Color color, boolean raised) {

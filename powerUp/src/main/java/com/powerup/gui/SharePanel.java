@@ -19,7 +19,7 @@ public final class SharePanel extends AbstractPanel {
 
     private GridBagConstraints c;
     private BuyListener buyListener;
-    private ArrayList<JComponent[]> components;
+    private ArrayList<ArrayList<JComponent>> rows;
     private JButton done;
 
     public SharePanel(Game game, JDialog dialog) {
@@ -36,37 +36,41 @@ public final class SharePanel extends AbstractPanel {
 
     @Override
     protected void createComponents() {
-        components = new ArrayList<>();
-        components.add(new JComponent[]{
-                    makeHeader("Company"),
-                    makeHeader("Available"),
-                    makeHeader("You own"),
-                    makeHeader("Unit cost"),
-                    makeHeader("Buy")
-                });
+        rows = new ArrayList<>();
+        ArrayList<JComponent> headers = new ArrayList<>();
+        headers.add(makeHeader("Company"));
+        headers.add(makeHeader("Available"));
+        headers.add(makeHeader("You own"));
+        headers.add(makeHeader((game.getPlayers().length > 2 ? "Rivals own" : "Rival owns")));
+        if (game.getDoe() != null) {
+            headers.add(makeHeader("DoE owns"));
+        }
+        headers.add(makeHeader("Unit cost"));
+        headers.add(makeHeader("Buy"));
+        rows.add(headers);
         for (int i = 0; i < 6; i++) {
-            components.add(new JComponent[]{
-                        makeLabel(game.getMarket().getCompany(i).toString()),
-                        makeLabel(""),
-                        makeLabel(""),
-                        makeLabel(""),
-                        makeButton("Buy")
-                    });
+            ArrayList<JComponent> comp = new ArrayList<>();
+            comp.add(makeLabel(game.getMarket().getCompany(i).toString()));
+            for (int j = 0; j < (headers.size() - 2); j++) {
+                comp.add(makeLabel(""));
+            }
+            comp.add(makeButton("Buy"));
+            rows.add(comp);
         }
         c.gridy = 0;
-        for (JComponent[] compList : components) {
+        for (ArrayList<JComponent> row : rows) {
             c.gridx = 0;
-            for (JComponent comp : compList) {
-                this.add(comp, c);
-                if (comp.getClass() == JButton.class) {
-                    ((JButton) comp).addActionListener(buyListener);
+            for (JComponent cell : row) {
+                this.add(cell, c);
+                if (cell.getClass() == JButton.class) {
+                    ((JButton) cell).addActionListener(buyListener);
                 }
                 c.gridx++;
             }
             c.gridy++;
         }
         c.gridx = 0;
-        c.gridwidth = 5;
+        c.gridwidth = headers.size();
         done = new JButton("Done");
         this.add(done, c);
         done.addActionListener(doneListener);
@@ -80,15 +84,25 @@ public final class SharePanel extends AbstractPanel {
         int actions = game.getTurn().getActions();
         for (int i = 0; i < 6; i++) {
             Company seller = game.getMarket().getCompany(i);
-            ((JLabel) components.get(i + 1)[1]).setText(String.valueOf(seller.getShares().size()));
-            ((JLabel) components.get(i + 1)[2]).setText(String.valueOf(player.getNumberOfShares(seller)));
-            ((JLabel) components.get(i + 1)[3]).setText("$" + String.valueOf(seller.sellPrice()));
+            ((JLabel) rows.get(i + 1).get(1)).setText(String.valueOf(seller.getShares().size()));
+            ((JLabel) rows.get(i + 1).get(2)).setText(String.valueOf(player.getNumberOfShares(seller)));
+            ((JLabel) rows.get(i + 1).get(3)).setText(String.valueOf((seller.getActive() ? 25
+                    - ((game.getDoe() != null ? game.getDoe().getNumberOfShares(seller) : 0)
+                    + seller.getShares().size() + player.getNumberOfShares(seller)) : 0)));
+            int next;
+            if (game.getDoe() != null) {
+                ((JLabel) rows.get(i + 1).get(4)).setText(String.valueOf(game.getDoe().getNumberOfShares(seller)));
+                next = 5;
+            } else {
+                next = 4;
+            }
+            ((JLabel) rows.get(i + 1).get(next)).setText("$" + String.valueOf(seller.sellPrice()));
             if ((seller.getActive()) && (!seller.getShares().isEmpty())
                     && (actions > 0) && (player.getCash() >= seller.sellPrice())
                     && (game.getTurn().getTilePlayed())) {
-                components.get(i + 1)[4].setEnabled(true);
+                rows.get(i + 1).get(next + 1).setEnabled(true);
             } else {
-                components.get(i + 1)[4].setEnabled(false);
+                rows.get(i + 1).get(next + 1).setEnabled(false);
             }
         }
     }
@@ -96,7 +110,7 @@ public final class SharePanel extends AbstractPanel {
     public JButton[] getBuyButtons() {
         JButton[] buttons = new JButton[6];
         for (int i = 0; i < 6; i++) {
-            buttons[i] = (JButton) components.get(i + 1)[4];
+            buttons[i] = (JButton) rows.get(i + 1).get(rows.get(i + 1).size() - 1);
         }
         return buttons;
     }

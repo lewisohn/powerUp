@@ -1,6 +1,6 @@
 package com.powerup.listeners;
 
-import com.powerup.gui.GameFrame;
+import com.powerup.gui.help.HelpFrame;
 import com.powerup.logic.Game;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,11 +22,13 @@ public class StartListener implements ActionListener {
     private JButton newGame;
     private JButton help;
     private int numberOfPlayers;
+    private HelpFrame helpFrame;
 
-    public StartListener(JFrame frame, Game game, JTextField[] names,
+    public StartListener(JFrame frame, HelpFrame helpFrame, Game game, JTextField[] names,
             JRadioButton[] radioButtons, JCheckBox doe, JButton newGame,
             JButton help) {
         this.frame = frame;
+        this.helpFrame = helpFrame;
         this.game = game;
         this.names = names;
         this.radioButtons = radioButtons;
@@ -45,7 +47,6 @@ public class StartListener implements ActionListener {
         } else {
             for (int i = 1; i < 4; i++) {
                 if (e.getSource() == radioButtons[i]) {
-                    numberOfPlayers = i + 1;
                     for (int j = 1; j < i + 1; j++) {
                         names[j].setEnabled(true);
                     }
@@ -58,6 +59,11 @@ public class StartListener implements ActionListener {
     }
 
     private void newGameCheck() {
+        for (int i = 1; i < 4; i++) {
+            if (radioButtons[i].isSelected()) {
+                numberOfPlayers = i + 1;
+            }
+        }
         String error = "";
         nameCheck:
         for (int i = 0; i < numberOfPlayers; i++) {
@@ -96,6 +102,6 @@ public class StartListener implements ActionListener {
     }
 
     private void launchHelp() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        SwingUtilities.invokeLater(helpFrame);
     }
 }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title></title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="style.css">
+   </head>
+   <body>
+      <h1>Mergers</h1>
+
+      <p>Mergers - also known as takeovers - are a crucial part of the game,
+         so much so that being able to initiate the right mergers can be the
+         difference between first and last place.</p>
+
+      <h2>Initiating a merger</h2>
+      <p>As described in the "Playing a turn" tab, a merger is initiated when
+         a tile is played that is adjacent to at least two different
+         companies' tiles.</p>
+      <p>If there are exactly two companies with tiles adjacent to the newly
+         played tile, the larger company will take over the smaller one. If
+         there are more than two companies, the largest company will first
+         take over the second largest, then the next largest, all the way
+         down to the smallest.
+      <p>If two or more companies are the same size when a merger is
+         initiated, the active player may choose which company will survive.
+         If a company tries to take over two or more (smaller) companies
+         which are the same size as one another, the player may choose which
+         one will be taken over first.</p>
+
+      <h2>Effects of a merger</h2>
+      <p>For each company that merges into the surviving company, bonuses are
+         awarded, shares are sold, and company is liquidated. Each of these
+         stages is detailed further below. Note that in this section, the DoE,
+         if enabled for the game, is considered a player.</p>
+
+      <h3>Awarding of majority and minority bonuses</h3>
+      <p>Whichever player holds the most shares in the selling company receives
+         a majority bonus of ten times the value of one share at the time of
+         sale, and whichever player (if any) holds the second most shares in the
+         selling company receives a minority bonus of five times the value of
+         one share at the time of sale.</p>
+      <p>In the event that only one player owns shares in the selling company,
+         they receive the combined minority and minority bonuses.</p>
+      <p>In the event that two or more players are tied for the highest number
+         of shares in the selling company, they each receive an equal share of
+         the combined majority and minority bonuses. No other bonuses are
+         awarded.</p>
+      <p>In the event that one player is a clear majority shareholder but two or
+         more players are tied for being the minority shareholder, the tied
+         players each receive an equal share of the minority bonus, and the
+         majority shareholder receives the usual majority bonus.</p>
+      <p>Here are two examples to help illustrate this process more clearly.</p>
+      <div style="text-align:center;"><table>
+            <tr><td><strong>Selling company</strong></td><td><strong>Maniac Timber</strong></td></tr>
+            <tr><td>Share price</td><td>$200</td></tr>
+            <tr><td>Player 1's ownership</td><td> 5 shares</td></tr>
+            <tr><td>Player 2's ownership</td><td>3 shares</td></tr>
+            <tr><td>Player 3's ownership</td><td>3 shares</td></tr>
+            <tr><td>Player 4's ownership</td><td>1 share</td></tr>
+         </table></div>
+      <p>In the above example, Player 1 receives a bonus of (10 * $200) = $2000
+         as the majority shareholder, while Players 2 and 3 receive a bonus of
+         ((1/2) * 5 * $200) = $500 each as joint minority shareholders.</p>
+      <div style="text-align:center;"><table>
+            <tr><td><strong>Selling company</strong></td><td><strong>Superslick Oil</strong></td></tr>
+            <tr><td>Share price</td><td>$400</td></tr>
+            <tr><td>Player 1's ownership</td><td> 5 shares</td></tr>
+            <tr><td>Player 2's ownership</td><td>7 shares</td></tr>
+            <tr><td>The DoE's ownership</td><td>7 shares</td></tr>
+         </table></div>
+      <p>In the above example, Player 2 and the DoE are joint majority
+         shareholders, so they each receive a bonus of ((1/2) * (10 + 5) * $400)
+         = $3000. Player 1 does not receive a bonus.</p>
+
+      <h3>Sale of shares</h3>
+      <p>After the bonuses have been awarded, each player sells the shares they
+         hold in the selling company. They receive the value of the shares at
+         the time of sale.</p>
+
+      <h3>Liquidation of selling company</h3>
+      <p>After each player has sold their shares in the selling company, all of
+         its tiles are transferred to the purchasing company, and the selling
+         company is liquidated. This means they are no longer active, and may be
+         re-created elsewhere on the board on a subsequent turn in the usual
+         fashion (see the "Playing a turn" tab for information on creating
+         companies).</p>
+
+   </body>
+</html>

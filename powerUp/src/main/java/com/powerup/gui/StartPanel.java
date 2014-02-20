@@ -1,5 +1,6 @@
 package com.powerup.gui;
 
+import com.powerup.gui.help.HelpFrame;
 import com.powerup.listeners.StartListener;
 import com.powerup.logic.Game;
 import com.powerup.logic.Player;
@@ -44,6 +45,7 @@ public class StartPanel extends JPanel {
     private JCheckBox doe;
     private GridBagConstraints c;
     private StartListener startListener;
+    private HelpFrame helpFrame;
 
     public StartPanel(JFrame frame, Game game, Player[] players) {
         UIManager.put("swing.boldMetal", Boolean.FALSE);
@@ -55,7 +57,8 @@ public class StartPanel extends JPanel {
         doe = new JCheckBox("Department of Energy (DoE)");
         newGame = new JButton("New game");
         help = new JButton("Help");
-        startListener = new StartListener(frame, game, names, radioButtons,
+        helpFrame = new HelpFrame();
+        startListener = new StartListener(frame, helpFrame, game, names, radioButtons,
                 doe, newGame, help);
         this.setLayout(new GridBagLayout());
         c = new GridBagConstraints();
@@ -73,7 +76,7 @@ public class StartPanel extends JPanel {
         title.setHorizontalTextPosition(JLabel.CENTER);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         JLabel description = new JLabel("by Oliver Lewisohn");
-        JLabel pleaseName = new JLabel("Please select and name a number of players");
+        JLabel pleaseName = new JLabel("Please select and name up to four players");
         newGame.addActionListener(startListener);
         help.addActionListener(startListener);
         JPanel buttonPanel = new JPanel();
@@ -117,10 +120,10 @@ public class StartPanel extends JPanel {
             this.add(radioButtons[i], c);
             c.gridx++;
             if (players.length > i && players[i] != null) {
-                names[i] = new JTextField(players[i].toString(), 15);
+                names[i] = new JTextField(players[i].toString(), 16);
                 names[i].setEnabled(true);
             } else {
-                names[i] = new JTextField("Player " + (i + 1), 15);
+                names[i] = new JTextField("Player " + (i + 1), 16);
                 names[i].setEnabled(i < players.length ? true : false);
             }
             names[i].addFocusListener(selectListener);

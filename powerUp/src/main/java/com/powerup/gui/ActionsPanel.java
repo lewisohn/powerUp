@@ -11,9 +11,8 @@ public class ActionsPanel extends JPanel {
     private JLabel actions;
 
     public ActionsPanel() {
-        this.setBorder(BorderFactory.createTitledBorder("Action" + 
-                (!System.getProperty("os.name").equals("Linux") ? "s" : "")
-        ));
+        this.setBorder(BorderFactory.createTitledBorder("Action"
+                + (!System.getProperty("os.name").equals("Linux") ? "s" : "")));
         addComponents();
     }
 

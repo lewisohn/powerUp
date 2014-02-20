@@ -59,3 +59,15 @@ Bugien korjaaminen, pieniä sääntömuutoksia
 
 18/02/14: 2h
 Ohjelman valmistelua demotilaisuutta varten
+
+19/02/14: 4h
+Help-systeemin rakentaminen, sääntöjen ja ohjeiden kirjoittaminen
+
+20/02/14: 6h
+Refaktorointi, lisää sääntöjen ja ohjeiden kirjoittamista
+// Huomasin sääntöjen kirjoittamisessa, että yksi pieni osa pelistäni ei toiminut ihan sääntöjen mukaan.
+// Siis: kun kolme tai neljä yritystä liittyvät yhteen, ja ainakin kaksi niistä ovat saman kokoisia, niin pelaajalla
+// pitäisi olla mahdollisuus valita yritysten yhdistämisen a) selviytyän ja b) järjestyksen. Tämä tapahtuu erittäin
+// harvoin, mutta sen koodaamiseen meni pari tuntia. Helpoin ratkaisu olisi sisältänyt aivan järkyttävän paljon koodia,
+// joten mulla meni aikaa lyhyemmän ja siistimmän ratkaisun löytämiseen.
+// FEATURE FREEZE - ei enää uusia ominaisuuksia peliin, vaikka kuinka haluaisin. Tämän on pakko olla kohta valmis!

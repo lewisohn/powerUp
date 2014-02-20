@@ -42,7 +42,7 @@ public class StartFrame implements Runnable {
 
     public void createComponents(Container container) {
         this.startPanel = new StartPanel(frame, game, players);
-        startPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
+        startPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 5, 10));
         startPanel.setVisible(true);
         container.add(startPanel, BorderLayout.CENTER);
     }
