@@ -14,15 +14,15 @@ import javax.swing.SwingUtilities;
 
 public class StartListener implements ActionListener {
 
-    private JFrame frame;
-    private Game game;
-    private JTextField[] names;
-    private JRadioButton[] radioButtons;
-    private JCheckBox doe;
-    private JButton newGame;
-    private JButton help;
+    private final JButton help;
+    private final JButton newGame;
+    private final JCheckBox doe;
+    private final JFrame frame;
+    private final JTextField[] names;
+    private final JRadioButton[] radioButtons;
+    private final Game game;
+    private final HelpFrame helpFrame;
     private int numberOfPlayers;
-    private HelpFrame helpFrame;
 
     public StartListener(JFrame frame, HelpFrame helpFrame, Game game, JTextField[] names,
             JRadioButton[] radioButtons, JCheckBox doe, JButton newGame,

@@ -9,7 +9,7 @@ import java.awt.event.MouseMotionListener;
 
 public class TileListener implements MouseListener, MouseMotionListener {
 
-    private Game game;
+    private final Game game;
     private Turn turn;
 
     public TileListener(Game game) {

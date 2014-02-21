@@ -25,8 +25,8 @@ public final class Game {
      * Sets up the board and market.
      */
     public Game() {
-        board = new Board();
-        market = new Market(board);
+        board = new Board(this);
+        market = new Market(this);
     }
 
     private void createPlayers(int n, String[] playerNames) {
@@ -92,6 +92,10 @@ public final class Game {
 
     /**
      * Invokes the primary game frame.
+     *
+     * @param numberOfPlayers The number of players in the game.
+     * @param playerNames A list of the names for the players.
+     * @param energyDept True if the DoE was selected, false otherwise.
      */
     public void launch(int numberOfPlayers, String[] playerNames, boolean energyDept) {
         createPlayers(numberOfPlayers, playerNames);

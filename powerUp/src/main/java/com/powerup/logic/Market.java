@@ -14,14 +14,16 @@ public final class Market {
 
     private Company[] companies;
     private final Board board;
+    private final Game game;
 
     /**
      * Sets up the game's six companies.
      *
-     * @param board The game's board.
+     * @param game The game.
      */
-    public Market(Board board) {
-        this.board = board;
+    public Market(Game game) {
+        this.game = game;
+        this.board = game.getBoard();
         createCompanies();
     }
 
@@ -136,5 +138,41 @@ public final class Market {
             n += (company.size() >= size ? 1 : 0);
         }
         return n;
+    }
+
+    public ArrayList determineMajorAndMinor(Company company) {
+        ArrayList<ArrayList<Player>> shareholders = new ArrayList<>();
+        ArrayList<Player> maj = new ArrayList<>();
+        ArrayList<Player> min = new ArrayList<>();
+        shareholders.add(maj);
+        shareholders.add(min);
+        for (int i = 0; i < game.getPlayers().length; i++) {
+            shareholders = shareholderCheck(shareholders, game.getPlayer(i), company);
+        }
+        if (game.getDoe() != null) {
+            shareholders = shareholderCheck(shareholders, game.getDoe(), company);
+        }
+        return shareholders;
+    }
+
+    private ArrayList shareholderCheck(ArrayList<ArrayList<Player>> shareholders, Player player, Company company) {
+        int shares = player.getNumberOfShares(company);
+        if (shares > 0) {
+            if ((shareholders.get(0).isEmpty()) || (shares > shareholders.get(0).get(0).getNumberOfShares(company))) {
+                shareholders.set(1,(ArrayList<Player>) shareholders.get(0).clone());
+                shareholders.get(0).clear();
+                shareholders.get(0).add(player);
+            } else if (shares == shareholders.get(0).get(0).getNumberOfShares(company)) {
+                shareholders.get(0).add(player);
+            } else {
+                if ((shareholders.get(1).isEmpty()) || (shares > shareholders.get(1).get(0).getNumberOfShares(company))) {
+                    shareholders.get(1).clear();
+                    shareholders.get(1).add(player);
+                } else if (shares == shareholders.get(1).get(0).getNumberOfShares(company)) {
+                    shareholders.get(1).add(player);
+                }
+            }
+        }
+        return shareholders;
     }
 }

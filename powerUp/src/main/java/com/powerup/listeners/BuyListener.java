@@ -18,9 +18,6 @@ public class BuyListener implements ActionListener {
         this.sharePanel = sharePanel;
     }
 
-    // FIX ME
-    // Don't use a method that depends on the coordinates of the pressed button
-    // as they change depending on the environment the program is running in.
     @Override
     public void actionPerformed(ActionEvent e) {
         int cid = -1;

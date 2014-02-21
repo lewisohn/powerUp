@@ -140,7 +140,6 @@ public final class Company implements Comparable<Company> {
     public void takeOver(Company company) {
         System.out.println("Taking " + company.getTiles().size() + " tiles");
         for (Tile tile : company.getTiles()) {
-            System.out.println("Taking " + tile);
             this.addTile(tile);
         }
         company.liquidate();
@@ -150,7 +149,6 @@ public final class Company implements Comparable<Company> {
         tiles.clear();
         shares.clear();
         active = false;
-        System.out.println(this + " is now active: " + active);
     }
 
     @Override
