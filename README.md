@@ -1,7 +1,7 @@
-powerUp
+powerUp by Oliver Lewisohn
 
-Based on the board game 'Acquire' and the 68k Macintosh game Power Players
+Version 1.0, released 2014-02-28
 
-Featuring images and sound licensed under a Creative Commons license, including "Tada" sound by rdholder at http://www.freesound.org/people/rdholder/sounds/177120/
+Based on the 1993 Mac OS game 'Power Players' by Greg Francis and the 1962 board game 'Acquire' by Sid Sackson. No copyright is claimed and no infringement is intended.
 
-By Oliver Lewisohn
+"High voltage" logo licensed under the GNU Free Documentatino License, version 1.2. The full license text is available at https://commons.wikimedia.org/wiki/Commons:GNU_Free_Documentation_License_1.2.

@@ -75,6 +75,10 @@ Refaktorointi, lisää sääntöjen ja ohjeiden kirjoittamista
 24/02/14: 1h
 JUnit-testejä
 
-27/02/14: 3h
+26/02/14: 3h
 JUnit-testejä
 // Huomattava osa ohjelmani luokista ja metodeista jää testaamatta, sillä en osaa kirjoitta GUI-testejä vielä.
+
+27/02/14: 4h
+JUnit-testejä, Cobertura, PIT, Javadoc, Clean & Build, .jar
+// CODE FREEZE - ei enää muutoksia koodiin ollenkaan. Huomenna vielä documentaatiota ennen lopullista palautusta.
