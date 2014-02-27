@@ -55,6 +55,16 @@ public class GameTest {
       assertTrue(game.getPlayer(0).getTiles()[0].compareTo(game.getPlayer(1).getTiles()[0]) < 0);
    }
 
+   @Test
+   public void testGetPlayer() {
+      testCreatePlayers();
+      // Out of range
+      assertNull(game.getPlayer(-1));
+      assertNull(game.getPlayer(2));
+      // In range
+      assertEquals("Alice", game.getPlayer(0).toString());
+   }
+
    /*
     * Note: there would be more tests here, but all the remaining methods in the
     * Game class are either simple getters or involve the GUI in some way. As I

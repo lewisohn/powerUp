@@ -7,7 +7,7 @@ import java.util.Arrays;
 import javax.swing.SwingUtilities;
 
 /**
- * Primary logic class; everything is set up and accessed from here.
+ * Sets up and provides access to the game's logic components.
  *
  * @author Oliver Lewisohn
  * @since 2014-01-22

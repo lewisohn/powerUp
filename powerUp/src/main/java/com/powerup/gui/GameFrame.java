@@ -31,7 +31,7 @@ public class GameFrame implements Runnable {
 
     @Override
     public void run() {
-        frame = new JFrame("powerUp 0.8");
+        frame = new JFrame("powerUp 1.0");
         frame.setLayout(new GridBagLayout());
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -1,0 +1,7 @@
+To do list, as of version 1.0 (2014-02-28)
+
+- Implement menu bar with "New game" and "Help" options; move "New game" away
+  from "Commands" panel
+- Disable confirmation dialog when clicking "New game" after game has ended
+- Create dice roll graphics for rolling actions
+- Put information panel updates on timer, particularly at the end of the game

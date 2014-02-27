@@ -176,8 +176,18 @@ public class BoardTest {
     */
    @Test
    public void testGiveTileToPlayer_Player() {
-      game.createPlayers(2, new String[]{"Player 1", "Player 2"});
+      game.createPlayers(2, new String[]{"Alice", "Bob"});
       assertEquals(0, game.getPlayer(0).getHandSize());
+      board.giveTileToPlayer(game.getPlayer(0));
+      assertEquals(1, game.getPlayer(0).getHandSize());
+      for (ArrayList<Tile> list : board.getTiles()) {
+         for (Tile t : list) {
+            if (t.getLocation() != Location.HAND) {
+               t.setLocation(Location.BOARD);
+            }
+         }
+      }
+      // No unassigned tiles remain, hand size should remain the same
       board.giveTileToPlayer(game.getPlayer(0));
       assertEquals(1, game.getPlayer(0).getHandSize());
    }
@@ -187,7 +197,7 @@ public class BoardTest {
     */
    @Test
    public void testGiveTileToPlayer_Player_Tile() {
-      game.createPlayers(2, new String[]{"Player 1", "Player 2"});
+      game.createPlayers(2, new String[]{"Alice", "Bob"});
       assertEquals(0, game.getPlayer(0).getHandSize());
       board.giveTileToPlayer(game.getPlayer(0), tile);
       assertEquals(tile, game.getPlayer(0).getTiles()[0]);

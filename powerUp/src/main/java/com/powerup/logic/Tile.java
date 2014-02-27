@@ -60,8 +60,12 @@ public class Tile implements Comparable<Tile> {
     * @return True if the parameter tile is a neighbour, otherwise false.
     */
    public boolean isNextTo(Tile tile) {
-      return ((this.x == tile.getX()) && (Math.abs(this.y - tile.getY()) == 1))
-              || ((this.y == tile.getY()) && (Math.abs(this.x - tile.getX()) == 1));
+      if (tile != null) {
+         return ((this.x == tile.getX()) && (Math.abs(this.y - tile.getY()) == 1))
+                 || ((this.y == tile.getY()) && (Math.abs(this.x - tile.getX()) == 1));
+      } else {
+         return false;
+      }
    }
 
    public void setLocation(Location loc) {

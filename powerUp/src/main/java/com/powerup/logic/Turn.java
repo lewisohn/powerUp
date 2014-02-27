@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Random;
 
 /**
- * A game turn.
+ * A game turn; interacts with the GUI.
  *
  * @author Oliver Lewisohn
  * @since 2014-02-13
@@ -190,7 +190,7 @@ public final class Turn {
       if (game.getBoard().unassignedTilesRemaining() < 50) {
          for (int i = 0; i < 2; i++) {
             int threshold = 50 - (i == 1 ? 20 : 0);
-            int n = game.getMarket().numberOfCompaniesLargerThan(threshold);
+            int n = game.getMarket().numberOfCompaniesAtLeastSize(threshold);
             if (n >= (i + 1)) {
                window.writepn("The game is over");
                window.write(cardinal(n) + (n > 1 ? " companies have" : " company has")

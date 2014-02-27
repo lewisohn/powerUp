@@ -1,5 +1,6 @@
 package com.powerup.logic;
 
+import java.awt.Color;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
@@ -80,6 +81,14 @@ public class CompanyTest {
    }
 
    /**
+    * Test of getColor method, of class Company.
+    */
+   @Test
+   public void testGetColor() {
+      assertEquals(Color.class, companyA.getColor().getClass());
+   }
+
+   /**
     * Test of getSize method, of class Company.
     */
    @Test
@@ -109,8 +118,12 @@ public class CompanyTest {
    @Test
    public void testSellShare() {
       testActivate();
-      assertEquals(Share.class, companyA.sellShare().getClass());
-      assertEquals(24, companyA.getShares().size());
+      for (int i = 0; i < 25; i++) {
+         assertNotNull(companyA.sellShare());
+         assertEquals(24 - i, companyA.getShares().size());
+      }
+      // Sold out
+      assertNull(companyA.sellShare());
    }
 
    /**

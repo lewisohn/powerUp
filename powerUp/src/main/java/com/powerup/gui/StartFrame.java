@@ -28,7 +28,7 @@ public class StartFrame implements Runnable {
 
     @Override
     public void run() {
-        frame = new JFrame("powerUp 0.8");
+        frame = new JFrame("powerUp 1.0");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         createComponents(frame.getContentPane());
         frame.getRootPane().setDefaultButton(startPanel.getDefaultButton());

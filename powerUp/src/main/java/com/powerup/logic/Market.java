@@ -64,7 +64,7 @@ public final class Market {
     * contains all the major shareholders, and the second of which contains all
     * the minor shareholders.
     */
-   public ArrayList determineMajorAndMinor(Company company) {
+   public ArrayList<ArrayList<Player>> determineMajorAndMinor(Company company) {
       ArrayList<ArrayList<Player>> shareholders = new ArrayList<>();
       ArrayList<Player> maj = new ArrayList<>();
       ArrayList<Player> min = new ArrayList<>();
@@ -145,7 +145,7 @@ public final class Market {
     * @param size The size threshold.
     * @return The number of companies at least as big as the threshold.
     */
-   public int numberOfCompaniesLargerThan(int size) {
+   public int numberOfCompaniesAtLeastSize(int size) {
       int n = 0;
       for (Company company : companies) {
          n += (company.getSize() >= size ? 1 : 0);
