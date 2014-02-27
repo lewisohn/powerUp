@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Playing a turn</h1>
+
+        <p>At the beginning of each turn, you will receive a random number of
+            actions for that turn. There is a 3/6 chance you will get three actions,
+            a 2/6 chance you will get four actions, and a 1/6 chance you will get
+            two actions. Actions do not carry over to the next turn.</p>
+        <p>You may use your actions for many purposes, each of which is detailed
+            below. Your first action must be either to draw tiles or play a
+            tile.</p>
+
+        <h2>Drawing tiles</h2>
+        <p>Whenever you have less than five tiles in your hand, you may press the
+            "Draw tiles" button to receive up to five new ones. You may never hold
+            more than five tiles in your hand at any time.</p>
+
+        <h2>Playing a tile</h2>
+        <p>You may play a tile with your first action, or, if you chose to draw
+            new tiles with your first action, you <em>must</em> play a tile with your
+            second action.</p> 
+        <p>When you hover over a tile, its location on the board will be
+            highlighted. Clicking the tile plays it to that location.</p>
+        <p>If the tile you played has no neighbouring tiles on the board (in the
+            four compass directions - diagonal neighbours are not counted), then
+            it becomes a neutral tile, and nothing happens. You may use your
+            remaining actions, if you have any, to play more tiles, to buy
+            shares or to draw new tiles.</p>
+        <p>On the other hand, if the tile you played has at least one
+            neighbouring tile, then one of three things - an attempt to create a
+            new company, an expansion of an existing company, and a merger of
+            two or more companies - will take place. These three events are
+            detailed below. After one of them has occurred, you will no longer
+            be able to play tiles on your current turn (unless the tile you
+            played caused a failed attempt to create a new company), but you may
+            use your remaining actions, if you have any, to buy shares or to
+            draw new tiles.</p>
+
+        <h3>Creating a new company</h3>
+        <p>After playing a tile, if it has at least one neighbouring neutral
+            tile and no neighbour tiles belonging to a company, then an attempt
+            to create a new company will be made. This attempt will succeed if
+            there are fewer than six active companies on the board at the time,
+            and fail otherwise.</p>
+        <p>You may select any company to create from the list of currently
+            inactive companies, and you will receive one free share in that
+            company. If the DoE is in the game (see the "Overview" tab for more
+            information on the DoE), it will receive a random number of shares
+            in the company, at least one and no more than 10 minus the number of
+            players in the game (e.g. in a two-player game, no more than eight).
+        </p>
+        <p>Each company has a pre-determined starting share price.
+            These prices are as follows:</p>
+        <div style="text-align:center;margin-bottom:12px;"><table>
+                <tr><td>Eclipse Solar</td><td>$200</td></tr>
+                <tr><td>Maniac Timber</td><td>$200</td></tr>
+                <tr><td>Cortex Power</td><td>$300</td></tr>
+                <tr><td>Rufus Geothermal</td><td>$300</td></tr>
+                <tr><td>Superslick Oil</td><td>$400</td></tr>
+                <tr><td>Whoops Uranium</td><td>$400</td></tr>
+            </table></div>
+        <p>After a company has been created, it will build its headquarters at
+            the tile you played, and expand into any neighbouring neutral tiles.
+        </p>
+
+        <h3>Expanding a company</h3>
+        <p>If the tile you played has at least one neighbour tile belonging to
+            a company, but does not have neighbouring tiles belonging to two
+            <em>different</em> companies, then the neighbouring company will
+            expand into the tile you played, as well as any neighbouring neutral
+            tiles.</p>
+        <p>When a company expands, its share prices increases by $50 for each
+            new tile it acquires. For example, the starting share price for
+            Eclipse Solar is $200, and once it has expanded into two additional
+            tiles, giving it a total size of four tiles, its share price will be
+            $200 + (2 * $50) = $300.</p>
+
+        <h3>Merging two or more companies</h3>
+        <p>If the tile you played has neighbouring tiles belonging to two
+            or more different companies, a merger will be initiated. Mergers
+            are one of the most important elements of the game, and you can read
+            more about them on the "Mergers" tab.</p>
+
+        <h2>Buying shares</h2>
+        <p>Once you have played at least one tile to the board, you may use your
+            remaining actions to buy shares in the currently active companies by
+            clicking the "Stock market" button and bringing up the shares
+            dialog.</p>
+        <p>Each company starts with 25 shares when it is created, and no
+            additional shares are issued when they have sold out. You cannot buy
+            shares in inactive companies.</p>
+        <p>You may only buy a share from a company if you have enough cash to do
+            so, and if you have actions remaining. Each purchase counts as one
+            action, so you need three actions to buy three shares, for example.
+        <p>There are two reasons to buy shares. Firstly, if you buy shares in a
+            small company which then expands, your shares will be worth more
+            than when you bought them. Secondly, and more importantly, if you
+            buy enough shares to become either the largest or second largest
+            owner of shares in any given company, you will receive a sizeable
+            bonus if and when the company is taken over by another. You can read
+            more about those bonuses on the "Mergers" tab.</p>
+
+        <h2>Ending your turn</h2>
+        <p>Once you have run out actions, you may not draw new tiles, play any
+            more tiles or buy any more shares, but you can still view the stock
+            market. Once you are ready to continue with the game, press the "End
+            turn" button to pass the turn to the next player.</p>
+    </body>
+</html>

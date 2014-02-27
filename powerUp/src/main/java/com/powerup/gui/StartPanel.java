@@ -25,8 +25,6 @@ import javax.swing.UIManager;
 
 public class StartPanel extends JPanel {
 
-    private final JFrame frame;
-    private final Game game;
     private final Player[] players;
     private final JTextField[] names;
     private final JRadioButton[] radioButtons;
@@ -49,8 +47,6 @@ public class StartPanel extends JPanel {
 
     public StartPanel(JFrame frame, Game game, Player[] players) {
         UIManager.put("swing.boldMetal", Boolean.FALSE);
-        this.frame = frame;
-        this.game = game;
         this.players = players;
         this.names = new JTextField[4];
         this.radioButtons = new JRadioButton[4];
@@ -71,7 +67,7 @@ public class StartPanel extends JPanel {
 
     private void createComponents() {
         ImageIcon logo = new ImageIcon("icons/logo.png");
-        JLabel title = new JLabel("powerUp 0.8", logo, JLabel.CENTER);
+        JLabel title = new JLabel("powerUp 1.0", logo, JLabel.CENTER);
         title.setVerticalTextPosition(JLabel.BOTTOM);
         title.setHorizontalTextPosition(JLabel.CENTER);
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));

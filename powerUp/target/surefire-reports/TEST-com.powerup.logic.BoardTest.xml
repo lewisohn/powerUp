@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.279" errors="0" skipped="0" tests="15" name="com.powerup.logic.BoardTest">
+<testsuite failures="0" time="0.216" errors="0" skipped="0" tests="15" name="com.powerup.logic.BoardTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_25\jre\bin"/>
@@ -60,19 +60,19 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.071" classname="com.powerup.logic.BoardTest" name="testGetTiles"/>
+  <testcase time="0.022" classname="com.powerup.logic.BoardTest" name="testGetTiles"/>
   <testcase time="0" classname="com.powerup.logic.BoardTest" name="testGetTile"/>
-  <testcase time="0" classname="com.powerup.logic.BoardTest" name="testGiveTileToPlayer_Player_Tile"/>
-  <testcase time="0" classname="com.powerup.logic.BoardTest" name="testRecursivelyAddTilesToCompany"/>
-  <testcase time="0" classname="com.powerup.logic.BoardTest" name="testGetAllConnectedTiles"/>
-  <testcase time="0" classname="com.powerup.logic.BoardTest" name="testGetCompanyNeighbours"/>
+  <testcase time="0.001" classname="com.powerup.logic.BoardTest" name="testGetAllConnectedTiles"/>
+  <testcase time="0.03" classname="com.powerup.logic.BoardTest" name="testGetCompanyNeighbours"/>
   <testcase time="0" classname="com.powerup.logic.BoardTest" name="testGetHighlightedTile"/>
   <testcase time="0" classname="com.powerup.logic.BoardTest" name="testGetNeighbours"/>
   <testcase time="0" classname="com.powerup.logic.BoardTest" name="testGetNeutralNeighbours"/>
   <testcase time="0" classname="com.powerup.logic.BoardTest" name="testGetRandomUnassignedTile"/>
-  <testcase time="0.005" classname="com.powerup.logic.BoardTest" name="testGiveTileToPlayer_Player"/>
+  <testcase time="0" classname="com.powerup.logic.BoardTest" name="testGiveTileToPlayer_Player"/>
   <testcase time="0" classname="com.powerup.logic.BoardTest" name="testPlayTileToBoard"/>
   <testcase time="0" classname="com.powerup.logic.BoardTest" name="testRefillPlayerHand"/>
   <testcase time="0" classname="com.powerup.logic.BoardTest" name="testSetHighlightedTile"/>
   <testcase time="0" classname="com.powerup.logic.BoardTest" name="testUnassignedTilesRemaining"/>
+  <testcase time="0" classname="com.powerup.logic.BoardTest" name="testGiveTileToPlayer_Player_Tile"/>
+  <testcase time="0" classname="com.powerup.logic.BoardTest" name="testRecursivelyAddTilesToCompany"/>
 </testsuite>
