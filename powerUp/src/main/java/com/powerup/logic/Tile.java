@@ -8,94 +8,89 @@ package com.powerup.logic;
  */
 public class Tile implements Comparable<Tile> {
 
-    private Location location;
-    private Company owner;
-    private final int x;
-    private final int y;
+   private final int x;
+   private final int y;
+   private Company owner;
+   private Location location;
 
-    /**
-     * Creates a new tile with the given coordinates.
-     *
-     * @param x The x-coordinate of the tile.
-     * @param y The y-coordinate of the tile.
-     * @param board The game's board.
-     */
-    public Tile(int x, int y, Board board) {
-        this.x = x;
-        this.y = y;
-        location = Location.NONE;
-        owner = null;
-    }
+   /**
+    * Creates a new tile with the given coordinates.
+    *
+    * @param x The x-coordinate of the tile.
+    * @param y The y-coordinate of the tile.
+    * @param board The game's board.
+    */
+   public Tile(int x, int y, Board board) {
+      this.x = x;
+      this.y = y;
+      location = Location.NONE;
+      owner = null;
+   }
+   /**
+    * The three possible locations for a tile: BOARD - on the game's board; HAND
+    * - in a player's hand; NONE - unassigned.
+    */
+   public enum Location {
 
-    /**
-     * The three possible locations for a tile: BOARD - on the game's board;
-     * HAND - in a player's hand; NONE - unassigned.
-     */
-    public enum Location {
+      BOARD,
+      HAND,
+      NONE
+   }
 
-        BOARD,
-        HAND,
-        NONE
-    }
+   public Location getLocation() {
+      return location;
+   }
 
-    /**
-     * Plays a tile to the board. This cannot be undone.
-     *
-     * @param loc
-     */
-    public void setLocation(Location loc) {
-        this.location = loc;
-    }
+   public Company getOwner() {
+      return owner;
+   }
 
-    public int getX() {
-        return x;
-    }
+   public int getX() {
+      return x;
+   }
 
-    public int getY() {
-        return y;
-    }
+   public int getY() {
+      return y;
+   }
 
-    public Location getLocation() {
-        return location;
-    }
+   /**
+    * Checks if this tile is a neighbour of another tile.
+    *
+    * @param tile The potential neighbour tile to be checked.
+    * @return True if the parameter tile is a neighbour, otherwise false.
+    */
+   public boolean isNextTo(Tile tile) {
+      return ((this.x == tile.getX()) && (Math.abs(this.y - tile.getY()) == 1))
+              || ((this.y == tile.getY()) && (Math.abs(this.x - tile.getX()) == 1));
+   }
 
-    public Company getOwner() {
-        return owner;
-    }
+   public void setLocation(Location loc) {
+      this.location = loc;
+   }
 
-    public void setOwner(Company company) {
-        owner = company;
-    }
+   public void setOwner(Company company) {
+      owner = company;
+   }
 
-    @Override
-    public String toString() {
-        String ref = new String();
-        ref = ref + (char) (x + 65);
-        ref = ref + y;
-        return ref;
-    }
-
-    @Override
-    public int compareTo(Tile o) {
-        if (this.x < o.getX()) {
+   /* Override methods: no Javadoc */
+   @Override
+   public int compareTo(Tile o) {
+      if (this.x < o.getX()) {
+         return -1;
+      } else if (this.x == o.getX()) {
+         if (this.y < o.getY()) {
             return -1;
-        } else if (this.x == o.getX()) {
-            if (this.y < o.getY()) {
-                return -1;
-            }
-            return 1;
-        }
-        return 1;
-    }
+         }
+         return 1;
+      }
+      return 1;
+   }
 
-    /**
-     * Checks if this tile is a neighbour of another tile.
-     *
-     * @param tile The potential neighbour tile to be checked.
-     * @return True if the parameter tile is a neighbour, otherwise false.
-     */
-    public boolean isNextTo(Tile tile) {
-        return ((this.x == tile.getX()) && (Math.abs(this.y - tile.getY()) == 1))
-                || ((this.y == tile.getY()) && (Math.abs(this.x - tile.getX()) == 1));
-    }
+   @Override
+   public String toString() {
+      String ref = new String();
+      ref = ref + (char) (x + 65);
+      ref = ref + y;
+      return ref;
+   }
 }

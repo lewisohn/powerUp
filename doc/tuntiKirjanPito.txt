@@ -71,3 +71,10 @@ Refaktorointi, lisää sääntöjen ja ohjeiden kirjoittamista
 // harvoin, mutta sen koodaamiseen meni pari tuntia. Helpoin ratkaisu olisi sisältänyt aivan järkyttävän paljon koodia,
 // joten mulla meni aikaa lyhyemmän ja siistimmän ratkaisun löytämiseen.
 // FEATURE FREEZE - ei enää uusia ominaisuuksia peliin, vaikka kuinka haluaisin. Tämän on pakko olla kohta valmis!
+
+24/02/14: 1h
+JUnit-testejä
+
+27/02/14: 3h
+JUnit-testejä
+// Huomattava osa ohjelmani luokista ja metodeista jää testaamatta, sillä en osaa kirjoitta GUI-testejä vielä.

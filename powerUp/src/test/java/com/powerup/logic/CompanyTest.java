@@ -7,83 +7,134 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ *
+ * @author Oliver Lewisohn
+ */
 public class CompanyTest {
 
-    Game game;
-    Board board;
-    Company eclipse;
-    Company maniac;
-    Player player1;
-    Player player2;
+   Board board;
+   Game game;
+   Company companyA;
+   Company companyB;
+   Tile tile;
 
-    public CompanyTest() {
-        game = new Game();
-        board = game.getBoard();
-        eclipse = game.getCompany(0);
-        eclipse.deactivate(true);
-        maniac = game.getCompany(1);
-        maniac.deactivate(true);
-        player1 = game.getPlayer(0);
-    }
+   public CompanyTest() {
+   }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
+   @BeforeClass
+   public static void setUpClass() {
+   }
 
-    @AfterClass
-    public static void tearDownClass() {
-    }
+   @AfterClass
+   public static void tearDownClass() {
+   }
 
-    @Before
-    public void setUp() {
-    }
+   @Before
+   public void setUp() {
+      game = new Game();
+      board = game.getBoard();
+      companyA = game.getMarket().getCompany(0);
+      companyB = game.getMarket().getCompany(5);
+      tile = board.getRandomUnassignedTile();
+   }
 
-    @After
-    public void tearDown() {
-    }
+   @After
+   public void tearDown() {
+   }
 
-//    @Test
-//    public void companyHasCorrectNumberOfTiles() {
-//        assertEquals(0, eclipse.getTiles().size());
-//        board.playTile(0, 0);
-//        board.playTile(0, 1);
-//        board.playTile(0, 2);
-//        eclipse.addTile(board.getTile(0, 0));
-//        eclipse.addTile(board.getTile(0, 1));
-//        eclipse.addTile(board.getTile(0, 2));
-//        eclipse.addTile(board.getTile(0, 3));
-//        assertEquals(3, eclipse.getTiles().size());
-//        assertEquals(eclipse, board.getTile(0,0).getOwner());
-//    }
+   /**
+    * Test of activate method, of class Company.
+    */
+   @Test
+   public void testActivate() {
+      assertFalse(companyA.getActive());
+      assertNull(companyA.getHeadquarters());
+      assertEquals(0, companyA.getShares().size());
+      companyA.activate(tile);
+      assertTrue(companyA.getActive());
+      assertEquals(tile, companyA.getHeadquarters());
+      assertEquals(25, companyA.getShares().size());
 
-//    @Test
-//    public void companySellingPriceIsCalculatedCorrectly() {
-//        player1.buyShare(eclipse);
-//        companyHasCorrectNumberOfTiles();
-//        assertEquals(262, eclipse.sellPrice());
-//    }
+   }
 
-    @Test
-    public void companyCanBeDeactivated() {
-        assertTrue(eclipse.getActive());
-        eclipse.deactivate(false);
-        assertFalse(eclipse.getActive());
+   /**
+    * Test of addTile method, of class Company.
+    */
+   @Test
+   public void testAddTile() {
+      assertTrue(companyA.getTiles().isEmpty());
+      board.playTileToBoard(tile);
+      companyA.addTile(tile);
+      assertTrue(companyA.getTiles().contains(tile));
+   }
 
-    }
+   /**
+    * Test of deactivate method, of class Company.
+    */
+   @Test
+   public void testDeactivate() {
+      testActivate();
+      companyA.deactivate();
+      assertFalse(companyA.getActive());
+   }
 
-//    @Test
-//    public void companyTakeOverIsSuccessful() {
-//        companyHasCorrectNumberOfTiles();
-//        maniac.takeOver(eclipse);
-//        assertEquals(3, maniac.getTiles().size());
-//        assertEquals(0, eclipse.getTiles().size());
-//        assertEquals(25, eclipse.getShares().size());
-//        assertFalse(eclipse.getActive());
-//    }
+   /**
+    * Test of getSize method, of class Company.
+    */
+   @Test
+   public void testGetSize() {
+      assertEquals(0, companyA.getSize());
+      testAddTile();
+      assertEquals(1, companyA.getSize());
+   }
 
-    @Test
-    public void companyNameTest() {
-        assertEquals("Eclipse Solar", eclipse.toString());
-    }
+   /**
+    * Test of sellPrice method, of class Company.
+    */
+   @Test
+   public void testSellPrice() {
+      assertEquals(200, companyA.sellPrice());
+      for (int i = 0; i < 3; i++) {
+         Tile t = board.getRandomUnassignedTile();
+         board.playTileToBoard(t);
+         companyA.addTile(t);
+         assertEquals(200 + (50 * Math.max(i - 1, 0)), companyA.sellPrice());
+      }
+   }
 
+   /**
+    * Test of sellShare method, of class Company.
+    */
+   @Test
+   public void testSellShare() {
+      testActivate();
+      assertEquals(Share.class, companyA.sellShare().getClass());
+      assertEquals(24, companyA.getShares().size());
+   }
+
+   /**
+    * Test of takeOver method, of class Company.
+    */
+   @Test
+   public void testTakeOver() {
+      board.playTileToBoard(tile);
+      companyA.activate(tile);
+      companyA.addTile(tile);
+      Tile t = board.getRandomUnassignedTile();
+      board.playTileToBoard(t);
+      companyB.activate(t);
+      companyB.addTile(t);
+      for (int i = 0; i < 5; i++) {
+         t = board.getRandomUnassignedTile();
+         board.playTileToBoard(t);
+         companyB.addTile(t);
+      }
+      companyA.takeOver(companyB);
+      assertEquals(7, companyA.getSize());
+      assertEquals(0, companyB.getSize());
+      assertTrue(companyB.getShares().isEmpty());
+      assertTrue(companyA.getActive());
+      assertFalse(companyB.getActive());
+   }
 }

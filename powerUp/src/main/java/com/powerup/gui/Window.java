@@ -89,7 +89,7 @@ public class Window {
      * @return The company chosen by the player.
      */
     public Company showCreateCompanyDialog() {
-        Object[] options = game.getMarket().inactiveCompanies().toArray();
+        Object[] options = game.getMarket().getInactiveCompanies().toArray();
         Object[] strings = new Object[options.length];
         for (int i = 0; i < options.length; i++) {
             strings[i] = options[i].toString();

@@ -21,10 +21,10 @@ public class StartFrame implements Runnable {
         this.players = players;
     }
 
-    public StartFrame(Game game) {
-        this.game = game;
-        players = new Player[4];
-    }
+//    public StartFrame(Game game) {
+//        this.game = game;
+//        players = new Player[4];
+//    }
 
     @Override
     public void run() {

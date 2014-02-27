@@ -13,146 +13,146 @@ import java.util.ArrayList;
  */
 public final class Company implements Comparable<Company> {
 
-    private final String name;
-    private final int initialValue;
-    private boolean active;
-    private Tile headquarters;
-    private final ArrayList<Share> shares;
-    private final ArrayList<Tile> tiles;
-    private final Color color;
+   private final ArrayList<Share> shares;
+   private final ArrayList<Tile> tiles;
+   private final Color color;
+   private final int initialValue;
+   private final String name;
+   private boolean active;
+   private Tile headquarters;
 
-    /**
-     * Creates a new inactive company with the given name, price, and 25 shares.
-     *
-     * @param name The name of the company.
-     * @param initialValue The initial share price of the company.
-     * @param color The color of the company's tiles.
-     */
-    public Company(String name, int initialValue, Color color) {
-        this.name = name;
-        this.initialValue = initialValue;
-        this.color = color;
-        active = false;
-        shares = new ArrayList<>();
-        tiles = new ArrayList<>();
-    }
+   /**
+    * Creates a new inactive company with the given name, price, and 25 shares.
+    *
+    * @param name The name of the company.
+    * @param initialValue The initial share price of the company.
+    * @param color The color of the company's tiles.
+    */
+   public Company(String name, int initialValue, Color color) {
+      this.name = name;
+      this.initialValue = initialValue;
+      this.color = color;
+      active = false;
+      shares = new ArrayList<>();
+      tiles = new ArrayList<>();
+   }
 
-    private void createShares() {
-        for (int i = 0; i < 25; i++) {
-            shares.add(new Share(this));
-        }
-    }
+   /**
+    * Activates the company and sets its headquarters.
+    *
+    * @param tile The company's new headquarters.
+    */
+   public void activate(Tile tile) {
+      headquarters = tile;
+      active = true;
+      createShares();
+   }
 
-    /**
-     * Assigns a tile to the company. <p /> A tile must be on the board for it
-     * to be assigned to a company.
-     *
-     * @param tile The tile to be added.
-     */
-    public void addTile(Tile tile) {
-        if (tile.getLocation() == Tile.Location.BOARD) {
-            tile.setOwner(this);
-            tiles.add(tile);
-        }
-    }
+   /**
+    * Assigns a tile to the company. <p /> A tile must be on the board for it to
+    * be assigned to a company.
+    *
+    * @param tile The tile to be added.
+    */
+   public void addTile(Tile tile) {
+      if (tile.getLocation() == Tile.Location.BOARD) {
+         tile.setOwner(this);
+         tiles.add(tile);
+      }
+   }
 
-    public int size() {
-        return tiles.size();
-    }
+   /**
+    * Deactivates the company.
+    */
+   public void deactivate() {
+      active = false;
+   }
 
-    public Tile getHeadquarters() {
-        return headquarters;
-    }
+   public boolean getActive() {
+      return active;
+   }
 
-    /**
-     * Activates the company and sets its headquarters.
-     *
-     * @param tile The company's new headquarters.
-     */
-    public void activate(Tile tile) {
-        headquarters = tile;
-        active = true;
-        createShares();
-    }
+   public Color getColor() {
+      return this.color;
+   }
 
-    public Color getColor() {
-        return this.color;
-    }
+   public Tile getHeadquarters() {
+      return headquarters;
+   }
 
-    public ArrayList<Tile> getTiles() {
-        return tiles;
-    }
+   public int getSize() {
+      return tiles.size();
+   }
 
-    /**
-     * Deactivates the company.
-     */
-    public void deactivate() {
-        active = false;
-    }
+   public ArrayList<Share> getShares() {
+      return shares;
+   }
 
-    public boolean getActive() {
-        return active;
-    }
+   public ArrayList<Tile> getTiles() {
+      return tiles;
+   }
 
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    /**
-     * Calculates the price of buying one share from the company. <p /> A
-     * company's value grows by 50 dollars for each tile it owns in addition to
-     * the minimum of two tiles.
-     *
-     * @return The price of buying one share from the company.
-     */
-    public int sellPrice() {
+   /**
+    * Calculates the price of buying one share from the company. <p /> A
+    * company's value grows by 50 dollars for each tile it owns in addition to
+    * the minimum of two tiles.
+    *
+    * @return The price of buying one share from the company.
+    */
+   public int sellPrice() {
 //        return initialValue + ((initialValue / 100) * (Math.max(0, tiles.size() - 2) * 10));
-        return initialValue + (Math.max(0, tiles.size() - 2) * 50);
+      return initialValue + (Math.max(0, tiles.size() - 2) * 50);
 
-    }
+   }
 
-    /**
-     * Instructs the company to sell one of its shares, if it has any left.
-     *
-     * @return The share which is being sold.
-     */
-    public Share sellShare() {
-        if (shares.isEmpty()) {
-            return null;
-        } else {
-            Share purchase = shares.get(0);
-            shares.remove(0);
-            return purchase;
+   /**
+    * Instructs the company to sell one of its shares, if it has any left.
+    *
+    * @return The share which is being sold.
+    */
+   public Share sellShare() {
+      if (shares.isEmpty()) {
+         return null;
+      } else {
+         Share purchase = shares.get(0);
+         shares.remove(0);
+         return purchase;
+      }
+   }
 
-        }
-    }
+   /**
+    * Makes one company take over another one, gaining all its tiles.
+    *
+    * @param company The company to be taken over.
+    */
+   public void takeOver(Company company) {
+      for (Tile tile : company.getTiles()) {
+         this.addTile(tile);
+      }
+      company.liquidate();
+   }
 
-    public ArrayList<Share> getShares() {
-        return shares;
-    }
+   /* Private methods: no Javadoc */
+   private void createShares() {
+      for (int i = 0; i < 25; i++) {
+         shares.add(new Share(this));
+      }
+   }
 
-    /**
-     * Makes one company take over another one, gaining all its tiles.
-     *
-     * @param company The company to be taken over.
-     */
-    public void takeOver(Company company) {
-        System.out.println("Taking " + company.getTiles().size() + " tiles");
-        for (Tile tile : company.getTiles()) {
-            this.addTile(tile);
-        }
-        company.liquidate();
-    }
+   private void liquidate() {
+      tiles.clear();
+      shares.clear();
+      active = false;
+   }
 
-    private void liquidate() {
-        tiles.clear();
-        shares.clear();
-        active = false;
-    }
+   /* Override methods: no Javadoc */
+   @Override
+   public int compareTo(Company o) {
+      return o.getSize() - this.getSize();
+   }
 
-    @Override
-    public int compareTo(Company o) {
-        return o.size() - this.size();
-    }
+   @Override
+   public String toString() {
+      return name;
+   }
 }
