@@ -40,7 +40,7 @@ public class GameFrame implements Runnable {
         c.insets = new Insets(5, 8, 5, 8);
         c.fill = GridBagConstraints.BOTH;
         createComponents(frame.getContentPane());
-        ImageIcon icon = new ImageIcon("icons/window.png");
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("icons/window.png"));
         frame.setIconImage(icon.getImage());
         frame.pack();
         frame.setLocationRelativeTo(null);

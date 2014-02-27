@@ -41,12 +41,12 @@ public class HelpFrame implements Runnable {
 
    private void createComponents(Container contentPane) {
       this.tabbedPane = new JTabbedPane();
-      tabbedPane.addTab("Overview", new HelpPanel(this.getClass().getClassLoader().getResource("overview.html")));
-      tabbedPane.addTab("Playing a turn", new HelpPanel(this.getClass().getClassLoader().getResource("turn.html")));
-      tabbedPane.addTab("Mergers", new HelpPanel(this.getClass().getClassLoader().getResource("mergers.html")));
-      tabbedPane.addTab("End of the game", new HelpPanel(this.getClass().getClassLoader().getResource("endgame.html")));
-      tabbedPane.addTab("Tips", new HelpPanel(this.getClass().getClassLoader().getResource("tips.html")));
-      tabbedPane.addTab("About", new HelpPanel(this.getClass().getClassLoader().getResource("about.html")));
+      tabbedPane.addTab("Overview", new HelpPanel(getClass().getClassLoader().getResource("overview.html")));
+      tabbedPane.addTab("Playing a turn", new HelpPanel(getClass().getClassLoader().getResource("turn.html")));
+      tabbedPane.addTab("Mergers", new HelpPanel(getClass().getClassLoader().getResource("mergers.html")));
+      tabbedPane.addTab("End of the game", new HelpPanel(getClass().getClassLoader().getResource("endgame.html")));
+      tabbedPane.addTab("Tips", new HelpPanel(getClass().getClassLoader().getResource("tips.html")));
+      tabbedPane.addTab("About", new HelpPanel(getClass().getClassLoader().getResource("about.html")));
       contentPane.add(tabbedPane, c);
    }
 }

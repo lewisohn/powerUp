@@ -66,7 +66,7 @@ public class StartPanel extends JPanel {
     }
 
     private void createComponents() {
-        ImageIcon logo = new ImageIcon("icons/logo.png");
+        ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("icons/logo.png"));
         JLabel title = new JLabel("powerUp 1.0", logo, JLabel.CENTER);
         title.setVerticalTextPosition(JLabel.BOTTOM);
         title.setHorizontalTextPosition(JLabel.CENTER);

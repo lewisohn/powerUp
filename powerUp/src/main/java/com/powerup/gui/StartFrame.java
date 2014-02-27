@@ -21,18 +21,13 @@ public class StartFrame implements Runnable {
         this.players = players;
     }
 
-//    public StartFrame(Game game) {
-//        this.game = game;
-//        players = new Player[4];
-//    }
-
     @Override
     public void run() {
         frame = new JFrame("powerUp 1.0");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         createComponents(frame.getContentPane());
         frame.getRootPane().setDefaultButton(startPanel.getDefaultButton());
-        ImageIcon icon = new ImageIcon("icons/window.png");
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("icons/window.png"));
         frame.setIconImage(icon.getImage());
         frame.pack();
         frame.setLocationRelativeTo(null);
