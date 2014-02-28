@@ -1,0 +1,90 @@
+powerUp: sekvenssejä
+
+---
+
+Koska jokaisen sekvenssikaavion piirtämiseen menee pari tuntia, päätin tyytyä yhteen sekvenssikaavioon ja kuvata tässä muita sekvensseja sanallisesti.
+
+---
+
+Tiilin pelaaminen: käyttäjä klikkaa omassa kädessä olevaa tiiliä kun hänellä on vielä action-pisteitä jäljellä ja ei ole vielä pelannut ei-neutraalia tiiliä.
+
+TileListener ohjaa pelilautaa (Board) pelaamaan klikattua tiiliä.
+Board varmistaa, ettei tiili ole jo pelattu - sen ei pitäisi olla - ja sitten pelaa sen.
+Kyseisen tillin location-attribuutti muutuu BOARDiksi. Board on osa Location-Enumia.
+TileListener ohjaa Boardia poistamaan korostuksen kyseiseltä tiililtä (korotuksen aiheuttaa mouseover, eli näkyy juuri ennen kuin tiiliä pelataan).
+TileListener ohjaa peli-ikkunan infopanelia päivittymään tiedolla, että pelaaja pelasi tiilin.
+TileListener ilmoittaa Turnille, että tiili on pelattu.
+Turn asettaa tilePlayed-attribuutinsa trueksi (tämä on välttämätön ja riittävä ehto vuoron lopettamiseen).
+Turn ohjaa Boardia palauttamaan kaikki yritykset (Company), jotka omistavat pelatun tiilin naapuritiilejä. Nämä tulevat takaisin ArrayList<Company>-muodossa.
+Turn laittaa nämä yrityksen suuruusjärjestykseen ja laskee, kuinka monta niitä on.
+CASE 1+ {
+	Jos oli ainakin yksi Company-naapuri, niin Turn asettaa sen nonNeutralTilePlayed-attribuutin trueksi (tämä estää muiden tiilien pelaaminen samalla vuorolla).
+	CASE 2+ {
+		Jos oli ainakin kaksi Company-naapuria, niin Turn kutsuu selvitää, mikä yksi niistä jää aktiivisena peliin.
+		Tämä tapahtuu seuraavasti: jos yksi yritys on suurempi kuin kaikki muut, niin se selviää. Jos ainakin kaksi niistä ovat saman kokoisia, niin käyttäjä saa päättää, mikä niistä selviää. Käyttäjä saa myös päättää yhdistämisen järjestys, mikäli kaksi yritystä ovat saman kokoisia, mutta kumpikaan ei ole suurin yritys joukosta.
+		Turn antaa enemmisto- (ja tarvittaessa myös vähemmistö-) bonuksia oikeille pelaajille, ja ohjaa kaikki pelaajat myymään niiden osingot myydyissä Companyssa.
+		Turn ohjaa henkiin jäävä Company ostamaan muut Companyt oikeassa järjestyksessä.
+		Company ottaa muista Companysta niiden kaikki tiilit ja ohjaa niitä tyhjentämään osingonsa ja deaktivoitumaan.
+	}
+	Turn ohjaa Boardia tarkistamaan, oliko muita neutraaleja tiileja pelatun tiilin naapureidin joukossa. Jos on, nekin tulevat Companyn omistukseen. Tämä tapahtuu rekursiivisesti alkaen pelatusta tiilistä, sitten siirtymällä sen naapureihin, niiden naapureihin, ja niin edelleen, kunnes kaikki tiilit on hoidettu.
+	Turn ohjaa peli-ikkunan infopanelia päivittymään tiedolla, että henkiin jäänyt Company kasvoi suuremmaksi.
+}
+CASE 0 {
+	Jos ei ollut yhtään Company-naapureita, niin Turn tarkistaa, oliko pelatulla tiilillä ainakin yksi neutraalinaapuri, jonka kanssa se voisi perustaa uuden yrityksen.
+	Jos on, niin pörssiltä (Market) ensin kysytään, onko mahdollista perustaa enää uuden yrityksen. Tämä ei onnistu, jos kaikki kuusi yritykset ovat jo pelissä.
+	CASE ei ole mahdollista perustaa uutta yritystä {
+		Turn ohjaa peli-ikkunan infopanelia päivittymään tiedolla, että ei voitu perustaa uutta yritystä.
+	}
+	CASE on mahdollista perustaa uuden yrityksen {
+		Turn asettaa sen nonNeutralTilePlayed-attribuutin trueksi.
+		Turn ohjaa peli-ikkunaa kysymään pelaajalta, minkä yrityksen jän haluaa perustaa.
+		Turn ilmoittaa Playerille, että se saa ostaa yhden osingon uudelta yritykseltä veloituksetta.
+		Turn ohjaa peli-ikkunan infopanelia päivittymään tiedolla, että uusi yritys perustettiin.
+		Turn tarkistaa, onko energiaministeriö (Department of Energy, DoE) mukana pelissä.
+		CASE DoE on mukana {
+			Turn ohjaa DoEta ostamaan satunnainen määrä (väliltä 1..(10 - pelaajien määrä) osinkoja veloituksetta uudelta yritykseltä.
+			Turn ohjaa peli-ikkunan infopanelia päivittymään tiedolla, että DoE osti N osinkoja.
+		}
+		Turn ohjaa peli-ikkunan infopanelia päivittymään tiedolla, että Player sai yhden ilmaisen osingon.
+	}
+	Turn ohjaa peli-ikkunaa päivittymään.
+}
+TurnListener ohjaa Turnia vähentämään yhden action-pisteen ja tarkistamaan, voiko pelaaja enää tehdä mitään.
+
+---
+
+Osinkon ostaminen: käyttäjä klikkaa "Buy"-painiketta "Stock market"-dialogissa kun hänellä on vielä action-pisteitä jäljellä ja hän on jo pelannut tiilin.
+
+BuyListener selvittää painikkeen perusteella, miltä yritykseltä käyttäjä yrittää ostaa osingon, ja ohjaa käyttäjää vastaavaa Player-oliota ostamaan siltä osingin.
+Player selvittää oikealta Companylta, mika on sen nykyinen myyntihinta. Se palautetaan Playerille.
+Player tarkistaa, onko sillä varaa ostaa osingon sillä hinnalla. Pitäisi olla, sillä "Buy"-painiketta ei olisi käyttäjän käytössä, mikäli rahaa ei riittäisi.
+Player ohjaa Companyta myymaan osingon.
+Company tarkistaa, onko sillä enää osinkoja myydä. Edelleen pitäisi olla.
+Company poistaa yhden osingon sen ArrayList<Share>sta ja palauttaa sen pelaajalle.
+Player varmistaa, että sai osingon takaisin Companylta, lisää sen omaan portfolioon (joka on myös ArrayList<Share>), ja vähentää sen hinnan omasta saldostaan.
+Player palauttaa "true" BuyListenerille.
+BuyListener ohjaa peli-ikkunan infopanelia päivittymään tiedolla, että pelaaja osti yhden osingon, ja että kyseisellä yrityksellä on N osinkoa jäljellä.
+BuyListener ohjaa vuoro-oliota (Turn) vähentämään yhden action-pisteen ja tarkistamaan, voiko pelaaja enää tehdä mitään.
+Lopuksi BuyListener päivittää "Stock Market"-dialogia, jotta siinä näkyy, kuinka monta osinkoa on vielä ostettavissa, ja kuinka monta pelaaja jo omistaa.
+
+---
+
+Uusien tiilien nostaminen: käyttäjä klikkaa "Draw tiles"-painiketta peli-ikkunassa kun hänellä on vielä action-pisteitä jäljellä ja hän on jo pelannut tiilin.
+
+CommandListener hakee käyttäjää vastaavaa Player-oliota Turnista.
+CommandListener ohjaa pelilauttaa (Board) antamaan uuseja tiilejä Playerille.
+Board ohjaa Playerin ilmoittamaan, kuinka monta tiiliä sillä on jo kädessä.
+Board yrittää lisätä Playerin käteen uusia tiilejä viiteen asti.
+Jokaisen tulevan lisäyksen kohdassa Board tarkistaa, että on riittävästi tiilejä jäljellä antaa. Jos on, niin se valitsee uuden tiilin satunnaisesti ja kertoo Playerilla, että se on saamassa uuden tiilin.
+Player lisää sen omaan käteensä.
+CommandListener ohjaa peli-ikkunan infopanelia päivittymään tiedolla, että pelaaja nosti tiilejä. Jos tiilit loppuivat kesken, se ilmoittaa siitäkin.
+CommandListener ohjaa vuoro-oliota (Turn) vähentämään yhden action-pisteen ja tarkistamaan, voiko pelaaja enää tehdä mitään.
+
+---
+
+Vuoron lopettaminen: käyttäjä klikkaa "End turn"-painiketta peli-ikkunassa kun hän on pelannut ainakin yhden tiilin.
+
+CommandListener hakee loppuvaa vuoroa (Turn) ja kertoo sille, että se loppuu.
+CommandListener ohjaa peli-ikkunan infopanelia päivittymään tiedolla, että aktiivisen pelaajan vuoro on loppunut.
+CommandListener laskee seuraavan vuoron pelaajan ID:n (ID on välillä 0..[pelaajien määrä - 1]) ja lähettää sen Game-oliolle.
+Game aloittaa uuden vuoron kyseisellä pelaaja-ID:llä.

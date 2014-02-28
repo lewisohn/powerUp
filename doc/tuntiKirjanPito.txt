@@ -1,3 +1,9 @@
+powerUp: tuntikirja
+
+---
+
+Formatti:
+
 Päivämäärä: Aikaa käytetty
 Ajankäytön kohde
 // Kommenttejä
@@ -70,7 +76,7 @@ Refaktorointi, lisää sääntöjen ja ohjeiden kirjoittamista
 // pitäisi olla mahdollisuus valita yritysten yhdistämisen a) selviytyän ja b) järjestyksen. Tämä tapahtuu erittäin
 // harvoin, mutta sen koodaamiseen meni pari tuntia. Helpoin ratkaisu olisi sisältänyt aivan järkyttävän paljon koodia,
 // joten mulla meni aikaa lyhyemmän ja siistimmän ratkaisun löytämiseen.
-// FEATURE FREEZE - ei enää uusia ominaisuuksia peliin, vaikka kuinka haluaisin. Tämän on pakko olla kohta valmis!
+// Ei enää uusia ominaisuuksia peliin tästä eteenpäin, vaikka kuinka haluaisin. Tämän on pakko olla kohta valmis!
 
 24/02/14: 1h
 JUnit-testejä
@@ -81,7 +87,8 @@ JUnit-testejä
 
 27/02/14: 4h
 JUnit-testejä, Cobertura, PIT, Javadoc, Clean & Build, .jar
-// CODE FREEZE - ei enää muutoksia koodiin ollenkaan. Huomenna vielä dokumentaatiota ennen lopullista palautusta.
+// Ei enää muutoksia koodiin ollenkaan tästä lähtien. Huomenna vielä dokumentaatiota ennen lopullista palautusta.
 
-28/02/14: 1h
-Dokumentaation kirjoittaminen
+28/02/14: 5h
+Dokumentaation kirjoittaminen, kaavioiden piirtäminen, lopullinen palautus
+// Ohi on! Aikaa käytetty yhteensä: 85 tuntia.

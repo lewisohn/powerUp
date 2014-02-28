@@ -39,4 +39,4 @@ Käyttäjien toiminnot:
 
 ---
 
-Tarkempia pelisääntojä löytyy itse pelistä (englanniksi): paina "Help"-painiketta.
+Tarkempia pelisääntojä löytyy itse pelistä (englanniksi) painamalla "Help"-painiketta aloitusikunnassa.
