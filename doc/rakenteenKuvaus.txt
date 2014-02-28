@@ -1,0 +1,23 @@
+powerUp: ohjelman rakenteen kuvaus
+
+---
+
+Ohjelmassa on kolme pakkausta hierarkkisessa järjestyksessä: ensin tulle logic (logiikka), sitten gui (graafinen käyttöliittymä) ja lopuksi listeners (kuuntelijat).
+
+---
+
+Logic-pakkaus sisältää kaikki pelilogiikan luokat. Siinä tapahtuu kaikki laskut yms. Ainoastaan kaksi luokkaa ovat gui-pakkauksen ja listeners-pakkauksen kanssa tekemisissä: Game (peli) ja Turn (vuoro). Game aloittaa ja lopettaa pelin, ja Turn saa käyttöliittymän näyttämään kaikki vuorossa tapahtuvat toiminnot. Turn myös tekee jonkun verran laskuja, mutta mahdollisin paljon on siirretty omiin luokkiinsa, kuten Board (pelilauta) ja Market (pörssi).
+
+Luonnollisesti, kaikki Tilet (tiilit) ovat Boardista olemassaoloriippuvaisia, ja kaikki Companyt (yritykset) ovat Marketista olemassaoloriippuvaisia. Playerit (pelaajat) ovat Gamesta olemassaoloriippuvaisia, ja DoE (energiaministeriö) on Playerin aliluokka ihan selkeyden vuoksi; sillä ole omia metodeja tai attribuutteja.
+
+Direction (suunta) on yksinkertainen apuluokka, jota käytetään naapureiden löytämiseen.
+
+---
+
+Gui-pakkauksesta ainoastaan Window-luokan metodeja kutsutaan logic-pakkauksesta (paitsi aivan ohjelman käynnistyksen jälkeen, ennen pelin alkua). Windowsin metodit lähettävät käskyt eteenpäin GameFrame-, ResultsDialog- ja ShareDialog-luokkiin, jotka toteuttavat Runnable-rajapinnan. Jokainen niistä luo luokkia, jotka ovat JPanelin aliluokkia. AbstractPanel on myös JPanelin aliluokka, ja siinä on muutama toistuva metodi paneleille.
+
+Gui-pakkauksella on myös alipakkaus gui.help, joka sisältää kaikki help-systeemin liittyvät luokat. Help-systeemin tekstit löytyvät ohjelman src/main/resources-kansiosta HTML-tiedostoina.
+
+---
+
+Listeners-pakkaus sisältää kaikki kuuntelijat, jotka ovat tässä tapauksessa kaikki joko Action-, Mouse- tai MouseMotionListenerin implementaatioita.

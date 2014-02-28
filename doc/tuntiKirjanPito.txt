@@ -81,4 +81,7 @@ JUnit-testejä
 
 27/02/14: 4h
 JUnit-testejä, Cobertura, PIT, Javadoc, Clean & Build, .jar
-// CODE FREEZE - ei enää muutoksia koodiin ollenkaan. Huomenna vielä documentaatiota ennen lopullista palautusta.
+// CODE FREEZE - ei enää muutoksia koodiin ollenkaan. Huomenna vielä dokumentaatiota ennen lopullista palautusta.
+
+28/02/14: 1h
+Dokumentaation kirjoittaminen

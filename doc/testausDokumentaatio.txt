@@ -1,0 +1,9 @@
+powerUp: testausdokumentaatio
+
+---
+
+Logic-pakkausta on testattu mahdollisin laajasti JUnit-testeillä, mutta @Override-metodit ja ne metodit, jotka ovat käyttöliittymän kanssa tekemisissä, on testattu käsin pelaamalla monta peliä. Käyttöliittymää ja kuuntelijoita ovat samalla tulleet testatuiksi.
+
+---
+
+Version 1.0-julkaisussa on korjattu kaikki esiin tulleita bugeja. Jos niitä löytyy lisää, niistä voi ilmoittaa osoitteessa https://github.com/lewisohn/powerUp/issues.

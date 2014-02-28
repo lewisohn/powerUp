@@ -1,0 +1,11 @@
+powerUp: käyttöohjeet
+
+---
+
+Aloita peli komentoriviltä suorittamalla java -jar powerUp-1.0.jar.
+
+Windows-käytöjärjestelmissä, joissa on Java asennettuna, on mahdollista myös käynnistää pelin tuplaklikkaamalla kyseistä .jar-tiedostoa.
+
+---
+
+Pelin aloitusikkunasta on mahdollista valita haluttu pelaajien määrä, kahdesta neljään. Jokainen tarvitsee yksilöllisen nimen: peli ei käynnisty, jos kahdella tai useammalla pelaajilla on sama nimi (tai ei nimeä ollenkaan). On myös mahdollista valita, otetaanko Department of Energy (DoE, energiaministeriö) mukaan peliin. DoEsta ja kaikista muista pelin säännöistä voi lukea enemmän (englanniksi) pelin sisäänrakennetusta help-systeemistä, jota avataan klikkaamalla "Help" aloitusikunnasta. Paina "New game" aloittaakseen uuden pelin.

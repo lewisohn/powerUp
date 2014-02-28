@@ -1,0 +1,2191 @@
+<html>
+<head>
+<style type='text/css'>
+html, body, div, span, p, blockquote, pre {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+body{
+	line-height: 1;
+	color: black;
+	background: white;
+	margin-left: 20px;
+}
+
+.src { 
+border: 1px solid #dddddd;
+padding-top: 10px;
+padding-right: 5px;
+padding-left: 5px;
+}
+
+
+.covered {background-color: #ddffdd}
+.uncovered {background-color: #ffdddd}
+.killed {background-color: #aaffaa}
+.survived {background-color: #ffaaaa}
+.uncertain {background-color: #dde7ef}
+.run_error {background-color: #dde7ef}
+.na {background-color: #eeeeee}
+.timed_out {background-color: #dde7ef}
+.non_viable {background-color: #aaffaa}
+.memory_error {background-color: #dde7ef}
+.not_started {background-color: #dde7ef; color : red}
+.no_coverage {background-color: #ffaaaa}
+
+</style>
+
+</head>
+<body>
+
+
+<h1>Company.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_1'/>
+1
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_1'></a>
+</td>
+<td class=''><pre><span  class=''>package com.powerup.logic;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_2'/>
+2
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_2'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_3'/>
+3
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_3'></a>
+</td>
+<td class=''><pre><span  class=''>import java.awt.Color;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_4'/>
+4
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_4'></a>
+</td>
+<td class=''><pre><span  class=''>import java.util.ArrayList;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_5'/>
+5
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_5'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_6'/>
+6
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_6'></a>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_7'/>
+7
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_7'></a>
+</td>
+<td class=''><pre><span  class=''> * An electricity company. &#60;p /&#62; Initially inactive, but is activated during the</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_8'/>
+8
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_8'></a>
+</td>
+<td class=''><pre><span  class=''> * course of the game. Once activated, owns tiles and sells shares. Can take</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_9'/>
+9
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_9'></a>
+</td>
+<td class=''><pre><span  class=''> * over other companies. Becomes inactivate again if taken over.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_10'/>
+10
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_10'></a>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_11'/>
+11
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_11'></a>
+</td>
+<td class=''><pre><span  class=''> * @author Oliver Lewisohn</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_12'/>
+12
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_12'></a>
+</td>
+<td class=''><pre><span  class=''> * @since 2014-01-22</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_13'/>
+13
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_13'></a>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_14'/>
+14
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_14'></a>
+</td>
+<td class=''><pre><span  class=''>public final class Company implements Comparable&#60;Company&#62; {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_15'/>
+15
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_15'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_16'/>
+16
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_16'></a>
+</td>
+<td class=''><pre><span  class=''>   private final ArrayList&#60;Share&#62; shares;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_17'/>
+17
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_17'></a>
+</td>
+<td class=''><pre><span  class=''>   private final ArrayList&#60;Tile&#62; tiles;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_18'/>
+18
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_18'></a>
+</td>
+<td class=''><pre><span  class=''>   private final Color color;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_19'/>
+19
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_19'></a>
+</td>
+<td class=''><pre><span  class=''>   private final int initialValue;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_20'/>
+20
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_20'></a>
+</td>
+<td class=''><pre><span  class=''>   private final String name;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_21'/>
+21
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_21'></a>
+</td>
+<td class=''><pre><span  class=''>   private boolean active;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_22'/>
+22
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_22'></a>
+</td>
+<td class=''><pre><span  class=''>   private Tile headquarters;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_23'/>
+23
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_23'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_24'/>
+24
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_24'></a>
+</td>
+<td class=''><pre><span  class=''>   /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_25'/>
+25
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_25'></a>
+</td>
+<td class=''><pre><span  class=''>    * Creates a new inactive company with the given name, price, and 25 shares.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_26'/>
+26
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_26'></a>
+</td>
+<td class=''><pre><span  class=''>    *</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_27'/>
+27
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_27'></a>
+</td>
+<td class=''><pre><span  class=''>    * @param name The name of the company.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_28'/>
+28
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_28'></a>
+</td>
+<td class=''><pre><span  class=''>    * @param initialValue The initial share price of the company.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_29'/>
+29
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_29'></a>
+</td>
+<td class=''><pre><span  class=''>    * @param color The color of the company&#39;s tiles.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_30'/>
+30
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_30'></a>
+</td>
+<td class=''><pre><span  class=''>    */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_31'/>
+31
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_31'></a>
+</td>
+<td class='covered'><pre><span  class=''>   public Company(String name, int initialValue, Color color) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_32'/>
+32
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_32'></a>
+</td>
+<td class='covered'><pre><span  class=''>      this.name = name;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_33'/>
+33
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_33'></a>
+</td>
+<td class='covered'><pre><span  class=''>      this.initialValue = initialValue;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_34'/>
+34
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_34'></a>
+</td>
+<td class='covered'><pre><span  class=''>      this.color = color;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_35'/>
+35
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_35'></a>
+</td>
+<td class='covered'><pre><span  class=''>      active = false;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_36'/>
+36
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_36'></a>
+</td>
+<td class='covered'><pre><span  class=''>      shares = new ArrayList&#60;&#62;();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_37'/>
+37
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_37'></a>
+</td>
+<td class='covered'><pre><span  class=''>      tiles = new ArrayList&#60;&#62;();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_38'/>
+38
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_38'></a>
+</td>
+<td class='covered'><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_39'/>
+39
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_39'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_40'/>
+40
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_40'></a>
+</td>
+<td class=''><pre><span  class=''>   /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_41'/>
+41
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_41'></a>
+</td>
+<td class=''><pre><span  class=''>    * Activates the company and sets its headquarters.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_42'/>
+42
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_42'></a>
+</td>
+<td class=''><pre><span  class=''>    *</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_43'/>
+43
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_43'></a>
+</td>
+<td class=''><pre><span  class=''>    * @param tile The company&#39;s new headquarters.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_44'/>
+44
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_44'></a>
+</td>
+<td class=''><pre><span  class=''>    */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_45'/>
+45
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_45'></a>
+</td>
+<td class=''><pre><span  class=''>   public void activate(Tile tile) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_46'/>
+46
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_46'></a>
+</td>
+<td class='covered'><pre><span  class=''>      headquarters = tile;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_47'/>
+47
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_47'></a>
+</td>
+<td class='covered'><pre><span  class=''>      active = true;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_48'/>
+48
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_48'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      createShares();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_49'/>
+49
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_49'></a>
+</td>
+<td class='covered'><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_50'/>
+50
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_50'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_51'/>
+51
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_51'></a>
+</td>
+<td class=''><pre><span  class=''>   /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_52'/>
+52
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_52'></a>
+</td>
+<td class=''><pre><span  class=''>    * Assigns a tile to the company. &#60;p /&#62; A tile must be on the board for it to</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_53'/>
+53
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_53'></a>
+</td>
+<td class=''><pre><span  class=''>    * be assigned to a company.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_54'/>
+54
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_54'></a>
+</td>
+<td class=''><pre><span  class=''>    *</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_55'/>
+55
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_55'></a>
+</td>
+<td class=''><pre><span  class=''>    * @param tile The tile to be added.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_56'/>
+56
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_56'></a>
+</td>
+<td class=''><pre><span  class=''>    */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_57'/>
+57
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_57'></a>
+</td>
+<td class=''><pre><span  class=''>   public void addTile(Tile tile) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_58'/>
+58
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_58'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      if (tile.getLocation() == Tile.Location.BOARD) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_59'/>
+59
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_59'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>         tile.setOwner(this);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_60'/>
+60
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_60'></a>
+</td>
+<td class='covered'><pre><span  class=''>         tiles.add(tile);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_61'/>
+61
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_61'></a>
+</td>
+<td class=''><pre><span  class=''>      }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_62'/>
+62
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_62'></a>
+</td>
+<td class='covered'><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_63'/>
+63
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_63'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_64'/>
+64
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_64'></a>
+</td>
+<td class=''><pre><span  class=''>   /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_65'/>
+65
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_65'></a>
+</td>
+<td class=''><pre><span  class=''>    * Deactivates the company.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_66'/>
+66
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_66'></a>
+</td>
+<td class=''><pre><span  class=''>    */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_67'/>
+67
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_67'></a>
+</td>
+<td class=''><pre><span  class=''>   public void deactivate() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_68'/>
+68
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_68'></a>
+</td>
+<td class='covered'><pre><span  class=''>      active = false;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_69'/>
+69
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_69'></a>
+</td>
+<td class='covered'><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_70'/>
+70
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_70'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_71'/>
+71
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_71'></a>
+</td>
+<td class=''><pre><span  class=''>   public boolean getActive() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_72'/>
+72
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_72'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      return active;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_73'/>
+73
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_73'></a>
+</td>
+<td class=''><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_74'/>
+74
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_74'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_75'/>
+75
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_75'></a>
+</td>
+<td class=''><pre><span  class=''>   public Color getColor() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_76'/>
+76
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_76'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      return this.color;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_77'/>
+77
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_77'></a>
+</td>
+<td class=''><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_78'/>
+78
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_78'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_79'/>
+79
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_79'></a>
+</td>
+<td class=''><pre><span  class=''>   public Tile getHeadquarters() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_80'/>
+80
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_80'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      return headquarters;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_81'/>
+81
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_81'></a>
+</td>
+<td class=''><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_82'/>
+82
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_82'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_83'/>
+83
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_83'></a>
+</td>
+<td class=''><pre><span  class=''>   public int getSize() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_84'/>
+84
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_84'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      return tiles.size();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_85'/>
+85
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_85'></a>
+</td>
+<td class=''><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_86'/>
+86
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_86'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_87'/>
+87
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_87'></a>
+</td>
+<td class=''><pre><span  class=''>   public ArrayList&#60;Share&#62; getShares() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_88'/>
+88
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_88'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      return shares;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_89'/>
+89
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_89'></a>
+</td>
+<td class=''><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_90'/>
+90
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_90'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_91'/>
+91
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_91'></a>
+</td>
+<td class=''><pre><span  class=''>   public ArrayList&#60;Tile&#62; getTiles() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_92'/>
+92
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_92'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      return tiles;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_93'/>
+93
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_93'></a>
+</td>
+<td class=''><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_94'/>
+94
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_94'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_95'/>
+95
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_95'></a>
+</td>
+<td class=''><pre><span  class=''>   /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_96'/>
+96
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_96'></a>
+</td>
+<td class=''><pre><span  class=''>    * Calculates the price of buying one share from the company. &#60;p /&#62; A</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_97'/>
+97
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_97'></a>
+</td>
+<td class=''><pre><span  class=''>    * company&#39;s value grows by 50 dollars for each tile it owns in addition to</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_98'/>
+98
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_98'></a>
+</td>
+<td class=''><pre><span  class=''>    * the minimum of two tiles.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_99'/>
+99
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_99'></a>
+</td>
+<td class=''><pre><span  class=''>    *</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_100'/>
+100
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_100'></a>
+</td>
+<td class=''><pre><span  class=''>    * @return The price of buying one share from the company.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_101'/>
+101
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_101'></a>
+</td>
+<td class=''><pre><span  class=''>    */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_102'/>
+102
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_102'></a>
+</td>
+<td class=''><pre><span  class=''>   public int sellPrice() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_103'/>
+103
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_103'></a>
+</td>
+<td class=''><pre><span  class=''>//        return initialValue + ((initialValue / 100) * (Math.max(0, tiles.size() - 2) * 10));</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_104'/>
+104
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_104'>4</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      return initialValue + (Math.max(0, tiles.size() - 2) * 50);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_105'/>
+105
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_105'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_106'/>
+106
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_106'></a>
+</td>
+<td class=''><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_107'/>
+107
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_107'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_108'/>
+108
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_108'></a>
+</td>
+<td class=''><pre><span  class=''>   /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_109'/>
+109
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_109'></a>
+</td>
+<td class=''><pre><span  class=''>    * Instructs the company to sell one of its shares, if it has any left.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_110'/>
+110
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_110'></a>
+</td>
+<td class=''><pre><span  class=''>    *</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_111'/>
+111
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_111'></a>
+</td>
+<td class=''><pre><span  class=''>    * @return The share which is being sold.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_112'/>
+112
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_112'></a>
+</td>
+<td class=''><pre><span  class=''>    */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_113'/>
+113
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_113'></a>
+</td>
+<td class=''><pre><span  class=''>   public Share sellShare() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_114'/>
+114
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_114'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      if (shares.isEmpty()) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_115'/>
+115
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_115'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>         return null;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_116'/>
+116
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_116'></a>
+</td>
+<td class=''><pre><span  class=''>      } else {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_117'/>
+117
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_117'></a>
+</td>
+<td class='covered'><pre><span  class=''>         Share purchase = shares.get(0);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_118'/>
+118
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_118'></a>
+</td>
+<td class='covered'><pre><span  class=''>         shares.remove(0);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_119'/>
+119
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_119'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>         return purchase;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_120'/>
+120
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_120'></a>
+</td>
+<td class=''><pre><span  class=''>      }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_121'/>
+121
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_121'></a>
+</td>
+<td class=''><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_122'/>
+122
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_122'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_123'/>
+123
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_123'></a>
+</td>
+<td class=''><pre><span  class=''>   /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_124'/>
+124
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_124'></a>
+</td>
+<td class=''><pre><span  class=''>    * Makes one company take over another one, gaining all its tiles.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_125'/>
+125
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_125'></a>
+</td>
+<td class=''><pre><span  class=''>    *</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_126'/>
+126
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_126'></a>
+</td>
+<td class=''><pre><span  class=''>    * @param company The company to be taken over.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_127'/>
+127
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_127'></a>
+</td>
+<td class=''><pre><span  class=''>    */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_128'/>
+128
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_128'></a>
+</td>
+<td class=''><pre><span  class=''>   public void takeOver(Company company) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_129'/>
+129
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_129'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      for (Tile tile : company.getTiles()) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_130'/>
+130
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_130'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>         this.addTile(tile);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_131'/>
+131
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_131'></a>
+</td>
+<td class='covered'><pre><span  class=''>      }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_132'/>
+132
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_132'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      company.liquidate();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_133'/>
+133
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_133'></a>
+</td>
+<td class='covered'><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_134'/>
+134
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_134'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_135'/>
+135
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_135'></a>
+</td>
+<td class=''><pre><span  class=''>   /* Private methods: no Javadoc */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_136'/>
+136
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_136'></a>
+</td>
+<td class=''><pre><span  class=''>   private void createShares() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_137'/>
+137
+</td>
+<td class='uncertain'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_137'>3</a>
+</td>
+<td class='covered'><pre><span  class='uncertain'>      for (int i = 0; i &#60; 25; i++) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_138'/>
+138
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_138'></a>
+</td>
+<td class='covered'><pre><span  class=''>         shares.add(new Share(this));</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_139'/>
+139
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_139'></a>
+</td>
+<td class=''><pre><span  class=''>      }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_140'/>
+140
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_140'></a>
+</td>
+<td class='covered'><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_141'/>
+141
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_141'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_142'/>
+142
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_142'></a>
+</td>
+<td class=''><pre><span  class=''>   private void liquidate() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_143'/>
+143
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_143'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      tiles.clear();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_144'/>
+144
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_144'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      shares.clear();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_145'/>
+145
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_145'></a>
+</td>
+<td class='covered'><pre><span  class=''>      active = false;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_146'/>
+146
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_146'></a>
+</td>
+<td class='covered'><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_147'/>
+147
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_147'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_148'/>
+148
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_148'></a>
+</td>
+<td class=''><pre><span  class=''>   /* Override methods: no Javadoc */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_149'/>
+149
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_149'></a>
+</td>
+<td class=''><pre><span  class=''>   @Override</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_150'/>
+150
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_150'></a>
+</td>
+<td class=''><pre><span  class=''>   public int compareTo(Company o) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_151'/>
+151
+</td>
+<td class='survived'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_151'>2</a>
+</td>
+<td class='uncovered'><pre><span  class='survived'>      return o.getSize() - this.getSize();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_152'/>
+152
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_152'></a>
+</td>
+<td class=''><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_153'/>
+153
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_153'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_154'/>
+154
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_154'></a>
+</td>
+<td class=''><pre><span  class=''>   @Override</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_155'/>
+155
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_155'></a>
+</td>
+<td class=''><pre><span  class=''>   public String toString() {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_156'/>
+156
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_156'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>      return name;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_157'/>
+157
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_157'></a>
+</td>
+<td class=''><pre><span  class=''>   }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f8ad735_158'/>
+158
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_158'></a>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_48'>48</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_48'/> 
+
+<p class='KILLED'>removed call to com/powerup/logic/Company::createShares : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_58'>58</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_58'/> 
+
+<p class='KILLED'>negated conditional : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_59'>59</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_59'/> 
+
+<p class='KILLED'>removed call to com/powerup/logic/Tile::setOwner : KILLED -> com.powerup.logic.BoardTest.com.powerup.logic.BoardTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_72'>72</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_72'/> 
+
+<p class='KILLED'>replaced return of integer sized value with (x == 0 ? 1 : 0) : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_76'>76</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_76'/> 
+
+<p class='KILLED'>mutated return of Object value for com/powerup/logic/Company::getColor to ( if (x != null) null else throw new RuntimeException ) : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_80'>80</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_80'/> 
+
+<p class='KILLED'>mutated return of Object value for com/powerup/logic/Company::getHeadquarters to ( if (x != null) null else throw new RuntimeException ) : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_84'>84</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_84'/> 
+
+<p class='KILLED'>replaced return of integer sized value with (x == 0 ? 1 : 0) : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_88'>88</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_88'/> 
+
+<p class='KILLED'>mutated return of Object value for com/powerup/logic/Company::getShares to ( if (x != null) null else throw new RuntimeException ) : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_92'>92</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_92'/> 
+
+<p class='KILLED'>mutated return of Object value for com/powerup/logic/Company::getTiles to ( if (x != null) null else throw new RuntimeException ) : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_104'>104</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_104'/> 
+
+<p class='KILLED'>replaced return of integer sized value with (x == 0 ? 1 : 0) : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> <p class='KILLED'>Replaced integer addition with subtraction : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> <p class='KILLED'>Replaced integer subtraction with addition : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> <p class='KILLED'>Replaced integer multiplication with division : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_114'>114</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_114'/> 
+
+<p class='KILLED'>negated conditional : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_115'>115</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_115'/> 
+
+<p class='KILLED'>mutated return of Object value for com/powerup/logic/Company::sellShare to ( if (x != null) null else throw new RuntimeException ) : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_119'>119</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_119'/> 
+
+<p class='KILLED'>mutated return of Object value for com/powerup/logic/Company::sellShare to ( if (x != null) null else throw new RuntimeException ) : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_129'>129</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_129'/> 
+
+<p class='KILLED'>negated conditional : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_130'>130</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_130'/> 
+
+<p class='KILLED'>removed call to com/powerup/logic/Company::addTile : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_132'>132</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_132'/> 
+
+<p class='KILLED'>removed call to com/powerup/logic/Company::liquidate : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_137'>137</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_137'/> 
+
+<p class='TIMED_OUT'>Changed increment from 1 to -1 : TIMED_OUT</p> <p class='KILLED'>changed conditional boundary : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> <p class='KILLED'>negated conditional : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_143'>143</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_143'/> 
+
+<p class='KILLED'>removed call to java/util/ArrayList::clear : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_144'>144</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_144'/> 
+
+<p class='KILLED'>removed call to java/util/ArrayList::clear : KILLED -> com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_151'>151</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_151'/> 
+
+<p class='NO_COVERAGE'>replaced return of integer sized value with (x == 0 ? 1 : 0) : NO_COVERAGE</p> <p class='NO_COVERAGE'>Replaced integer subtraction with addition : NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f8ad735_156'>156</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f8ad735_156'/> 
+
+<p class='KILLED'>mutated return of Object value for com/powerup/logic/Company::toString to ( if (x != null) null else throw new RuntimeException ) : KILLED -> com.powerup.logic.MarketTest.com.powerup.logic.MarketTest</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+<li class='mutator'>RETURN_VALS_MUTATOR</li>
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+<li class='mutator'>MATH_MUTATOR</li>
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>com.powerup.logic.MarketTest.com.powerup.logic.MarketTest (17 ms)</li><li>com.powerup.logic.PlayerTest.com.powerup.logic.PlayerTest (11 ms)</li><li>com.powerup.logic.BoardTest.com.powerup.logic.BoardTest (33 ms)</li><li>com.powerup.logic.CompanyTest.com.powerup.logic.CompanyTest (15 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 0.30
+
+</body>
+</html>

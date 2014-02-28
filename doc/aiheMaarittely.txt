@@ -1,4 +1,4 @@
-powerUp
+powerUp: aihemäärittely
 
 ---
 
@@ -12,27 +12,31 @@ Käyttäjät: Neljä pelaajaa.
 
 Pelin kuvaus: 
 
-- Pelilauta koostuu useista neliöistä ("tonteista"), kukin merkitty yksilöllisellä kirjain- ja numerokombinaatiolla, eli A4 tai E6. Laudan koko on 10x10.
+- Pelilauta koostuu useista neliöistä (neliötä sanotaan pelissä tiiliksi), kukin merkitty yksilöllisellä kirjain- ja numerokombinaatiolla, eli A4 tai E6. Laudan koko on 10x10.
 
-- Pelaajat yrittävät kerätä mahdollisimman paljon rahaa.
+- Pelaajat saavat $6000 pelin alussa ja yrittävät kerätä mahdollisimman paljon lisää.
 
-- Pelaajat pelaavat pelaamalla tontteja laudalle, perustamalla ja yhdistämällä sähköyrityksia, ja ostamalla ja myymällä osinkoja.
+- Pelaajat pelaavat pelaamalla tontteja laudalle, perustamalla ja yhdistämällä sähköyrityksia, ja ostamalla osinkoja.
 
-- Eniten rahaa tienataan olemalla enemmistöomistaja sähköyrityksessä, jonka toinen yritys ostaa. Ostohetkellä jaetaan omistajille bonuksia.
+- Eniten rahaa tienataan olemalla enemmistö- tai vähemmistöomistajana sähköyrityksessä, jota myydään toiselle yritykselle. Ostohetkellä jaetaan omistajille bonuksia.
 
-- Peli loppuu, kun pelattavat tontit loppuvat. Jokaisen pelaajan osingot myydään, ja eniten rahaa kerännyt pelaaja voittaa.
+- Peli loppuu, kun pelattavat tontit loppuvat, kun yksi yritys kasvaa liian isoksi, tai kun kaksi yritystä kasvavat molemmat liian isoiksi. Jokaisen pelaajan osingot myydään, ja eniten rahaa kerännyt pelaaja voittaa.
 
 ---
 
 Käyttäjien toiminnot:
 
 - Pelin aloittaminen
+- Help-systeemin lukeminen
 
 - Vuoron pelaaminen
-  - Tontin ostaminen
-  - Tontin pelaaminen
+  - Tiilin pelaaminen
+  - Uusien tiilien nostaminen
   - Sähköyrityksen perustaminen
+  - Sähköyrityksen myyminen
   - Osinkojen ostaminen
-  - Osinkojen myyminen
-  - Vaihtokauppa
   - Vuoron lopettaminen
+
+---
+
+Tarkempia pelisääntojä löytyy itse pelistä (englanniksi): paina "Help"-painiketta.
